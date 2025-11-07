@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.service.serviceImpl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,12 +131,34 @@ public class ProductServiceImpl implements IProductService {
     public Product updateProduct(Long productId, Product req) throws ProductException {
         Product product = findProductById(productId);
 
+        //tên spham
+        if (req.getProduct_name() != null && !req.getProduct_name().isEmpty()) {
+            product.setProduct_name(req.getProduct_name());
+        }
+
+        //giá
+        if (req.getPrice() > 0) {
+            product.setPrice(req.getPrice());
+        }
+
+        // thương hiệu
+        if (req.getBrand() != null && !req.getBrand().isEmpty()) {
+            product.setBrand(req.getBrand());
+        }
+
+        // tồn kho
         if (req.getQuantity() != 0) {
             product.setQuantity(req.getQuantity());
-            logger.info("Product update success!");
+            product.setInStock(product.getQuantity() > 0);
         }
+
+        // Thêm logic cho category, colors, images
+        // chưa làm
+
+
         return productRepository.save(product);
     }
+
 
     @Override
     public Product findProductById(Long id) throws ProductException {
@@ -151,8 +174,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Page<ProductDTO> getAllProduct(String category, List<String> colors,
-                                       Integer minPrice, Integer maxPrice,
-                                       String sort, Integer pageNumber, Integer pageSize) throws ProductException {
+                                          Integer minPrice, Integer maxPrice,
+                                          String sort, Integer pageNumber, Integer pageSize) throws ProductException {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, sort);
         if (products.isEmpty()) {
@@ -216,5 +239,45 @@ public class ProductServiceImpl implements IProductService {
             listProductRespone.add(toDTO(product));
         }
         return listProductRespone;
+    }
+
+    @Override
+    @Transactional
+    public Product decreaseStock(Long productId, int quantityToDecrease) throws ProductException {
+        Product product = findProductById(productId);
+        int currentQuantity = product.getQuantity();
+
+        if (currentQuantity < quantityToDecrease) {
+            logger.error("Insufficient stock for product ID: " + productId);
+            throw new ProductException("Insufficient stock for product ID: " + productId);
+        }
+
+        product.setQuantity(currentQuantity - quantityToDecrease);
+
+        // Cập nhật trạng thái inStock
+        if (product.getQuantity() <= 0) {
+            product.setInStock(false);
+        }
+
+        Product savedProduct = productRepository.save(product);
+        logger.info("Stock decreased for product ID {}. New quantity: {}", productId, savedProduct.getQuantity());
+        return savedProduct;
+    }
+
+    @Override
+    @Transactional
+    public Product increaseStock(Long productId, int quantityToIncrease) throws ProductException {
+        Product product = findProductById(productId);
+
+        product.setQuantity(product.getQuantity() + quantityToIncrease);
+
+        // Đảm bảo inStock là true nếu số lượng > 0
+        if (product.getQuantity() > 0) {
+            product.setInStock(true);
+        }
+
+        Product savedProduct = productRepository.save(product);
+        logger.info("Stock increased for product ID {}. New quantity: {}", productId, savedProduct.getQuantity());
+        return savedProduct;
     }
 }

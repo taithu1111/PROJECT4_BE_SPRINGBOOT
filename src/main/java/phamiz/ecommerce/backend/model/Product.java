@@ -1,3 +1,56 @@
+//package phamiz.ecommerce.backend.model;
+//
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//
+//import java.time.LocalDateTime;
+//import java.util.ArrayList;
+//import java.util.HashSet;
+//import java.util.List;
+//import java.util.Set;
+//
+//@Setter
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
+//public class Product {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
+//
+//    private String product_name;
+//    private int quantity;
+//    private int price;
+//    private String brand;
+//
+//    @Column(name = "colors")
+//    @ElementCollection
+//    @JoinTable(name = "product_color", joinColumns = @JoinColumn(name = "product_id"))
+//    private Set<ProductColor> productColors = new HashSet<ProductColor>();
+//
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private Category category;
+//
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Rating> ratings = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "product" , cascade = CascadeType.ALL,orphanRemoval = true)
+//    private List<Review> reviews = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<ProductImage> images = new ArrayList<>();
+//
+//    private LocalDateTime createdAt;
+//}
+// cấu hình cũ
+
+// CẤU HÌNH MỚI
 package phamiz.ecommerce.backend.model;
 
 import jakarta.persistence.*;
@@ -28,10 +81,14 @@ public class Product {
     private int price;
     private String brand;
 
-    @Column(name = "colors")
-    @ElementCollection
-    @JoinTable(name = "product_color", joinColumns = @JoinColumn(name = "product_id"))
-    private Set<ProductColor> productColors = new HashSet<ProductColor>();
+    // inventory
+    private boolean inStock = true;
+
+    // --- ĐÂY LÀ PHẦN ĐÃ SỬA: XÓA CẤU HÌNH CŨ (@ElementCollection) ---
+    // Cấu hình mới: Product (1) <---> (N) ProductColor
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductColor> productColors = new HashSet<>();
+    // -------------------------------------------------------------------
 
     @ManyToOne
     @JoinColumn(name = "category_id")

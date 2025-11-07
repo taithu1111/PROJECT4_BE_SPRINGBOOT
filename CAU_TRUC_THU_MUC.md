@@ -26,6 +26,7 @@ backend/
 │   │   │               │   └── JwtValidator.java              # JWT token validator filter
 │   │   │               │
 │   │   │               ├── controller/                        # REST Controllers
+│   │   │               │   ├── AdminProductController.java    # Product and Stock endpoints(CRUD, Inventory
 │   │   │               │   ├── AuthController.java            # Authentication endpoints
 │   │   │               │   ├── CartController.java            # Cart management endpoints
 │   │   │               │   ├── CartItemController.java      # Cart item operations
@@ -34,27 +35,29 @@ backend/
 │   │   │               │   ├── ProductController.java        # Product endpoints
 │   │   │               │   ├── RatingController.java         # Rating endpoints
 │   │   │               │   ├── ReviewController.java         # Review endpoints
-│   │   │               │   └── UserController.java          # User profile endpoints
+│   │   │               │   └── UserController.java           # User profile endpoints
 │   │   │               │
-│   │   │               ├── dto/                               # Data Transfer Objects
-│   │   │               │   ├── ApiResponse.java              # Generic API response
+│   │   │               ├── dto/                                # Data Transfer Objects
+│   │   │               │   ├── ApiResponse.java              # Standard API Status/Message Wrapper
 │   │   │               │   │
-│   │   │               │   ├── Auth/                          # Authentication DTOs
+│   │   │               │   ├── Auth/                           # Authentication DTOs
 │   │   │               │   │   ├── AuthResponse.java         # Auth response DTO
 │   │   │               │   │   └── LoginRequest.java         # Login request DTO
 │   │   │               │   │
-│   │   │               │   ├── Cart/                          # Cart DTOs
+│   │   │               │   ├── Cart/                           # Cart DTOs
 │   │   │               │   │   ├── AddItemRequest.java       # Add item to cart request
 │   │   │               │   │   ├── CartDTO.java              # Cart data transfer object
 │   │   │               │   │   ├── CartItemDTO.java          # Cart item DTO
 │   │   │               │   │   └── UpdateCartItem.java       # Update cart item request
 │   │   │               │   │
 │   │   │               │   ├── Product/                        # Product DTOs
-│   │   │               │   │   ├── CreateProductRequest.java # Create product request
+│   │   │               │   │   ├── CreateProductRequest.java # Res body create new product
+│   │   │               │   │   ├── ErrorDetails.java         # Standardized format err res from the API
 │   │   │               │   │   ├── ProductDTO.java           # Product data transfer object
-│   │   │               │   │   └── ReviewDTO.java           # Review DTO
+│   │   │               │   │   └── ReviewDTO.java            # Review DTO
+│   │   │               │   │   └── StockUpdateRequest.java   # Res body updating product inven/stock
 │   │   │               │   │
-│   │   │               │   ├── Rating/                       # Rating DTOs
+│   │   │               │   ├── Rating/                         # Rating DTOs
 │   │   │               │   │   └── RatingRequest.java        # Rating request DTO
 │   │   │               │   │
 │   │   │               │   └── Review/                       # Review DTOs
@@ -62,6 +65,7 @@ backend/
 │   │   │               │
 │   │   │               ├── exception/                         # Custom exceptions
 │   │   │               │   ├── CartItemException.java       # Cart item exceptions
+│   │   │               │   ├── GlobalExceptionHandler.java  # Centralized exception handler, maps custom exceptions
 │   │   │               │   ├── OrderException.java          # Order exceptions
 │   │   │               │   ├── ProductException.java        # Product exceptions
 │   │   │               │   └── UserException.java           # User exceptions
@@ -154,6 +158,7 @@ Các class cấu hình hệ thống:
 #### 🎮 **controller/**
 REST API Controllers xử lý HTTP requests:
 - **AuthController**: Đăng ký/đăng nhập (`/auth/signup`, `/auth/signin`)
+- **AdminProductController**: Quản lý tồn kho(CRUD) DÀNH CHO ADMIN
 - **ProductController**: Quản lý sản phẩm (`/api/product/**`)
 - **CartController**: Quản lý giỏ hàng (`/api/cart/**`)
 - **CartItemController**: Thao tác trên CartItem (`/api/cartItem/**`)
@@ -165,19 +170,23 @@ REST API Controllers xử lý HTTP requests:
 
 #### 📦 **dto/**
 Data Transfer Objects - các class truyền dữ liệu giữa các layers:
+- **ApiResponse**: Wrapper phànr hồi chuẩn hóa cho trạng thái, thông báo API
 - **Auth/**: LoginRequest, AuthResponse
 - **Cart/**: CartDTO, CartItemDTO, AddItemRequest, UpdateCartItem
 - **Product/**: ProductDTO, CreateProductRequest, ReviewDTO
 - **Rating/**: RatingRequest
 - **Review/**: ReviewRequest
-- **ApiResponse**: Generic response wrapper
+  - **ApiResponse**: Định dạng chuẩn hóa cho lỗi từ API
 
 #### ⚠️ **exception/**
 Custom exception classes:
 - **CartItemException**: Exception cho CartItem operations
+- **GlobalExceptionHandler**: Bộ xử lý tập trung lỗi ánh xạ ngoại lệ tới mã trạng thái HTTP phù hợp(400: lỗi do client, 500: lỗi do server  )
 - **OrderException**: Exception cho Order operations
 - **ProductException**: Exception cho Product operations
 - **UserException**: Exception cho User operations
+
+
 
 #### 📊 **model/**
 JPA Entity classes - mapping với database tables:

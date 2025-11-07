@@ -13,6 +13,7 @@ import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.service.IProductService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +22,8 @@ import java.util.Optional;
 public class ProductController {
     private final IProductService productService;
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
+    // --- CÁC ENDPOINT HIỆN CÓ ---
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProduct() {
@@ -52,7 +55,6 @@ public class ProductController {
         Page<ProductDTO> response = productService.getAllProduct(
                 category, color, minPrice, maxPrice,
                 sort, pageNumber, pageSize);
-        System.out.println(response);
         logger.info("Filter products success !");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
