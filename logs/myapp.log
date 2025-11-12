@@ -1,0 +1,4 @@
+2025-11-12T11:03:09.415+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 97380 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-12T11:03:09.416+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-12T11:07:08.823+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 98392 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-12T11:07:08.824+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
