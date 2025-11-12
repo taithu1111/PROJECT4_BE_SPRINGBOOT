@@ -136,3 +136,9 @@ java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.Sql
 2025-11-12T11:14:34.552+0700 WARN  org.hibernate.dialect.Dialect : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
 2025-11-12T11:14:34.554+0700 WARN  org.hibernate.orm.deprecation : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2025-11-12T11:14:34.963+0700 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-12T13:39:48.603+0700 INFO  o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-12T13:39:48.620+0700 INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-12T13:39:48.630+0700 INFO  o.h.c.i.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2025-11-12T13:39:48.807+0700 WARN  org.hibernate.dialect.Dialect : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-11-12T13:39:48.809+0700 WARN  org.hibernate.orm.deprecation : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-12T13:39:49.225+0700 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
