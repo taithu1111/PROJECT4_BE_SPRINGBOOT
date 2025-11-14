@@ -1,0 +1,18 @@
+2025-11-14T11:05:23.653+0700 INFO  o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-14T11:05:23.670+0700 INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-14T11:05:23.680+0700 INFO  o.h.c.i.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2025-11-14T11:05:23.844+0700 WARN  org.hibernate.dialect.Dialect : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-11-14T11:05:23.845+0700 WARN  org.hibernate.orm.deprecation : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-14T11:05:24.269+0700 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-14T11:06:52.787+0700 INFO  o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-14T11:06:52.804+0700 INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-14T11:06:52.814+0700 INFO  o.h.c.i.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2025-11-14T11:06:52.980+0700 WARN  org.hibernate.dialect.Dialect : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-11-14T11:06:52.981+0700 WARN  org.hibernate.orm.deprecation : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-14T11:06:53.386+0700 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-14T11:43:47.666+0700 INFO  o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-14T11:43:47.683+0700 INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-14T11:43:47.694+0700 INFO  o.h.c.i.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2025-11-14T11:43:47.856+0700 WARN  org.hibernate.dialect.Dialect : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-11-14T11:43:47.858+0700 WARN  org.hibernate.orm.deprecation : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-14T11:43:48.264+0700 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)

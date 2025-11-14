@@ -41,4 +41,11 @@ public class RatingController {
         List<Rating> ratings = ratingService.getProductsRating(productId);
         return new ResponseEntity<>(ratings, HttpStatus.CREATED);
     }
+    @GetMapping("/average-rating/{productId}")
+    public ResponseEntity<Double> getAverageRating(@PathVariable Long productId) {
+        Double avg = ratingService.getAverageRating(productId);
+        return ResponseEntity.ok(avg);
+    }
+
+
 }

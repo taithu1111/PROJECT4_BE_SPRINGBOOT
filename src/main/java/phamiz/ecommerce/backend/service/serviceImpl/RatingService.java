@@ -39,4 +39,10 @@ public class RatingService implements IRatingService {
     public List<Rating> getProductsRating(Long productId) {
         return ratingRepository.getAllProductsRating(productId);
     }
+
+    @Override
+    public Double getAverageRating(Long productId) {
+        Double avg = ratingRepository.getAverageRatingByProductId(productId);
+        return avg != null ? avg : 0.0;
+    }
 }

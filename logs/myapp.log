@@ -1,0 +1,56 @@
+2025-11-14T11:05:23.032+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 990 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-14T11:05:23.033+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-14T11:05:25.263+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.354 seconds (process running for 2.538)
+2025-11-14T11:06:52.182+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 2123 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-14T11:06:52.182+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-14T11:06:54.400+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.338 seconds (process running for 2.53)
+2025-11-14T11:08:14.141+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-14T11:08:14.185+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-14T11:10:45.693+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Create cart success!
+2025-11-14T11:10:45.705+0700 INFO  p.e.b.controller.AuthController : New user signed up with email: t5@gmail.com
+2025-11-14T11:10:45.726+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:11:05.649+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:05.835+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:11:05.861+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:05.949+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:11:15.673+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:15.817+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:11:15.830+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:15.906+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:11:32.523+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:32.623+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:11:32.634+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:11:32.700+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:17:32.451+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:17:32.454+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:17:32.469+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:17:32.552+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:17:32.568+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:17:32.711+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:29:23.887+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:29:23.890+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:29:23.914+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:29:23.999+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:29:24.023+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:29:24.110+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:43:47.039+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 16927 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-14T11:43:47.042+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-14T11:43:49.388+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.473 seconds (process running for 2.66)
+2025-11-14T11:44:11.870+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:44:11.876+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:44:11.912+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-14T11:44:11.956+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:44:11.980+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:44:12.092+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:45:21.832+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:45:21.956+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:45:21.965+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:45:22.041+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:46:38.892+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:46:38.995+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:46:39.008+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:46:39.089+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:47:01.526+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:47:01.635+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-14T11:47:01.657+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-14T11:47:01.745+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
