@@ -1,320 +1,1058 @@
-2025-11-14T11:05:23.032+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 990 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T11:05:23.033+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T11:05:25.263+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.354 seconds (process running for 2.538)
-2025-11-14T11:06:52.182+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 2123 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T11:06:52.182+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T11:06:54.400+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.338 seconds (process running for 2.53)
-2025-11-14T11:08:14.141+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
-2025-11-14T11:08:14.185+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
-2025-11-14T11:10:45.693+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Create cart success!
-2025-11-14T11:10:45.705+0700 INFO  p.e.b.controller.AuthController : New user signed up with email: t5@gmail.com
-2025-11-14T11:10:45.726+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:11:05.649+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:05.835+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:11:05.861+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:05.949+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:11:15.673+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:15.817+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:11:15.830+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:15.906+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:11:32.523+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:32.623+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:11:32.634+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:11:32.700+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:17:32.451+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:17:32.454+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:17:32.469+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:17:32.552+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:17:32.568+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:17:32.711+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:29:23.887+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:29:23.890+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:29:23.914+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:29:23.999+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:29:24.023+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:29:24.110+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:43:47.039+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 16927 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T11:43:47.042+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T11:43:49.388+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.473 seconds (process running for 2.66)
-2025-11-14T11:44:11.870+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:44:11.876+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:44:11.912+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T11:44:11.956+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:44:11.980+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:44:12.092+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:45:21.832+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:45:21.956+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:45:21.965+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:45:22.041+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:46:38.892+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:46:38.995+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:46:39.008+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:46:39.089+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:47:01.526+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:47:01.635+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:47:01.657+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:47:01.745+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:56:23.658+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:56:23.707+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T11:56:23.716+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T11:56:23.773+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:49:18.799+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 37789 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T15:49:18.800+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T15:49:21.265+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.595 seconds (process running for 2.789)
-2025-11-14T15:49:36.974+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T15:49:37.013+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T15:49:41.940+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:49:42.021+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:49:42.037+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:49:42.151+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:50:22.767+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:50:22.946+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:50:22.963+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:50:23.091+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:50:59.266+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:50:59.353+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:50:59.371+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:50:59.470+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:54:46.015+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T15:54:46.061+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T15:57:48.724+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:57:48.835+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:57:48.848+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:57:48.941+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:58:29.412+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:58:29.505+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T15:58:29.516+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T15:58:29.608+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:05:36.450+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:05:36.464+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:05:40.735+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:05:40.839+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:05:40.851+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:05:40.937+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:09:02.086+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:09:02.099+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:09:16.257+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:09:16.354+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:09:16.366+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:09:16.449+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:10:26.018+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:10:26.019+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
-2025-11-14T16:10:32.498+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:10:32.619+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:10:32.631+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:10:32.710+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:10:34.624+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:10:34.625+0700 INFO  p.e.b.controller.ProductController : Product found with id : 2
-2025-11-14T16:10:34.635+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:10:34.635+0700 INFO  p.e.b.controller.ProductController : Product found with id : 2
-2025-11-14T16:11:15.368+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:11:15.369+0700 INFO  p.e.b.controller.ProductController : Product found with id : 2
-2025-11-14T16:12:05.953+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:06.066+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:06.083+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:06.181+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:07.323+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:12:07.323+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
-2025-11-14T16:12:07.335+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:12:07.335+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
-2025-11-14T16:12:15.997+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:16.107+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:16.121+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:16.191+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:28.824+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:28.935+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:28.950+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:29.031+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:37.518+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:37.636+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:37.650+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:37.732+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:56.835+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:56.948+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:12:56.962+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:12:57.060+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:13:00.826+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:13:00.826+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
-2025-11-14T16:13:00.839+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:13:00.839+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
-2025-11-14T16:13:25.760+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:13:25.867+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:13:25.882+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:13:25.972+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:25:44.932+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:25:44.966+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:25:44.973+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:25:45.032+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:26:58.698+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:26:58.810+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:26:58.824+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:26:58.978+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:07.717+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:07.833+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:07.847+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:07.932+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:39.453+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:39.504+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:39.509+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:39.559+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:44.677+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:44.733+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:27:44.741+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:27:44.795+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:32:31.079+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:32:31.169+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:32:35.824+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:32:35.920+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:33:05.335+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:33:05.336+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:33:05.345+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:33:05.406+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:33:05.415+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:33:05.511+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:35:27.870+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:35:27.965+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:35:32.231+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:35:32.251+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:35:32.279+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:35:32.355+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:35:32.364+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:35:32.494+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:37:05.900+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:37:05.979+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:43:57.351+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:43:57.435+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:43:59.707+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:43:59.710+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:43:59.724+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:43:59.799+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:43:59.822+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:43:59.961+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:04.543+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:44:04.544+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:04.559+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:44:04.607+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:04.613+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:04.720+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:09.196+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:09.290+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:09.299+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:09.382+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:18.049+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:18.136+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:25.357+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:25.443+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:44:53.255+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:44:53.336+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:45:00.254+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:45:00.332+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:01.571+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:01.661+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:16.872+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:16.959+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:16.971+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:17.046+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:21.354+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:21.430+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:21.441+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:21.539+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:41.650+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:48:41.650+0700 INFO  p.e.b.controller.ProductController : Product found with id : 2
-2025-11-14T16:48:41.659+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T16:48:41.660+0700 INFO  p.e.b.controller.ProductController : Product found with id : 2
-2025-11-14T16:48:48.347+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:48.404+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:48:48.411+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:48:48.500+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:52:36.557+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:52:36.652+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:52:36.662+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:52:36.759+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:53:58.685+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:53:58.764+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:54:12.830+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:54:12.831+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:54:12.861+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T16:54:12.928+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T16:54:12.939+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T16:54:13.067+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:00:14.630+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:00:14.677+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:02:07.676+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:02:07.776+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:02:07.786+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:02:07.865+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:02:41.440+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:02:41.492+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:03:46.038+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:03:46.136+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:03:46.145+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:03:46.268+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:04:18.961+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T17:04:18.963+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:04:18.972+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T17:04:19.048+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:04:19.071+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:04:19.194+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:26.521+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:26.613+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:26.623+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:26.711+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:33.176+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:33.264+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:33.277+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:33.371+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:36.706+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:36.803+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:09:36.813+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:09:36.925+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:10:07.574+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T17:10:07.574+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
-2025-11-14T17:10:07.588+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
-2025-11-14T17:10:07.588+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
-2025-11-14T17:10:23.429+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:10:23.499+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:10:23.508+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:10:23.602+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:15:47.487+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:15:47.579+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:15:47.591+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:15:47.796+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:27:59.616+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 71940 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T17:27:59.617+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T17:28:46.538+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 72675 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T17:28:46.539+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T17:33:15.574+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 75104 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
-2025-11-14T17:33:15.575+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-14T17:33:17.928+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.478 seconds (process running for 2.68)
-2025-11-14T17:33:24.842+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T17:33:24.849+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:24.869+0700 INFO  p.e.b.controller.ProductController : Search products by name: Samsung
-2025-11-14T17:33:24.900+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
-2025-11-14T17:33:24.939+0700 INFO  p.e.b.controller.ProductController : Search products by name: Samsung
-2025-11-14T17:33:24.991+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:25.001+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:25.052+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:33.397+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:33.466+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:33.478+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:33.585+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:40.842+0700 INFO  p.e.b.controller.ProductController : Search products by name: Iphone
-2025-11-14T17:33:40.863+0700 INFO  p.e.b.controller.ProductController : Search products by name: Iphone
-2025-11-14T17:33:43.818+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:43.879+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:43.891+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:43.980+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:51.527+0700 INFO  p.e.b.controller.ProductController : Search products by name: Airpod
-2025-11-14T17:33:51.542+0700 INFO  p.e.b.controller.ProductController : Search products by name: Airpod
-2025-11-14T17:33:57.385+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:57.437+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:33:57.448+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:33:57.547+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:34:34.965+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:34:35.039+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:34:35.051+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:34:35.161+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:34:44.294+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:34:44.386+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
-2025-11-14T17:34:44.398+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
-2025-11-14T17:34:44.491+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:09:08.609+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 93928 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-15T13:09:08.610+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-15T13:09:10.932+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.451 seconds (process running for 2.646)
+2025-11-15T13:09:36.485+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:09:36.548+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t5@gmail.com
+2025-11-15T13:09:36.639+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t5@gmail.com
+2025-11-15T13:09:36.666+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-15T13:09:36.687+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-15T13:09:39.012+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:09:39.097+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:09:39.110+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:09:39.228+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:11:12.319+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-15T13:11:12.324+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:11:12.332+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t5@gmail.com
+2025-11-15T13:11:12.409+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:11:12.418+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:11:12.510+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:11:56.796+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:11:56.796+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:11:56.816+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:11:56.816+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:02.809+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:02.809+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:02.827+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:02.827+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:03.591+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:12:03.704+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:12:03.714+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:12:03.819+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:12:04.807+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:04.807+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:04.824+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:04.824+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:11.560+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:11.560+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:11.577+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T13:12:11.577+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T13:12:22.386+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:12:22.484+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:12:22.498+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:12:22.648+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:30:13.723+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:30:13.737+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc12020@gmail.com
+2025-11-15T13:30:13.850+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc12020@gmail.com
+2025-11-15T13:30:13.868+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:30:13.882+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:30:19.650+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:30:19.707+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:30:19.715+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:30:19.786+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:37:16.798+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:37:16.835+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:38:03.264+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:38:03.264+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:38:03.281+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:38:03.285+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:28.925+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:40:28.929+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc12020@gmail.com
+2025-11-15T13:40:29.054+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc12020@gmail.com
+2025-11-15T13:40:29.088+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:29.100+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:29.131+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:29.141+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:42.207+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:40:42.213+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc12020@gmail.com
+2025-11-15T13:40:42.337+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc12020@gmail.com
+2025-11-15T13:40:42.349+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:42.360+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:43.911+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:40:43.934+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc12020@gmail.com
+2025-11-15T13:41:01.967+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:41:01.969+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:41:02.085+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:41:02.121+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:02.134+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:03.383+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:03.411+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:03.426+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:03.495+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:03.501+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:03.594+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:19.087+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:41:19.090+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:41:19.221+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:41:19.239+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:19.262+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:20.406+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:20.522+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:20.538+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:20.621+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:50.887+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:41:50.891+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:41:51.016+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:41:51.037+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:51.045+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:41:52.177+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:52.216+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:52.224+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:52.252+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:55.808+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:55.863+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:41:55.873+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:41:55.985+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:42:00.532+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:42:00.536+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:42:00.660+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:42:00.676+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:42:00.686+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:42:01.733+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:42:01.777+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:42:01.786+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:42:01.873+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:42:05.668+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:42:05.671+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:42:05.797+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:42:05.813+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:42:05.823+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:42:06.970+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:42:07.017+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:42:07.025+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:42:07.057+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:43:46.411+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:43:46.427+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:43:50.517+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:43:50.520+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:43:50.648+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:43:50.659+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:43:50.666+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:43:58.413+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:43:58.423+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:44:04.298+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:44:04.301+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:44:04.432+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:44:04.446+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:44:04.451+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:44:11.098+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:44:11.101+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:44:11.231+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:44:11.242+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:44:11.248+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:44:57.986+0700 INFO  p.e.b.controller.AuthController : Email is already exists with another account
+2025-11-15T13:46:08.811+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:46:08.817+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T13:46:08.942+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T13:46:08.953+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:46:08.960+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:46:14.656+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:46:14.673+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T13:49:18.281+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:49:18.285+0700 ERROR p.e.b.s.s.CustomUserServiceImpl : User not found with email : phuc.ttp.23@aptechlearning.edu.vn
+2025-11-15T13:49:26.456+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:49:26.459+0700 ERROR p.e.b.s.s.CustomUserServiceImpl : User not found with email : tran
+2025-11-15T13:49:31.728+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:49:31.731+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranhavii850@gmail.com
+2025-11-15T13:49:31.858+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranhavii850@gmail.com
+2025-11-15T13:49:31.878+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:49:31.886+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:49:36.489+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:49:36.498+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:49:39.607+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:49:39.706+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:49:39.717+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:49:39.825+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:53:21.104+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:53:21.119+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:53:21.127+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:53:21.134+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:57:31.886+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:31.895+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:57:35.646+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:35.646+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:35.678+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:57:35.684+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:35.688+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:35.696+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:57:43.466+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:43.466+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:43.475+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:57:43.477+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:43.483+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:57:43.506+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:58:42.752+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T13:58:42.755+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranhavii850@gmail.com
+2025-11-15T13:58:42.884+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranhavii850@gmail.com
+2025-11-15T13:58:42.912+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:42.921+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:42.946+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:42.949+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:58:42.954+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:42.959+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:58:49.048+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:58:49.125+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:58:49.133+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T13:58:49.266+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T13:58:57.011+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:57.018+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T13:58:57.026+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T13:58:57.034+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:08.342+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:08.342+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:08.361+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:08.363+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:08.369+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:08.380+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:11.374+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:11.374+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:11.387+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:11.388+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:11.398+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:11.406+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:18.509+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:18.510+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:18.522+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:18.525+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:18.532+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:18.540+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:27.438+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:27.438+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:27.446+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:27.451+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:27.453+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:27.464+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:40.392+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:40.394+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:40.402+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:02:40.404+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:40.412+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:02:40.419+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:10:41.409+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:10:41.414+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranhavii850@gmail.com
+2025-11-15T14:10:41.541+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranhavii850@gmail.com
+2025-11-15T14:10:41.562+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:10:41.587+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:10:41.617+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:10:41.622+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:10:41.627+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii850@gmail.com
+2025-11-15T14:10:41.634+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id102
+2025-11-15T14:11:10.840+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:11:10.843+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranhavii8507@gmail.com
+2025-11-15T14:11:10.969+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranhavii8507@gmail.com
+2025-11-15T14:11:10.981+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii8507@gmail.com
+2025-11-15T14:11:10.989+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii8507@gmail.com
+2025-11-15T14:11:12.373+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii8507@gmail.com
+2025-11-15T14:11:12.396+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranhavii8507@gmail.com
+2025-11-15T14:11:21.606+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:11:21.659+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:11:21.697+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:11:21.777+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:12:35.922+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:12:35.927+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T14:12:36.054+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T14:12:36.070+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:12:36.101+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:12:37.826+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:12:37.868+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:12:37.875+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:12:37.939+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:14:43.526+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:14:43.529+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T14:14:43.681+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T14:14:43.692+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:14:43.698+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:14:45.317+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:14:45.409+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:14:45.417+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:14:45.532+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:14:55.326+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:14:55.330+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t@gmail.com
+2025-11-15T14:14:55.456+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t@gmail.com
+2025-11-15T14:14:55.487+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:14:55.498+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:14:57.001+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:14:57.009+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:14:57.027+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:14:57.114+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:14:57.121+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:14:57.222+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:15:55.958+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:15:55.964+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t@gmail.com
+2025-11-15T14:15:56.097+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t@gmail.com
+2025-11-15T14:15:56.111+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:15:56.119+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:16:06.668+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:16:06.754+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:16:06.764+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:16:06.858+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:16:10.052+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:16:10.055+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t@gmail.com
+2025-11-15T14:16:10.184+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t@gmail.com
+2025-11-15T14:16:10.218+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:16:10.228+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:16:11.353+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:16:11.441+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:16:11.449+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:16:11.532+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:17:00.436+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:17:00.457+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:17:32.491+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:17:32.494+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t@gmail.com
+2025-11-15T14:17:32.622+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t@gmail.com
+2025-11-15T14:17:32.634+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:17:32.640+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:17:34.094+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:17:34.107+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:13.235+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:13.235+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:13.247+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:13.271+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:20.873+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:20.875+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:20.895+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:20.897+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:21.219+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:21.220+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:21.232+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:21.235+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:25.106+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:18:25.109+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t@gmail.com
+2025-11-15T14:18:25.236+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t@gmail.com
+2025-11-15T14:18:25.248+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:25.254+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:26.439+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:18:26.457+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t@gmail.com
+2025-11-15T14:31:54.466+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 19609 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-15T14:31:54.467+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-15T14:31:57.329+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.987 seconds (process running for 3.178)
+2025-11-15T14:37:49.827+0700 ERROR p.e.b.s.serviceImpl.UserService : User not found with email : t@gmail.com
+2025-11-15T14:37:49.858+0700 ERROR p.e.b.s.serviceImpl.UserService : User not found with email : t@gmail.com
+2025-11-15T14:37:56.979+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:37:56.983+0700 ERROR p.e.b.s.s.CustomUserServiceImpl : User not found with email : t@gmail.com
+2025-11-15T14:38:07.686+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T14:38:07.692+0700 ERROR p.e.b.s.s.CustomUserServiceImpl : User not found with email : t@gmail.com
+2025-11-15T14:38:22.892+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Create cart success!
+2025-11-15T14:38:22.902+0700 INFO  p.e.b.controller.AuthController : New user signed up with email: tranphuc120203@gmail.com
+2025-11-15T14:38:22.931+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:38:45.689+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:38:45.833+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:38:45.853+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:38:45.942+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:38:54.759+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:38:54.878+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:38:54.933+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:38:54.992+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:39:03.142+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:39:03.165+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:39:03.176+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:39:03.185+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:39:59.268+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:39:59.280+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:40:18.634+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:40:18.634+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:40:18.641+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:40:18.649+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:40:18.651+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:40:18.658+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:40:38.174+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:40:38.278+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:40:38.290+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T14:40:38.359+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T14:41:28.098+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:41:28.107+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:41:28.117+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:41:28.128+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:55:21.410+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:55:21.423+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:55:28.299+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:55:28.301+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:55:28.309+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T14:55:28.325+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:55:28.325+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T14:55:28.336+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart item not found with id1
+2025-11-15T15:09:21.151+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:21.151+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:21.173+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:09:21.173+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:09:21.174+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:21.186+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:21.194+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:09:21.195+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:09:22.638+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:22.638+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:22.647+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:09:22.647+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:09:22.647+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:22.656+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:09:22.667+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:09:22.667+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:12:31.491+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:31.492+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:31.501+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:31.501+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:12:31.501+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:12:31.512+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:31.522+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:12:31.523+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:12:45.550+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:45.561+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:12:45.561+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:12:49.229+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:49.229+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:49.239+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:49.239+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:12:49.239+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:12:49.248+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:12:49.259+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:12:49.259+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:13:30.352+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:13:30.360+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:13:30.360+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:14:00.697+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:14:00.697+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:14:00.705+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:14:00.705+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:14:00.705+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:14:00.716+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:14:00.722+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:14:00.722+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:14:19.351+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:14:19.363+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:14:19.364+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:15:44.574+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:15:44.581+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:15:44.581+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:15:44.592+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:15:44.604+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:15:44.604+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:16:32.855+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:16:32.873+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:16:32.873+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:17:00.872+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:17:00.880+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:17:00.881+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:18:37.900+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:18:37.909+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:18:37.910+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:18:48.895+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:18:48.906+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:18:48.906+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:19:01.283+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:19:01.295+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:19:01.295+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:19:13.984+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:19:13.996+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:19:13.996+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:24:58.234+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:24:58.234+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:24:58.246+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:24:58.246+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:24:58.249+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:24:58.264+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:24:58.311+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:24:58.311+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:26:29.652+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:26:29.657+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:26:29.657+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:28:00.539+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:28:00.552+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:28:00.552+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:28:22.532+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:28:22.542+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:28:22.542+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:29:04.742+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:29:04.759+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:29:04.760+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:29:50.099+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:29:50.108+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:29:50.108+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:29:56.887+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:29:56.903+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:29:56.904+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:30:56.978+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:30:57.073+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:30:57.087+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:30:57.173+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:30:59.692+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:30:59.693+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:30:59.709+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:30:59.709+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:00.702+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:00.711+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:00.711+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:00.725+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:00.737+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:00.737+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:04.992+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:05.077+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:05.094+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:05.179+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:07.338+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:07.338+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:07.349+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:07.349+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:09.186+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:09.194+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:09.195+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:09.206+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:09.217+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:09.217+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:10.823+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:10.823+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:10.836+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:10.836+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:13.157+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:13.170+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:13.170+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:13.184+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:13.196+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:13.197+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:17.197+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:17.300+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:17.315+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:17.389+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:19.103+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:19.103+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T15:31:19.114+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:19.115+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T15:31:21.265+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:21.272+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:21.272+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:21.282+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:31:21.291+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T15:31:21.292+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 1
+2025-11-15T15:31:24.735+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:24.735+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T15:31:24.744+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:24.744+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T15:31:25.493+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:25.596+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:25.611+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:31:25.702+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:31:32.634+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:32.634+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:31:32.642+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:31:32.642+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:33:03.953+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:33:03.954+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:36:44.045+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:36:44.045+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:36:44.046+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:36:44.063+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:36:44.064+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:36:44.064+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:36:58.155+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:36:58.166+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:11.450+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T15:37:11.454+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T15:37:11.584+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T15:37:11.621+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:11.632+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:13.095+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:13.105+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:37:13.105+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:37:13.121+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:37:13.121+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:37:13.121+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:52.378+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:52.393+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:59.279+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T15:37:59.282+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T15:37:59.409+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T15:37:59.421+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:37:59.428+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:38:03.017+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:38:03.030+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:40:28.645+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:40:28.661+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T15:40:37.782+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Create cart success!
+2025-11-15T15:40:37.786+0700 INFO  p.e.b.controller.AuthController : New user signed up with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:40:37.810+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:40:42.197+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:40:42.300+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:40:42.312+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T15:40:42.410+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T15:40:52.592+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:40:52.592+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:40:52.603+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:40:52.603+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:41:06.553+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:41:06.553+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:41:06.554+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:41:06.568+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:41:06.568+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:41:06.568+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:42:35.907+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:42:35.908+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:43:01.695+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:43:01.698+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:43:01.700+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:43:01.710+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:43:01.710+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:43:01.711+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:45:02.856+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:45:02.857+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:51:02.072+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:51:02.074+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:51:02.114+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:51:02.114+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:51:18.919+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:51:18.920+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:51:53.133+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:51:53.134+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:51:53.136+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:51:53.146+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:51:53.147+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:51:53.147+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:52:26.732+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:52:26.734+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:52:26.734+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:52:26.746+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:52:26.751+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:52:26.751+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:55:34.950+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:55:34.951+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:55:34.951+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:55:34.960+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T15:55:34.960+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:55:34.960+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:55:53.131+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:55:53.133+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:56:07.489+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:56:07.490+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T15:56:18.627+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T15:56:18.628+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:07:05.863+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:07:05.865+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:07:08.245+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:07:08.250+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:07:08.270+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:12:38.902+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:12:38.904+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:13:07.048+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:13:07.049+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:13:11.888+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:13:11.893+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:13:11.896+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:14:18.992+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:14:19.037+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:14:19.044+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:14:19.117+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:14:19.878+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:14:19.878+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:14:19.887+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:14:19.887+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:14:20.998+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:14:21.003+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:14:21.004+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:15:41.815+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:15:41.816+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:16:28.682+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:16:28.683+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:17:23.371+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:17:23.375+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:17:23.379+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:17:23.385+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:17:23.385+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:18:42.709+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T16:18:42.713+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:18:42.844+0700 INFO  p.e.b.controller.AuthController : User signed in with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:18:42.862+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:18:42.868+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:18:44.788+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:18:44.788+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:18:44.800+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:18:44.800+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:18:44.811+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:18:44.918+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:18:44.927+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:18:45.029+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:18:52.161+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:18:52.161+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:18:52.169+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:18:52.169+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:21:03.019+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:21:03.019+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:21:29.219+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:21:29.219+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:21:37.640+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:21:37.640+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:37:19.672+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:19.682+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:19.684+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:37:19.732+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:19.737+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:19.737+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:19.745+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:19.751+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:19.751+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:26.979+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:27.036+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:27.047+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:27.113+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:29.344+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:29.351+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:29.351+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:29.359+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:29.370+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:29.370+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:31.043+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:31.099+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:31.107+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:31.164+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:36.276+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:36.277+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
+2025-11-15T16:37:36.286+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:36.286+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
+2025-11-15T16:37:38.080+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:38.084+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:38.086+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:37:38.095+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:37:38.095+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:37:40.778+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:40.781+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:40.782+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:37:40.803+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:40.811+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:40.811+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:40.820+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:40.832+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:40.832+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:51.540+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:51.598+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:51.607+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:37:51.693+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:37:53.193+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:53.193+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:37:53.200+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:53.200+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:37:55.179+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:55.182+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:55.183+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:37:55.187+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:37:55.187+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:37:58.393+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:58.397+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:37:58.399+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:37:58.420+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:58.425+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:58.425+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:37:58.433+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:37:58.464+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:37:58.464+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:38:18.346+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:18.439+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:18.449+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:18.540+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:35.326+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T16:38:35.328+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T16:38:35.452+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T16:38:35.462+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:35.469+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:37.094+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:37.104+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:37.133+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:37.163+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:37.170+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:37.244+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:39.126+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:39.204+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:39.213+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:38:39.320+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:38:40.376+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:38:40.376+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:38:40.387+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:38:40.387+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:38:41.227+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:41.230+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:38:41.233+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:38:41.252+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:38:41.267+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:09.490+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T16:39:09.494+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T16:39:09.623+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T16:39:09.635+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:09.642+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:11.223+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:11.232+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:11.232+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:11.247+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:11.252+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:11.252+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:13.427+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:13.508+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:13.516+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:13.607+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:15.044+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:15.044+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:39:15.054+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:15.054+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:39:20.204+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T16:39:20.207+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: tranphuc120203@gmail.com
+2025-11-15T16:39:20.336+0700 INFO  p.e.b.controller.AuthController : User signed in with email: tranphuc120203@gmail.com
+2025-11-15T16:39:20.348+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:20.357+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : tranphuc120203@gmail.com
+2025-11-15T16:39:21.549+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:21.549+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:39:21.560+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:21.560+0700 INFO  p.e.b.controller.ProductController : Product found with id : 4
+2025-11-15T16:39:21.567+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:21.669+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:21.680+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:21.785+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:36.725+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-15T16:39:36.728+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:36.857+0700 INFO  p.e.b.controller.AuthController : User signed in with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:36.867+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:36.873+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:38.539+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:38.550+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:38.550+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:38.569+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:38.569+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:38.630+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:38.638+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:38.719+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:40.862+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:40.937+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:40.946+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:41.032+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:47.724+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:47.733+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:39:47.733+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:39:47.741+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:47.751+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:39:47.751+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:39:54.258+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:54.339+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:54.348+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:39:54.470+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:39:55.189+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:55.189+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:55.198+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:55.199+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:39:56.410+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:56.414+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:39:56.416+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:39:56.434+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:56.440+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:39:56.440+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:39:56.448+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:39:56.458+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:39:56.458+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:40:01.770+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:40:01.812+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:40:01.820+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:40:01.877+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:40:03.207+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:40:03.207+0700 INFO  p.e.b.controller.ProductController : Product found with id : 5
+2025-11-15T16:40:03.215+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:40:03.215+0700 INFO  p.e.b.controller.ProductController : Product found with id : 5
+2025-11-15T16:40:05.442+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:40:05.446+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:40:05.448+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:40:05.452+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:40:05.452+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:40:10.761+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:40:10.766+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:40:10.769+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:40:10.788+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:40:10.796+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:40:10.796+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:40:10.806+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:40:10.814+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:40:10.814+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:42:40.440+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:42:40.487+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:42:40.506+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:42:40.571+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:42:43.077+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:42:43.077+0700 INFO  p.e.b.controller.ProductController : Product found with id : 6
+2025-11-15T16:42:43.083+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:42:43.084+0700 INFO  p.e.b.controller.ProductController : Product found with id : 6
+2025-11-15T16:42:44.248+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:42:44.252+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:42:44.255+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:42:44.264+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:42:44.264+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:43:08.479+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:43:08.482+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:43:08.484+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:43:08.507+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:43:08.523+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:43:08.523+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:43:08.532+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:43:08.540+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:43:08.541+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:51:57.743+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:51:57.827+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:51:57.837+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:51:57.938+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:51:59.700+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:51:59.700+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:51:59.708+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:51:59.708+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:52:03.335+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:52:03.337+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:52:03.339+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:52:03.357+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:52:03.366+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:52:03.367+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:52:03.377+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:52:03.386+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:52:03.387+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:52:08.526+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:52:08.599+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:52:08.607+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:52:08.697+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:52:11.426+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:52:11.426+0700 INFO  p.e.b.controller.ProductController : Product found with id : 12
+2025-11-15T16:52:11.434+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:52:11.434+0700 INFO  p.e.b.controller.ProductController : Product found with id : 12
+2025-11-15T16:52:22.798+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:52:22.802+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:52:22.804+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:52:22.809+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:52:22.810+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:53:49.164+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:53:49.168+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:53:49.170+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:53:49.194+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:53:49.199+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:53:49.199+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:53:49.207+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:53:49.211+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:53:49.211+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:53:53.176+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:53:53.233+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:53:53.238+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:53:53.303+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:53:59.091+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:53:59.091+0700 INFO  p.e.b.controller.ProductController : Product found with id : 20
+2025-11-15T16:53:59.106+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:53:59.106+0700 INFO  p.e.b.controller.ProductController : Product found with id : 20
+2025-11-15T16:54:04.995+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:54:04.998+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:54:05.000+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:54:05.005+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:54:05.005+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:54:11.063+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:54:11.066+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:54:11.068+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:54:11.086+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:54:11.094+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:54:11.095+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:54:11.108+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:54:11.116+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:54:11.116+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:56:12.478+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:56:12.576+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:56:12.593+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:56:12.694+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:56:15.458+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:56:15.467+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:56:15.467+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:56:15.482+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:56:15.492+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:56:15.492+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:56:21.831+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:56:21.908+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:56:21.916+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:56:22.025+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:56:23.625+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:56:23.625+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:56:23.634+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:56:23.634+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T16:56:24.831+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:56:24.833+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:56:24.835+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:56:24.852+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:56:24.859+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:56:24.859+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:56:24.871+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:56:24.880+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:56:24.880+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:57:18.670+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:57:18.750+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:57:18.757+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T16:57:18.849+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T16:57:25.299+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:57:25.299+0700 INFO  p.e.b.controller.ProductController : Product found with id : 19
+2025-11-15T16:57:25.321+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:57:25.321+0700 INFO  p.e.b.controller.ProductController : Product found with id : 19
+2025-11-15T16:57:29.979+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:57:29.982+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:57:29.983+0700 ERROR p.e.b.s.s.CartItemServiceImpl : Cart Item is null
+2025-11-15T16:57:29.988+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Create Cart Item success!
+2025-11-15T16:57:29.988+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item was created : 
+2025-11-15T16:57:34.960+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:57:34.964+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T16:57:34.965+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : CartItem was exit
+2025-11-15T16:57:34.986+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:57:34.994+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:57:34.995+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T16:57:35.006+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T16:57:35.017+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T16:57:35.017+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:10:21.343+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 62093 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-15T17:10:21.344+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-15T17:10:23.608+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.384 seconds (process running for 2.565)
+2025-11-15T17:10:28.093+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:28.162+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:28.196+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:28.316+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:29.882+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:29.954+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:29.964+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:30.067+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:32.079+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:32.080+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T17:10:32.098+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:32.098+0700 INFO  p.e.b.controller.ProductController : Product found with id : 1
+2025-11-15T17:10:33.637+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:33.642+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:33.670+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item quantity updated: iPhone 15 Pro
+2025-11-15T17:10:33.688+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:33.699+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:10:33.699+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:10:33.711+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:33.716+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:10:33.717+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:10:41.181+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:41.249+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:41.261+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:41.370+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:47.510+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:47.510+0700 INFO  p.e.b.controller.ProductController : Product found with id : 6
+2025-11-15T17:10:47.527+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:47.527+0700 INFO  p.e.b.controller.ProductController : Product found with id : 6
+2025-11-15T17:10:49.165+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:49.169+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:10:49.176+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item quantity updated: MacBook Pro 16"
+2025-11-15T17:10:49.216+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:49.223+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:10:49.223+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:10:49.244+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:10:49.249+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:10:49.249+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:10:59.811+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:59.866+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:10:59.879+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:10:59.958+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:11:02.274+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:11:02.274+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
+2025-11-15T17:11:02.288+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:11:02.288+0700 INFO  p.e.b.controller.ProductController : Product found with id : 3
+2025-11-15T17:11:03.818+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:11:03.823+0700 INFO  p.e.b.s.s.ProductServiceImpl : Product was found with id : 
+2025-11-15T17:11:03.828+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart Item quantity updated: Sony WH‑1000XM5 Headphones
+2025-11-15T17:11:03.849+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:11:03.857+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:11:03.857+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:11:03.873+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-15T17:11:03.884+0700 INFO  p.e.b.s.s.CartItemServiceImpl : Cart Items was found
+2025-11-15T17:11:03.884+0700 INFO  p.e.b.s.serviceImpl.CartServiceImpl : Cart was found with userId : 2
+2025-11-15T17:11:14.613+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:11:14.697+0700 INFO  p.e.b.controller.ProductController : Get all product !!!
+2025-11-15T17:11:14.714+0700 INFO  p.e.b.s.s.ProductServiceImpl : Find success
+2025-11-15T17:11:14.810+0700 INFO  p.e.b.controller.ProductController : Get all product !!!

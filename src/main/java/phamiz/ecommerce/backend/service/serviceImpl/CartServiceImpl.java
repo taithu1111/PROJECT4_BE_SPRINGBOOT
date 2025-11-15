@@ -9,6 +9,7 @@ import phamiz.ecommerce.backend.dto.Cart.CartDTO;
 import phamiz.ecommerce.backend.dto.Cart.CartItemDTO;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Cart;
 import phamiz.ecommerce.backend.model.CartItem;
 import phamiz.ecommerce.backend.model.Product;
@@ -17,6 +18,7 @@ import phamiz.ecommerce.backend.repositories.ICartRepository;
 import phamiz.ecommerce.backend.service.ICartItemService;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.IProductService;
+import phamiz.ecommerce.backend.service.IUserService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +30,7 @@ public class CartServiceImpl implements ICartService {
     private final ICartRepository cartRepository;
     private final ICartItemService cartItemService;
     private final IProductService productService;
+    private final IUserService userService;
     private static final Logger logger = LoggerFactory.getLogger(CartServiceImpl.class);
 
     @Override
@@ -38,30 +41,30 @@ public class CartServiceImpl implements ICartService {
         return cartRepository.save(cart);
     }
 
-    @Override
-    public String addCartItem(Long userId, AddItemRequest request) throws ProductException {
-        Cart cart = cartRepository.findByUserId(userId);
-        Product product = productService.findProductById(request.getProductId());
-
-        CartItem isPresent = cartItemService.isCartItemExist(cart, product);
-
-        if (isPresent == null) {
-            CartItem cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setCart(cart);
-            cartItem.setQuantity(request.getQuantity());
-            cartItem.setPrice(request.getPrice());
-
-            CartItem createdCartItem = cartItemService.createCartItem(cartItem);
-            logger.info("Cart Item was created : ", createdCartItem.getProduct().getProduct_name());
-            cart.getCartItems().add(createdCartItem);
-            cartRepository.save(cart);
-            logger.info("Item add to Cart");
-            return "Item add to Cart";
-        }
-        logger.info("CartItem was exit");
-        return "CartItem was exit";
-    }
+//    @Override
+//    public String addCartItem(Long userId, AddItemRequest request) throws ProductException {
+//        Cart cart = cartRepository.findByUserId(userId);
+//        Product product = productService.findProductById(request.getProductId());
+//
+//        CartItem isPresent = cartItemService.isCartItemExist(cart, product);
+//
+//        if (isPresent == null) {
+//            CartItem cartItem = new CartItem();
+//            cartItem.setProduct(product);
+//            cartItem.setCart(cart);
+//            cartItem.setQuantity(request.getQuantity());
+//            cartItem.setPrice(request.getPrice());
+//
+//            CartItem createdCartItem = cartItemService.createCartItem(cartItem);
+//            logger.info("Cart Item was created : ", createdCartItem.getProduct().getProduct_name());
+//            cart.getCartItems().add(createdCartItem);
+//            cartRepository.save(cart);
+//            logger.info("Item add to Cart");
+//            return "Item add to Cart";
+//        }
+//        logger.info("CartItem was exit");
+//        return "CartItem was exit";
+//    }
 
     @Override
     public Cart findUserCart(Long userId) throws CartItemException {
@@ -79,7 +82,7 @@ public class CartServiceImpl implements ICartService {
         }
         cart.setTotalPrice(totalPrice);
         cart.setTotalItem(totalItem);
-        logger.info("Cart was found with userId : "+ userId);
+        logger.info("Cart was found with userId : " + userId);
         return cart;
     }
 
@@ -92,11 +95,68 @@ public class CartServiceImpl implements ICartService {
         cartDTO.setTotalItem(cart.getTotalItem());
 
         Set<CartItemDTO> cartItemDTOS = new HashSet<>();
-        for (CartItem cartItem : cart.getCartItems()){
+        for (CartItem cartItem : cart.getCartItems()) {
             cartItemDTOS.add(cartItemService.toDTO(cartItem));
         }
         cartDTO.setCartItems(cartItemDTOS);
 
         return cartDTO;
     }
+    @Override
+    public String addCartItem(Long userId, AddItemRequest request) throws ProductException {
+        // Lấy cart của user
+        Cart cart = cartRepository.findByUserId(userId);
+
+        // Nếu chưa có cart, tạo mới
+        if (cart == null) {
+            User user = null; // cần service lấy user theo ID
+            try {
+                user = userService.findUserById(userId);
+            } catch (UserException e) {
+                throw new RuntimeException(e);
+            }
+            if (user == null) {
+                throw new ProductException("User not found for id: " + userId);
+            }
+            cart = createCart(user);
+            logger.info("Cart created for userId: " + userId);
+        }
+
+        Product product = productService.findProductById(request.getProductId());
+        if (product == null) {
+            throw new ProductException("Product not found for id: " + request.getProductId());
+        }
+
+        CartItem isPresent = cartItemService.isCartItemExist(cart, product);
+
+        if (isPresent == null) {
+            CartItem cartItem = new CartItem();
+            cartItem.setProduct(product);
+            cartItem.setCart(cart);
+            cartItem.setQuantity(request.getQuantity());
+            cartItem.setPrice(request.getPrice());
+
+            CartItem createdCartItem = cartItemService.createCartItem(cartItem);
+            logger.info("Cart Item was created: " + createdCartItem.getProduct().getProduct_name());
+
+            cart.getCartItems().add(createdCartItem);
+            cartRepository.save(cart);
+
+            logger.info("Item added to cart for userId: " + userId);
+            return "Item added to cart";
+        } else {
+            // Nếu item đã tồn tại, có thể tăng quantity
+            isPresent.setQuantity(isPresent.getQuantity() + request.getQuantity());
+            try {
+                cartItemService.updateCartItem(userId , isPresent.getId() , isPresent.getQuantity());
+            } catch (CartItemException e) {
+                throw new RuntimeException(e);
+            } catch (UserException e) {
+                throw new RuntimeException(e);
+            }
+            logger.info("Cart Item quantity updated: " + isPresent.getProduct().getProduct_name());
+            return "Cart item quantity updated";
+        }
+    }
+
 }
