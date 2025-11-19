@@ -33,6 +33,7 @@ public class ProductServiceImpl implements IProductService {
     private final ICategoryRepository categoryRepository;
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
+
     @Override
     public ProductDTO toDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
@@ -216,5 +217,13 @@ public class ProductServiceImpl implements IProductService {
             listProductRespone.add(toDTO(product));
         }
         return listProductRespone;
+    }
+    @Override
+    public List<ProductDTO> searchProductsByName(String name) throws ProductException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new ProductException("Search name must not be empty");
+        }
+        List<Product> products = productRepository.findByProductNameContainingIgnoreCase(name);
+        return products.stream().map(this::toDTO).collect(Collectors.toList());
     }
 }

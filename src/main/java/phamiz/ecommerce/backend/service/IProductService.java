@@ -20,4 +20,5 @@ public interface IProductService {
                                        Integer pageNumber, Integer pageSize) throws ProductException;
     public List<ProductDTO> getNewProduct();
     List<ProductDTO> getRandomProduct();
+    public List<ProductDTO> searchProductsByName(String name) throws ProductException;
 }

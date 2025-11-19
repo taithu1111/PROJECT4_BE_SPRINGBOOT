@@ -39,6 +39,7 @@ public class OrderService implements IOrderService {
         Cart cart = cartService.findUserCart(user.getId());
         List<OrderItem> orderItems = new ArrayList<>();
 
+
         for(CartItem item : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
             orderItem.setPrice(item.getPrice());

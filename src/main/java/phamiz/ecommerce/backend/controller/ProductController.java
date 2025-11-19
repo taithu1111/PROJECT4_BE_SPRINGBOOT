@@ -56,4 +56,12 @@ public class ProductController {
         logger.info("Filter products success !");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
+    @GetMapping("/search-by-name")
+    public ResponseEntity<List<ProductDTO>> searchProductsByName(
+            @RequestParam("name") String name) throws ProductException {
+        List<ProductDTO> list = productService.searchProductsByName(name);
+        logger.info("Search products by name: {}", name);
+        return ResponseEntity.ok(list);
+    }
+
 }

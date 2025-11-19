@@ -3,7 +3,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-./logs
+/logs/hibernate.log
+/logs/myapp.log
+
 ### STS ###
 .apt_generated
 .classpath

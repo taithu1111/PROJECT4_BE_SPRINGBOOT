@@ -9,6 +9,7 @@ import phamiz.ecommerce.backend.dto.Cart.CartDTO;
 import phamiz.ecommerce.backend.dto.Cart.CartItemDTO;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Cart;
 import phamiz.ecommerce.backend.model.CartItem;
 import phamiz.ecommerce.backend.model.Product;
@@ -17,6 +18,7 @@ import phamiz.ecommerce.backend.repositories.ICartRepository;
 import phamiz.ecommerce.backend.service.ICartItemService;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.IProductService;
+import phamiz.ecommerce.backend.service.IUserService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +30,7 @@ public class CartServiceImpl implements ICartService {
     private final ICartRepository cartRepository;
     private final ICartItemService cartItemService;
     private final IProductService productService;
+    private final IUserService userService;
     private static final Logger logger = LoggerFactory.getLogger(CartServiceImpl.class);
 
     @Override
@@ -79,7 +82,7 @@ public class CartServiceImpl implements ICartService {
         }
         cart.setTotalPrice(totalPrice);
         cart.setTotalItem(totalItem);
-        logger.info("Cart was found with userId : "+ userId);
+        logger.info("Cart was found with userId : " + userId);
         return cart;
     }
 
@@ -92,11 +95,13 @@ public class CartServiceImpl implements ICartService {
         cartDTO.setTotalItem(cart.getTotalItem());
 
         Set<CartItemDTO> cartItemDTOS = new HashSet<>();
-        for (CartItem cartItem : cart.getCartItems()){
+        for (CartItem cartItem : cart.getCartItems()) {
             cartItemDTOS.add(cartItemService.toDTO(cartItem));
         }
         cartDTO.setCartItems(cartItemDTOS);
 
         return cartDTO;
     }
+
+
 }

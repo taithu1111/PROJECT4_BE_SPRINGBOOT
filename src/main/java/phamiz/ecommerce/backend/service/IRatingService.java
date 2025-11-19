@@ -10,4 +10,5 @@ import java.util.List;
 public interface IRatingService {
     public Rating createRating(RatingRequest request, User user) throws ProductException;
     public List<Rating> getProductsRating(Long productId);
+    public Double getAverageRating(Long productId);
 }
