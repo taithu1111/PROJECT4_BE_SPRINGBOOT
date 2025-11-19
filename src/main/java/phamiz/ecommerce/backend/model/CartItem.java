@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference // CartItem là con của Cart Em phúc thêm để sửa StackOverFlow
     private Cart cart;
 
     @ManyToOne

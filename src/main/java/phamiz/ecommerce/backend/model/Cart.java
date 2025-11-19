@@ -1,5 +1,7 @@
 package phamiz.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +21,12 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference // Cart là con bỏ qua khi serialize User Em phúc thêm để sửa StackOverFlow
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL , orphanRemoval = true)
     @Column(name="cart_items")
+    @JsonManagedReference // Cart là cha của CartItem Em phúc thêm để sửa StackOverFlow
     private Set<CartItem> cartItems = new HashSet<>();
 
     @Column(name = "total_price")

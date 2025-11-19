@@ -706,3 +706,57 @@
 2025-11-19T15:46:10.712+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
 2025-11-19T15:47:44.519+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
 2025-11-19T15:50:05.027+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:21:46.471+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 72731 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-19T20:21:46.472+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-19T20:23:23.723+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 73759 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-19T20:23:23.724+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-19T20:25:52.179+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 75097 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-19T20:25:52.180+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-19T20:25:54.573+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.537 seconds (process running for 2.735)
+2025-11-19T20:37:41.709+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:41.709+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:41.741+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:41.747+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:47.893+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:37:47.897+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t11@gmail.com
+2025-11-19T20:37:48.012+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t11@gmail.com
+2025-11-19T20:37:48.029+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:48.029+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:48.047+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:54.236+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:37:54.242+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t11@gmail.com
+2025-11-19T20:37:54.367+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t11@gmail.com
+2025-11-19T20:37:54.384+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:54.384+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:37:54.396+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:38:11.568+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:38:11.572+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:11.690+0700 INFO  p.e.b.controller.AuthController : User signed in with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:11.701+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:11.702+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:11.716+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:39.909+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:38:39.915+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:40.041+0700 INFO  p.e.b.controller.AuthController : User signed in with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:40.054+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:40.055+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:38:40.074+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:48:54.746+0700 INFO  p.e.backend.BackendApplication : Starting BackendApplication using Java 17.0.10 with PID 83517 (/Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT/target/classes started by anhphuc in /Users/anhphuc/Desktop/aptech/Project_ki_4/PROJECT4_BE_SPRINGBOOT)
+2025-11-19T20:48:54.747+0700 INFO  p.e.backend.BackendApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-19T20:48:57.082+0700 INFO  p.e.backend.BackendApplication : Started BackendApplication in 2.462 seconds (process running for 2.645)
+2025-11-19T20:49:05.902+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:05.902+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:05.936+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:05.949+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:25.559+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:49:25.563+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:25.681+0700 INFO  p.e.b.controller.AuthController : User signed in with email: phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:25.697+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:25.697+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:25.720+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : phuc.ttp.2356@aptechlearning.edu.vn
+2025-11-19T20:49:49.481+0700 INFO  p.e.b.controller.AuthController : Caller
+2025-11-19T20:49:49.486+0700 INFO  p.e.b.s.s.CustomUserServiceImpl : User found with email: t11@gmail.com
+2025-11-19T20:49:49.613+0700 INFO  p.e.b.controller.AuthController : User signed in with email: t11@gmail.com
+2025-11-19T20:49:49.627+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:49:49.627+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
+2025-11-19T20:49:49.646+0700 INFO  p.e.b.s.serviceImpl.UserService : User found with email : t11@gmail.com
