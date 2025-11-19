@@ -25,6 +25,9 @@ public class User {
     private String email;
     private String role;
     private String mobile;
+    private String resetPasswordToken;
+    private LocalDateTime resetPasswordExpiry;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();

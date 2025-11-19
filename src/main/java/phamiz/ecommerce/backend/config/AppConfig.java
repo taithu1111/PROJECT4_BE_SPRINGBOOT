@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -25,10 +26,11 @@ public class AppConfig {
         // says no session http, commonly used in RESTfull API app, ez to expand
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/**")
-                        .authenticated()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll())
-                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(new JwtValidator(), UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(new CorsConfigurationSource() {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
@@ -52,15 +54,15 @@ public class AppConfig {
                         corsConfiguration.setMaxAge(3600L);
                         return corsConfiguration;
                     }
-                }))
-                .formLogin(formLogin -> {
-                    try {
-                        formLogin.init(http);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .httpBasic(httpBasic -> httpBasic.init(http));
+                }));
+                // .formLogin(formLogin -> {
+                //     try {
+                //         formLogin.init(http);
+                //     } catch (Exception e) {
+                //         throw new RuntimeException(e);
+                //     }
+                // })
+                // .httpBasic(httpBasic -> httpBasic.init(http));
         return http.build();
     }
 

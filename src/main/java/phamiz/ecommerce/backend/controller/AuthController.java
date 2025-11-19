@@ -9,9 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import phamiz.ecommerce.backend.config.JwtProvider;
 import phamiz.ecommerce.backend.dto.Auth.AuthResponse;
@@ -21,9 +23,14 @@ import phamiz.ecommerce.backend.model.Cart;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.repositories.UserRepository;
 import phamiz.ecommerce.backend.service.ICartService;
+import phamiz.ecommerce.backend.service.serviceImpl.EmailService;
 import phamiz.ecommerce.backend.service.serviceImpl.CustomUserServiceImpl;
+import java.util.Map;
+import java.util.Base64;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +48,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserServiceImpl customUserService;
     private final ICartService cartService;
+    private final EmailService emailService;
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     /**
@@ -138,5 +146,51 @@ public class AuthController {
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
     
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            // generate secure token
+            SecureRandom random = new SecureRandom();
+            byte[] bytes = new byte[32];
+            random.nextBytes(bytes);
+            String token = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+
+            user.setResetPasswordToken(token);
+            user.setResetPasswordExpiry(LocalDateTime.now().plusHours(1));
+            userRepository.save(user);
+
+            emailService.sendPasswordResetEmail(email, token);
+        }
+
+        // Always return success (avoid email enumeration)
+        return ResponseEntity.ok("If this email exists, a password reset link has been sent.");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> body) {
+        String token = body.get("token");
+        String newPassword = body.get("newPassword");
+
+        User user = userRepository.findByResetPasswordToken(token);
+
+        if (user == null || user.getResetPasswordExpiry().isBefore(LocalDateTime.now())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token");
+        }
+
+        if (!newPassword.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$")) {
+            return ResponseEntity.badRequest().body("Weak password");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setResetPasswordToken(null);
+        user.setResetPasswordExpiry(null);
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password reset successfully");
+    }
 }
 

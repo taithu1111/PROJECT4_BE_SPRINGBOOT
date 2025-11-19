@@ -36,6 +36,16 @@ public class JwtValidator extends OncePerRequestFilter {
         // value of Authorization commnly is Bearer <token>
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 
+        if (request.getRequestURI().startsWith("/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         if (jwt != null && jwt.startsWith(TOKEN_PREFIX)) {
             // Bearer <token>
             jwt = jwt.substring(TOKEN_PREFIX.length());
