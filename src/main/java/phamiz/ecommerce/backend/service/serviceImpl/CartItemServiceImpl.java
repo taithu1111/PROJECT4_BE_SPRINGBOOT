@@ -14,6 +14,7 @@ import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.repositories.ICartItemRepository;
 import phamiz.ecommerce.backend.repositories.ICartRepository;
+import phamiz.ecommerce.backend.repositories.IProductRepository;
 import phamiz.ecommerce.backend.service.ICartItemService;
 import phamiz.ecommerce.backend.service.IUserService;
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CartItemServiceImpl implements ICartItemService {
 
+    private final IProductRepository   productRepository;
     private final ICartItemRepository cartItemRepository;
     private final IUserService userService;
     private final ICartRepository cartRepository;
@@ -33,8 +35,9 @@ public class CartItemServiceImpl implements ICartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
+        Product product = productRepository.findById(cartItem.getProductId()).get();
         cartItem.setQuantity(1);
-        cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+        cartItem.setPrice(product.getPrice() * cartItem.getQuantity());
         CartItem createdCartItem = cartItemRepository.save(cartItem);
         logger.info("Create Cart Item success!");
         return createdCartItem;
@@ -42,18 +45,20 @@ public class CartItemServiceImpl implements ICartItemService {
 
     @Override
     public CartItem updateCartItem(Long userId, Long id, int quantity) throws CartItemException, UserException {
+
         CartItem cartItem = findCartItemById(id);
         if (cartItem == null) {
             logger.error("Cart Item is null");
         }
+        Product product = productRepository.findById(id).get();
         cartItem.setQuantity(quantity);
-        cartItem.setPrice(cartItem.getQuantity() * cartItem.getProduct().getPrice());
+        cartItem.setPrice(cartItem.getQuantity() * product.getPrice());
         return cartItemRepository.save(cartItem);
     }
 
     @Override
     public CartItem isCartItemExist(Cart cart, Product product) {
-        CartItem cartItem = cartItemRepository.isCartItemExist(cart, product);
+        CartItem cartItem = cartItemRepository.isCartItemExist(cart.getId(), product.getId());
         if (cartItem == null) {
             logger.error("Cart Item is null");
         }
@@ -93,12 +98,12 @@ public class CartItemServiceImpl implements ICartItemService {
     public CartItemDTO toDTO(CartItem cartItem) {
         CartItemDTO cartItemDTO = new CartItemDTO();
         cartItemDTO.setId(cartItem.getId());
-        cartItemDTO.setCartId(cartItem.getCart().getId());
-        cartItemDTO.setProductId(cartItem.getProduct().getId());
+        cartItemDTO.setCartId(cartItem.getCartId());
+        cartItemDTO.setProductId(cartItem.getProductId());
         cartItemDTO.setQuantity(cartItem.getQuantity());
         cartItemDTO.setPrice(cartItem.getPrice());
-        cartItemDTO.setProductName(cartItem.getProduct().getProduct_name());
-        cartItemDTO.setProductImageUrl(cartItem.getProduct().getImages().stream()
+        cartItemDTO.setProductName(productRepository.findProductByProductId(cartItem.getProductId()).getProduct_name());
+        cartItemDTO.setProductImageUrl(productRepository.findProductByProductId(cartItem.getProductId()).getImages().stream()
                 .map((productImage -> productImage.getImageUrl().toString())).collect(Collectors.toList()));
         return cartItemDTO;
     }

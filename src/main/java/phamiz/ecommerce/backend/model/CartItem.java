@@ -15,12 +15,11 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Long id;
 
-    @ManyToOne
-    @JsonBackReference // CartItem là con của Cart Em phúc thêm để sửa StackOverFlow
-    private Cart cart;
+    @Column(name = "cart_id")
+    private Long cartId;
 
-    @ManyToOne
-    private Product product;
+    @Column(name = "product_id")
+    private Long productId;
 
     private int quantity;
     private Integer price;

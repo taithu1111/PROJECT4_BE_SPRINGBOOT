@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import phamiz.ecommerce.backend.model.Cart;
 @Repository
 public interface ICartRepository extends JpaRepository<Cart,Long> {
-    @Query("SELECT cart FROM Cart cart WHERE cart.user.id = :userId")
+    @Query("SELECT cart FROM Cart cart WHERE cart.userId = :userId")
     public Cart findByUserId(@Param("userId") Long userId);
 }

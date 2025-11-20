@@ -19,14 +19,13 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference // Cart là con bỏ qua khi serialize User Em phúc thêm để sửa StackOverFlow
-    private User user;
+    @Column(name = "user_id", nullable = false)
+//    @JsonBackReference // Cart là con bỏ qua khi serialize User Em phúc thêm để sửa StackOverFlow
+    private Long userId;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL , orphanRemoval = true)
-    @Column(name="cart_items")
-    @JsonManagedReference // Cart là cha của CartItem Em phúc thêm để sửa StackOverFlow
+    @OneToMany
+//    @Column(name="cart_items")
+    @JoinColumn(name = "cart_id")
     private Set<CartItem> cartItems = new HashSet<>();
 
     @Column(name = "total_price")

@@ -23,11 +23,10 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
 
     // New method to get 6 latest products
     List<Product> findTop6ByOrderByCreatedAtDesc();
-
     // New method to get 6 random products
     @Query(value = "SELECT * FROM product ORDER BY RAND() LIMIT 6", nativeQuery = true)
     List<Product> findRandom6Products();
     @Query("SELECT p FROM Product p WHERE LOWER(p.product_name) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Product> findByProductNameContainingIgnoreCase(@Param("name") String name);
-
+    Product findProductByProductId(Long productId);
 }

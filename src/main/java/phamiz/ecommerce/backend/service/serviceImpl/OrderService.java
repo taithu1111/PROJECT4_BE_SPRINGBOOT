@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
 import phamiz.ecommerce.backend.model.*;
-import phamiz.ecommerce.backend.repositories.IAddressRepository;
-import phamiz.ecommerce.backend.repositories.IOrderItemRepository;
-import phamiz.ecommerce.backend.repositories.IOrderRepository;
-import phamiz.ecommerce.backend.repositories.UserRepository;
+import phamiz.ecommerce.backend.repositories.*;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.IOrderItemService;
 import phamiz.ecommerce.backend.service.IOrderService;
@@ -28,7 +25,7 @@ public class OrderService implements IOrderService {
     private final IOrderItemService orderItemService;
     private final IOrderItemRepository orderItemRepository;
     private final IAddressRepository addressRepository;
-
+    private final IProductRepository productRepository;
     @Override
     public Order createOrder(User user, Address shippingAddress) throws CartItemException {
         shippingAddress.setUser(user);
@@ -43,7 +40,7 @@ public class OrderService implements IOrderService {
         for(CartItem item : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
             orderItem.setPrice(item.getPrice());
-            orderItem.setProduct(item.getProduct());
+            orderItem.setProduct(productRepository.findProductByProductId(item.getProductId()));
             orderItem.setQuantity(item.getQuantity());
             OrderItem createdOrderItem = orderItemRepository.save(orderItem);
             orderItems.add(createdOrderItem);
