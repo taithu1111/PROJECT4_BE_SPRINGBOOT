@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +20,15 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    @JsonIgnore
     private User user;
     private String review;
     private LocalDateTime createdAt;

@@ -103,7 +103,6 @@ public class ProductServiceImpl implements IProductService {
             secondLevel = categoryRepository.save(secondLevelCategory);
         }
 
-
         Product product = new Product();
         product.setProductColors(request.getColors());
         product.setImages(request.getImages());
@@ -127,7 +126,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Product updateProduct(Long productId, Product req) throws ProductException {
+    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
         Product product = findProductById(productId);
 
         if (req.getQuantity() != 0) {
@@ -151,8 +150,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Page<ProductDTO> getAllProduct(String category, List<String> colors,
-                                       Integer minPrice, Integer maxPrice,
-                                       String sort, Integer pageNumber, Integer pageSize) throws ProductException {
+            Integer minPrice, Integer maxPrice,
+            String sort, Integer pageNumber, Integer pageSize) throws ProductException {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, sort);
         if (products.isEmpty()) {
@@ -184,8 +183,8 @@ public class ProductServiceImpl implements IProductService {
         int endIndex = startIndex + pageable.getPageSize();
         endIndex = Math.min(endIndex, listProductRespone.size());
         List<ProductDTO> pageContent = listProductRespone.subList(startIndex, endIndex);
-        Page<ProductDTO> pageResult  = new PageImpl<>(pageContent, pageable, listProductRespone.size());
-        return pageResult ;
+        Page<ProductDTO> pageResult = new PageImpl<>(pageContent, pageable, listProductRespone.size());
+        return pageResult;
     }
 
     @Override
@@ -216,5 +215,12 @@ public class ProductServiceImpl implements IProductService {
             listProductRespone.add(toDTO(product));
         }
         return listProductRespone;
+    }
+
+    @Override
+    public void createProducts(List<CreateProductRequest> reqs) {
+        for (CreateProductRequest req : reqs) {
+            createProduct(req);
+        }
     }
 }

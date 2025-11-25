@@ -26,14 +26,22 @@ public class User {
     private String role;
     private String mobile;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean active = true;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private List<Address> addresses = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private List<Review> reviews = new ArrayList<>();
 
     private LocalDateTime createdAt;

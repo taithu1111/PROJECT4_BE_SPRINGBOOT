@@ -3,8 +3,13 @@ package phamiz.ecommerce.backend.service.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.config.JwtProvider;
+import phamiz.ecommerce.backend.dto.User.UserDTO;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.repositories.UserRepository;
@@ -60,5 +65,63 @@ public class UserService implements IUserService {
         }
         logger.info(String.format("User found with email : %s", email));
         return user;
+    }
+
+    @Override
+    public java.util.List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> findAllUsers(Integer pageNumber, Integer pageSize, String sortBy) {
+        Pageable pageable;
+
+        if (sortBy != null && !sortBy.isEmpty()) {
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+        } else {
+            // Default sort by id descending (newest first)
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by("id").descending());
+        }
+
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
+    public User toggleUserStatus(Long userId) throws UserException {
+        User user = findUserById(userId);
+
+        // Validation 1: Cannot lock admin accounts
+        if ("ROLE_ADMIN".equals(user.getRole())) {
+            logger.warn("Attempted to lock admin account: {}", userId);
+            throw new UserException("Cannot lock admin accounts for security reasons");
+        }
+
+        user.setActive(!user.isActive());
+        logger.info("User {} status toggled to: {}", userId, user.isActive());
+        return userRepository.save(user);
+    }
+
+    /**
+     * Convert User entity to UserDTO (excludes password and relationships)
+     */
+    public UserDTO convertToDTO(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setMobile(user.getMobile());
+        dto.setRole(user.getRole());
+        dto.setActive(user.isActive());
+        dto.setCreatedAt(user.getCreatedAt());
+
+        // SECURITY: Password is intentionally excluded
+        // No addresses, ratings, or reviews to prevent circular references
+
+        return dto;
     }
 }

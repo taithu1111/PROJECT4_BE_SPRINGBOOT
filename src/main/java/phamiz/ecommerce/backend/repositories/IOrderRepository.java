@@ -9,9 +9,15 @@ import phamiz.ecommerce.backend.model.Order;
 import java.util.List;
 
 @Repository
-public interface IOrderRepository extends JpaRepository<Order,Long> {
+public interface IOrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT o FROM Order o WHERE o.user.id = :userId " +
             "AND (o.orderStatus = 'PLACED' OR o.orderStatus = 'CONFIRMED' " +
-            "OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED')")
+            "OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED' OR o.orderStatus = 'PENDING')")
     public List<Order> getUsersOrders(@Param("userId") Long userId);
+
+    @Query("SELECT SUM(o.totalPrice) FROM Order o WHERE o.orderStatus = 'DELIVERED'")
+    Long getTotalRevenue();
+
+    @Query("SELECT COUNT(o) FROM Order o")
+    Long countOrders();
 }

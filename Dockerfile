@@ -1,5 +1,5 @@
 # Base image được sử dụng để build image
-FROM --platform=amd64 openjdk:17.0.2-oraclelinux8
+FROM --platform=amd64 eclipse-temurin:21-jdk
 
 # Thông tin tác giả
 LABEL authors="minhpham"

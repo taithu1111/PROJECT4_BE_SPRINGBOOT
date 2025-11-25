@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,15 @@ public class Rating {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    @JsonIgnore
     private User user;
 
-    @ManyToOne//(fetch = FetchType.LAZY) load data when needed
+    @ManyToOne // (fetch = FetchType.LAZY) load data when needed
     @JoinColumn(name = "product_id", nullable = false)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private Product product;
 
     @Column(name = "rating")

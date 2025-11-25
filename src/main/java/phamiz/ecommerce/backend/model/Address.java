@@ -26,6 +26,9 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    @JsonIgnore
     private User user;
 
 }

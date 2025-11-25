@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
+@EnableMethodSecurity
 public class AppConfig {
 
     @Bean
@@ -28,7 +30,8 @@ public class AppConfig {
                         .requestMatchers("/api/**")
                         .authenticated()
                         .anyRequest().permitAll())
-                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(new CorsConfigurationSource() {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
@@ -47,7 +50,7 @@ public class AppConfig {
                         // Authorization: added to list of headers allowed
                         corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));
 
-                        //set time of CORS request stored in cache memory of browser
+                        // set time of CORS request stored in cache memory of browser
                         corsConfiguration.setMaxAge(3600L);
                         return corsConfiguration;
                     }

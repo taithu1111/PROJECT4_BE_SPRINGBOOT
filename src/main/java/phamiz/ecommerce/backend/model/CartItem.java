@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CartItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private Cart cart;
 
     @ManyToOne

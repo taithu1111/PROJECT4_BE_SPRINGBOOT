@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import phamiz.ecommerce.backend.dto.Cart.AddItemRequest;
 import phamiz.ecommerce.backend.dto.Cart.CartDTO;
 import phamiz.ecommerce.backend.dto.Cart.CartItemDTO;
@@ -23,6 +24,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CartServiceImpl implements ICartService {
 
     private final ICartRepository cartRepository;
@@ -60,27 +62,7 @@ public class CartServiceImpl implements ICartService {
             return "Item add to Cart";
         }
         logger.info("CartItem was exit");
-        return "CartItem was exit";
-    }
-
-    @Override
-    public Cart findUserCart(Long userId) throws CartItemException {
-        Cart cart = cartRepository.findByUserId(userId);
-        System.out.println(cart);
-        int totalPrice = 0;
-        int totalItem = 0;
-        cart.setCartItems(cartItemService.findCartItemByCartId(cart.getId()));
-        for (CartItem cartItem : cart.getCartItems()) {
-            System.out.println(cartItem.getProduct().getProduct_name());
-        }
-        for (CartItem cartItem : cart.getCartItems()) {
-            totalPrice = totalPrice + cartItem.getPrice();
-            totalItem = totalItem + cartItem.getQuantity();
-        }
-        cart.setTotalPrice(totalPrice);
-        cart.setTotalItem(totalItem);
-        logger.info("Cart was found with userId : "+ userId);
-        return cart;
+        return "Item already in cart";
     }
 
     @Override
@@ -92,11 +74,16 @@ public class CartServiceImpl implements ICartService {
         cartDTO.setTotalItem(cart.getTotalItem());
 
         Set<CartItemDTO> cartItemDTOS = new HashSet<>();
-        for (CartItem cartItem : cart.getCartItems()){
+        for (CartItem cartItem : cart.getCartItems()) {
             cartItemDTOS.add(cartItemService.toDTO(cartItem));
         }
         cartDTO.setCartItems(cartItemDTOS);
 
         return cartDTO;
+    }
+
+    @Override
+    public Cart findUserCart(Long userId) {
+        return cartRepository.findByUserId(userId);
     }
 }

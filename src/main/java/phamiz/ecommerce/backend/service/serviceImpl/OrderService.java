@@ -1,8 +1,14 @@
 package phamiz.ecommerce.backend.service.serviceImpl;
 
-
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
 import phamiz.ecommerce.backend.model.*;
@@ -21,7 +27,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderService implements IOrderService {
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
+
     private final ICartService cartService;
     private final IOrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -39,39 +48,35 @@ public class OrderService implements IOrderService {
         Cart cart = cartService.findUserCart(user.getId());
         List<OrderItem> orderItems = new ArrayList<>();
 
-        for(CartItem item : cart.getCartItems()) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setPrice(item.getPrice());
-            orderItem.setProduct(item.getProduct());
-            orderItem.setQuantity(item.getQuantity());
-            OrderItem createdOrderItem = orderItemRepository.save(orderItem);
-            orderItems.add(createdOrderItem);
-        }
-
         Order createdOrder = new Order();
         createdOrder.setUser(user);
-        createdOrder.setOrderItems(orderItems);
-        createdOrder.setTotalPrice(cart.getTotalPrice());
-        createdOrder.setTotalItem(cart.getTotalItem());
-
+        createdOrder.setOrderId(java.util.UUID.randomUUID().toString());
         createdOrder.setShippingAddress(address);
         createdOrder.setOrderDate(LocalDateTime.now());
         createdOrder.setOrderStatus("PENDING");
         createdOrder.setCreateAt(LocalDateTime.now());
+        createdOrder.setTotalPrice(cart.getTotalPrice());
+        createdOrder.setTotalItem(cart.getTotalItem());
 
-        Order savedOrder = orderRepository.save(createdOrder);
+        for (CartItem item : cart.getCartItems()) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setPrice(item.getPrice());
+            orderItem.setProduct(item.getProduct());
+            orderItem.setQuantity(item.getQuantity());
+            orderItem.setOrder(createdOrder);
 
-        for(OrderItem item : orderItems) {
-            item.setOrder(savedOrder);
-            orderItemRepository.save(item);
+            orderItems.add(orderItem);
         }
-        return savedOrder;
+
+        createdOrder.setOrderItems(orderItems);
+
+        return orderRepository.save(createdOrder);
     }
 
     @Override
     public Order findOrderById(Long orderId) throws OrderException {
         Optional<Order> order = orderRepository.findById(orderId);
-        if(order.isPresent()) {
+        if (order.isPresent()) {
             return order.get();
         }
         throw new OrderException("order not exist with id: " + orderId);
@@ -86,46 +91,145 @@ public class OrderService implements IOrderService {
     @Override
     public Order placedOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
+
+        // Validate: can only place PENDING orders
+        if (!"PENDING".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot place order with status: " + order.getOrderStatus());
+        }
+
         order.setOrderStatus("PLACED");
-        return order;
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} status changed to PLACED", orderId);
+        return savedOrder;
     }
 
     @Override
     public Order confirmedOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
+
+        // Validate: can only confirm PENDING or PLACED orders
+        if (!"PENDING".equals(order.getOrderStatus()) && !"PLACED".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot confirm order with status: " + order.getOrderStatus());
+        }
+
         order.setOrderStatus("CONFIRMED");
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} status changed to CONFIRMED", orderId);
+        return savedOrder;
     }
 
     @Override
     public Order shippedOrder(Long orderId) throws OrderException {
-        Order order  = findOrderById(orderId);
+        Order order = findOrderById(orderId);
+
+        // Validate: can only ship CONFIRMED orders
+        if (!"CONFIRMED".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot ship order with status: " + order.getOrderStatus());
+        }
+
         order.setOrderStatus("SHIPPED");
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} status changed to SHIPPED", orderId);
+        return savedOrder;
     }
 
     @Override
     public Order deliveredOrder(Long orderId) throws OrderException {
-        Order order  = findOrderById(orderId);
+        Order order = findOrderById(orderId);
+
+        // Validate: can only deliver SHIPPED orders
+        if (!"SHIPPED".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot deliver order with status: " + order.getOrderStatus());
+        }
+
         order.setOrderStatus("DELIVERED");
-        return orderRepository.save(order);
+        order.setDeliveryDate(LocalDateTime.now());
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} status changed to DELIVERED", orderId);
+        return savedOrder;
     }
 
     @Override
     public Order cancelledOrder(Long orderId) throws OrderException {
-        Order order  = findOrderById(orderId);
+        Order order = findOrderById(orderId);
+
+        // Validate: cannot cancel DELIVERED orders
+        if ("DELIVERED".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot cancel order with status: DELIVERED");
+        }
+
         order.setOrderStatus("CANCELLED");
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} status changed to CANCELLED", orderId);
+        return savedOrder;
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public Page<Order> getAllOrders(Integer pageNumber, Integer pageSize, String sortBy) {
+        Pageable pageable;
+
+        if (sortBy != null && !sortBy.isEmpty()) {
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+        } else {
+            // Default sort by id descending (newest first)
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by("id").descending());
+        }
+
+        return orderRepository.findAll(pageable);
     }
 
     @Override
     public void deleteOrder(Long orderId) throws OrderException {
         orderRepository.deleteById(orderId);
     }
-    
+
+    /**
+     * Convert Order entity to OrderDTO
+     */
+    public phamiz.ecommerce.backend.dto.Order.OrderDTO convertToDTO(Order order) {
+        if (order == null) {
+            return null;
+        }
+
+        phamiz.ecommerce.backend.dto.Order.OrderDTO dto = new phamiz.ecommerce.backend.dto.Order.OrderDTO();
+        dto.setId(order.getId());
+        dto.setOrderId(order.getOrderId());
+        dto.setUserId(order.getUser() != null ? order.getUser().getId() : null);
+        dto.setUserEmail(order.getUser() != null ? order.getUser().getEmail() : null);
+        dto.setOrderDate(order.getOrderDate());
+        dto.setDeliveryDate(order.getDeliveryDate());
+        dto.setTotalPrice(order.getTotalPrice());
+        dto.setOrderStatus(order.getOrderStatus());
+        dto.setTotalItem(order.getTotalItem());
+        dto.setCreateAt(order.getCreateAt());
+
+        // Convert shipping address
+        if (order.getShippingAddress() != null) {
+            phamiz.ecommerce.backend.dto.Order.AddressDTO addressDTO = new phamiz.ecommerce.backend.dto.Order.AddressDTO();
+            addressDTO.setId(order.getShippingAddress().getId());
+            addressDTO.setStreetAddress(order.getShippingAddress().getStreetAddress());
+            addressDTO.setCity(order.getShippingAddress().getCity());
+            addressDTO.setZipCode(order.getShippingAddress().getZipCode());
+            dto.setShippingAddress(addressDTO);
+        }
+
+        // Convert order items
+        if (order.getOrderItems() != null) {
+            List<phamiz.ecommerce.backend.dto.Order.OrderItemDTO> itemDTOs = new ArrayList<>();
+            for (OrderItem item : order.getOrderItems()) {
+                phamiz.ecommerce.backend.dto.Order.OrderItemDTO itemDTO = new phamiz.ecommerce.backend.dto.Order.OrderItemDTO();
+                itemDTO.setId(item.getId());
+                itemDTO.setProductId(item.getProduct() != null ? item.getProduct().getId() : null);
+                itemDTO.setProductName(item.getProduct() != null ? item.getProduct().getProduct_name() : null);
+                itemDTO.setQuantity(item.getQuantity());
+                itemDTO.setPrice(item.getPrice());
+                itemDTO.setDiscountedPrice(0); // Not in current model
+                itemDTOs.add(itemDTO);
+            }
+            dto.setOrderItems(itemDTOs);
+        }
+
+        return dto;
+    }
+
 }

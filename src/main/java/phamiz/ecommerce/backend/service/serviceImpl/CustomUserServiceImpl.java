@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Custom implementation of UserDetailsService for loading user details by username (email).
+ * Custom implementation of UserDetailsService for loading user details by
+ * username (email).
  */
 @Service
 @RequiredArgsConstructor
@@ -29,7 +31,8 @@ public class CustomUserServiceImpl implements UserDetailsService {
      *
      * @param email The email address of the user.
      * @return UserDetails object containing user details.
-     * @throws UsernameNotFoundException if the user with the provided email is not found.
+     * @throws UsernameNotFoundException if the user with the provided email is not
+     *                                   found.
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -40,9 +43,16 @@ public class CustomUserServiceImpl implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
+        String role = user.getRole();
+        if (role == null || role.isEmpty()) {
+            role = "ROLE_USER";
+        }
+        authorities.add(new SimpleGrantedAuthority(role));
         logger.info(String.format("User found with email: %s", email));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
 
-       
     }
 }

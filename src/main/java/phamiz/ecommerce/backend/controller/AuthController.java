@@ -29,7 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Controller class for handling authentication-related endpoints such as signup and signin.
+ * Controller class for handling authentication-related endpoints such as signup
+ * and signin.
  */
 @RestController
 @RequestMapping("/auth")
@@ -51,11 +52,14 @@ public class AuthController {
      * @throws UserException if the provided email already exists.
      */
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException {
-        String email = user.getEmail();
-        String password = user.getPassword();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
+    public ResponseEntity<AuthResponse> createUserHandler(
+            @RequestBody @jakarta.validation.Valid phamiz.ecommerce.backend.dto.Auth.SignupRequest req)
+            throws UserException {
+        String email = req.getEmail();
+        String password = req.getPassword();
+        String firstName = req.getFirstName();
+        String lastName = req.getLastName();
+        String mobile = req.getMobile();
 
         User isEmailExist = userRepository.findByEmail(email);
 
@@ -69,12 +73,15 @@ public class AuthController {
         createdUser.setPassword(passwordEncoder.encode(password));
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
+        createdUser.setMobile(mobile);
+        createdUser.setRole("ROLE_USER");
         createdUser.setCreatedAt(LocalDateTime.now());
 
         User savedUser = userRepository.save(createdUser);
         cartService.createCart(savedUser);
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(),
+                savedUser.getPassword());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -97,11 +104,20 @@ public class AuthController {
      * @return ResponseEntity containing authentication response.
      */
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> loginUserHandler(
+            @RequestBody @jakarta.validation.Valid LoginRequest loginRequest) {
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         logger.info("Caller");
-        Authentication authentication = authenticate(username, password);
+        System.out.println(loginRequest);
+        Authentication authentication = null;
+        try {
+            authentication = authenticate(username, password);
+        } catch (Exception e) {
+            System.out.println("DEBUG: Exception during authentication!");
+            e.printStackTrace();
+            throw e;
+        }
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
@@ -128,15 +144,26 @@ public class AuthController {
         UserDetails userDetails = customUserService.loadUserByUsername(username);
 
         if (userDetails == null) {
+            System.out.println("DEBUG: UserDetails is null for " + username);
             throw new BadCredentialsException("Invalid Username");
         }
 
+        // Validation: Check if account is active
+        User user = userRepository.findByEmail(username);
+        if (user != null && !user.isActive()) {
+            logger.warn("Locked account attempted login: {}", username);
+            throw new BadCredentialsException("Account has been locked. Please contact support.");
+        }
+
+        System.out.println("DEBUG: User found. Password in DB: " + userDetails.getPassword());
+        System.out.println("DEBUG: Password provided: " + password);
+
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+            System.out.println("DEBUG: Password mismatch!");
             throw new BadCredentialsException("Invalid Password");
         }
 
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
-    
-}
 
+}

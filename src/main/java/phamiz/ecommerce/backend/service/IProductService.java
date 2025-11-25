@@ -10,14 +10,24 @@ import java.util.List;
 
 public interface IProductService {
     ProductDTO toDTO(Product product);
-    public List<ProductDTO> findAllProduct();
-    public Product createProduct(CreateProductRequest request);
-    public String deleteProduct(Long productId) throws ProductException;
-    public Product updateProduct(Long productId, Product req) throws  ProductException;
-    public Product findProductById(Long id) throws ProductException;
-    public Page<ProductDTO> getAllProduct(String category, List<String> colors,
-                                       Integer minPrice, Integer maxPrice, String sort,
-                                       Integer pageNumber, Integer pageSize) throws ProductException;
-    public List<ProductDTO> getNewProduct();
+
+    List<ProductDTO> findAllProduct();
+
+    Product createProduct(CreateProductRequest request);
+
+    String deleteProduct(Long productId) throws ProductException;
+
+    Product updateProduct(Long productId, CreateProductRequest req) throws ProductException;
+
+    Product findProductById(Long id) throws ProductException;
+
+    Page<ProductDTO> getAllProduct(String category, List<String> colors,
+            Integer minPrice, Integer maxPrice, String sort,
+            Integer pageNumber, Integer pageSize) throws ProductException;
+
+    void createProducts(List<CreateProductRequest> reqs);
+
+    List<ProductDTO> getNewProduct();
+
     List<ProductDTO> getRandomProduct();
 }

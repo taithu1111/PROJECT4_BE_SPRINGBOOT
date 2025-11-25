@@ -1,7 +1,10 @@
 package phamiz.ecommerce.backend.service;
 
+import org.springframework.data.domain.Page;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
+
+import java.util.List;
 
 /**
  * Interface defining user-related operations.
@@ -25,4 +28,10 @@ public interface IUserService {
      * @throws UserException if the user corresponding to the JWT is not found.
      */
     public User findUserProfileByJwt(String jwt) throws UserException;
+
+    List<User> findAllUsers();
+
+    Page<User> findAllUsers(Integer pageNumber, Integer pageSize, String sortBy);
+
+    User toggleUserStatus(Long userId) throws UserException;
 }

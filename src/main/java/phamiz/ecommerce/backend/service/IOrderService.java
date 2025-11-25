@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.service;
 
+import org.springframework.data.domain.Page;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
 import phamiz.ecommerce.backend.model.Address;
@@ -25,7 +26,7 @@ public interface IOrderService {
 
     public Order cancelledOrder(Long orderId) throws OrderException;
 
-    public List<Order> getAllOrders();
+    public Page<Order> getAllOrders(Integer pageNumber, Integer pageSize, String sortBy);
 
     public void deleteOrder(Long orderId) throws OrderException;
 }

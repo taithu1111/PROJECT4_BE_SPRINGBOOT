@@ -5,16 +5,17 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class JwtProvider {
-    //  use HMAC-SHA based on SECRET_KEY.getBytes() after can used for asign and authen code jwt
 
-    //    Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret), SignatureAlgorithm.HS256.getJcaName());
     SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 
     public String generateToken(Authentication auth) {
@@ -22,21 +23,23 @@ public class JwtProvider {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + 84600000))
                 .claim("email", auth.getName())
-                .signWith(SignatureAlgorithm.HS256,key).compact();
-        System.out.println(jwt);
+                .claim("authorities", populateAuthorities(auth.getAuthorities()))
+                .signWith(SignatureAlgorithm.HS256, key).compact();
         return jwt;
     }
 
-    ;
-
     public String getEmailFromToken(String jwt) {
         jwt = jwt.substring(7);
-
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-
         String email = String.valueOf(claims.get("email"));
-//        System.out.println(email);
-
         return email;
+    }
+
+    private String populateAuthorities(java.util.Collection<? extends GrantedAuthority> collection) {
+        Set<String> auths = new HashSet<>();
+        for (GrantedAuthority authority : collection) {
+            auths.add(authority.getAuthority());
+        }
+        return String.join(",", auths);
     }
 }

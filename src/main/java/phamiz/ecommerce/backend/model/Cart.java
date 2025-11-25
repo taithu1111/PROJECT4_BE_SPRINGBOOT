@@ -21,8 +21,10 @@ public class Cart {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL , orphanRemoval = true)
-    @Column(name="cart_items")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "cart_items")
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private Set<CartItem> cartItems = new HashSet<>();
 
     @Column(name = "total_price")

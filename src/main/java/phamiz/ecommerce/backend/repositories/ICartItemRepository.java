@@ -11,11 +11,14 @@ import phamiz.ecommerce.backend.model.Product;
 import java.util.Set;
 
 @Repository
-public interface ICartItemRepository extends JpaRepository<CartItem,Long> {
+public interface ICartItemRepository extends JpaRepository<CartItem, Long> {
     @Query("SELECT ci FROM CartItem ci WHERE ci.cart = :cart "
             + "AND ci.product = :product ")
     public CartItem isCartItemExist(@Param("cart") Cart cart,
-                                    @Param("product") Product product);
+            @Param("product") Product product);
+
     @Query("SELECT ci FROM CartItem ci WHERE ci.cart.id = :cartId")
     public Set<CartItem> findByCartId(Long cartId);
+
+    boolean existsByProduct(Product product);
 }

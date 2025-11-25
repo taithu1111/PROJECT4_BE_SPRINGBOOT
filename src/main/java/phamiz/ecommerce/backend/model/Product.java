@@ -28,6 +28,8 @@ public class Product {
     private int price;
     private String brand;
 
+    private String description;
+
     @Column(name = "colors")
     @ElementCollection
     @JoinTable(name = "product_color", joinColumns = @JoinColumn(name = "product_id"))
@@ -40,11 +42,16 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product" , cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images = new ArrayList<>();
+
+    public void addImage(ProductImage image) {
+        images.add(image);
+        image.setProduct(this);
+    }
 
     private LocalDateTime createdAt;
 }
