@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +28,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(err, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ErrorDetails> usernameNotFoundExceptionHandler(UsernameNotFoundException ue, WebRequest req) {
+        logger.error("UsernameNotFoundException: ", ue);
+        // Return "Invalid Username" instead of the actual exception message for
+        // security
+        ErrorDetails err = new ErrorDetails("Invalid Username", req.getDescription(false), LocalDateTime.now());
+        return new ResponseEntity<>(err, HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(UserException.class)
     public ResponseEntity<ErrorDetails> userExceptionHandler(UserException ue, WebRequest req) {
         logger.error("UserException: ", ue);
         ErrorDetails err = new ErrorDetails(ue.getMessage(), req.getDescription(false), LocalDateTime.now());
-        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(err, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ProductException.class)
