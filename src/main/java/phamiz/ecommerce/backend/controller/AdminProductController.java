@@ -7,6 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import phamiz.ecommerce.backend.dto.ApiResponse;
 import phamiz.ecommerce.backend.dto.Product.CreateProductRequest;
+import phamiz.ecommerce.backend.dto.Product.ProductDTO;
+import phamiz.ecommerce.backend.dto.Product.ProductRawDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.service.IProductService;
@@ -14,6 +16,7 @@ import phamiz.ecommerce.backend.service.IProductService;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin/products")
@@ -56,4 +59,11 @@ public class AdminProductController {
         res.setStatus(true);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
+    @GetMapping("/raw")
+    public ResponseEntity<List<ProductRawDTO>> getAllProductRaw() {
+        return ResponseEntity.ok(productService.getAllProductRaw());
+    }
+
+
+
 }

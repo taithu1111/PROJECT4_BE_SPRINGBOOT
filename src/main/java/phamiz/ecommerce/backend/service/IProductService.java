@@ -3,10 +3,12 @@ package phamiz.ecommerce.backend.service;
 import org.springframework.data.domain.Page;
 import phamiz.ecommerce.backend.dto.Product.CreateProductRequest;
 import phamiz.ecommerce.backend.dto.Product.ProductDTO;
+import phamiz.ecommerce.backend.dto.Product.ProductRawDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IProductService {
     ProductDTO toDTO(Product product);
@@ -30,4 +32,6 @@ public interface IProductService {
     List<ProductDTO> getNewProduct();
 
     List<ProductDTO> getRandomProduct();
+    List<ProductRawDTO> getAllProductRaw();
+
 }
