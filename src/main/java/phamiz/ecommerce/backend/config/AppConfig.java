@@ -55,14 +55,10 @@ public class AppConfig {
                         return corsConfiguration;
                     }
                 }))
-                .formLogin(formLogin -> {
-                    try {
-                        formLogin.init(http);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .httpBasic(httpBasic -> httpBasic.init(http));
+                // FIXED: Disable form login and HTTP basic auth - using JWT-based
+                // authentication only
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

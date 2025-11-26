@@ -30,7 +30,7 @@ public class ReviewService implements IReviewService {
         Review review = new Review();
         review.setUser(user);
         review.setProduct(product);
-        review.setReview(review.getReview());
+        review.setReview(request.getReview());
         review.setCreatedAt(LocalDateTime.now());
         return reviewRepository.save(review);
     }
