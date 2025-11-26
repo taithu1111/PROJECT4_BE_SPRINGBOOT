@@ -65,6 +65,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorDetails> resourceNotFoundExceptionHandler(ResourceNotFoundException ue, WebRequest req) {
+        logger.error("ResourceNotFoundException: ", ue);
+        ErrorDetails err = new ErrorDetails(ue.getMessage(), req.getDescription(false), LocalDateTime.now());
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         logger.error("MethodArgumentNotValidException: ", ex);
