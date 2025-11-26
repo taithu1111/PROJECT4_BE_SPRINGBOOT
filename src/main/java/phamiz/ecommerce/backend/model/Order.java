@@ -37,4 +37,12 @@ public class Order {
     private String orderStatus;
     private int totalItem;
     private LocalDateTime createAt;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
+
+    private String transactionId;
 }

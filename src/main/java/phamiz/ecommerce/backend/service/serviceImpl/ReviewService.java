@@ -39,4 +39,11 @@ public class ReviewService implements IReviewService {
     public List<Review> getAllReview(Long productId) {
         return reviewRepository.getAllProductsReview(productId);
     }
+
+    @Override
+    public org.springframework.data.domain.Page<Review> getAllReviews(Long productId, Long userId, Integer page,
+            Integer size) {
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
+        return reviewRepository.findByFilter(productId, userId, pageable);
+    }
 }

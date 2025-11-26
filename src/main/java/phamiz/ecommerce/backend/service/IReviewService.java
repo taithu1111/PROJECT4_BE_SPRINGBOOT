@@ -9,5 +9,9 @@ import java.util.List;
 
 public interface IReviewService {
     public Review createReview(ReviewRequest request, User user) throws ProductException;
+
     public List<Review> getAllReview(Long productId);
+
+    public org.springframework.data.domain.Page<Review> getAllReviews(Long productId, Long userId, Integer page,
+            Integer size);
 }

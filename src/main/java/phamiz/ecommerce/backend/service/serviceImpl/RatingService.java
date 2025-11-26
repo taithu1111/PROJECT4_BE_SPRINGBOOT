@@ -1,6 +1,5 @@
 package phamiz.ecommerce.backend.service.serviceImpl;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.dto.Rating.RatingRequest;
@@ -22,7 +21,6 @@ public class RatingService implements IRatingService {
     private final IRatingRepository ratingRepository;
     private final IProductService productService;
 
-
     @Override
     public Rating createRating(RatingRequest request, User user) throws ProductException {
         Product product = productService.findProductById(request.getProductId());
@@ -38,5 +36,12 @@ public class RatingService implements IRatingService {
     @Override
     public List<Rating> getProductsRating(Long productId) {
         return ratingRepository.getAllProductsRating(productId);
+    }
+
+    @Override
+    public org.springframework.data.domain.Page<Rating> getAllRatings(Long productId, Long userId, Integer page,
+            Integer size) {
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
+        return ratingRepository.findByFilter(productId, userId, pageable);
     }
 }

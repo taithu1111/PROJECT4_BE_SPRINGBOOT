@@ -12,4 +12,11 @@ import java.util.List;
 public interface IRatingRepository extends JpaRepository<Rating, Long> {
     @Query("SELECT r FROM Rating r WHERE r.product.id = :productId")
     public List<Rating> getAllProductsRating(@Param("productId") Long productId);
+
+    @Query("SELECT r FROM Rating r WHERE " +
+            "(:productId IS NULL OR r.product.id = :productId) AND " +
+            "(:userId IS NULL OR r.user.id = :userId)")
+    org.springframework.data.domain.Page<Rating> findByFilter(@Param("productId") Long productId,
+            @Param("userId") Long userId,
+            org.springframework.data.domain.Pageable pageable);
 }

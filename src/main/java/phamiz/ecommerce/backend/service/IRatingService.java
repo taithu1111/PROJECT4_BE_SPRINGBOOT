@@ -9,5 +9,9 @@ import java.util.List;
 
 public interface IRatingService {
     public Rating createRating(RatingRequest request, User user) throws ProductException;
+
     public List<Rating> getProductsRating(Long productId);
+
+    public org.springframework.data.domain.Page<Rating> getAllRatings(Long productId, Long userId, Integer page,
+            Integer size);
 }

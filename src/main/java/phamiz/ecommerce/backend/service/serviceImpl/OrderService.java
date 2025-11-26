@@ -57,6 +57,8 @@ public class OrderService implements IOrderService {
         createdOrder.setCreateAt(LocalDateTime.now());
         createdOrder.setTotalPrice(cart.getTotalPrice());
         createdOrder.setTotalItem(cart.getTotalItem());
+        createdOrder.setPaymentStatus(PaymentStatus.PENDING);
+        createdOrder.setPaymentMethod(PaymentMethod.PAYOS);
 
         for (CartItem item : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
@@ -92,7 +94,6 @@ public class OrderService implements IOrderService {
     public Order placedOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
 
-        // Validate: can only place PENDING orders
         if (!"PENDING".equals(order.getOrderStatus())) {
             throw new OrderException("Cannot place order with status: " + order.getOrderStatus());
         }
@@ -107,7 +108,6 @@ public class OrderService implements IOrderService {
     public Order confirmedOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
 
-        // Validate: can only confirm PENDING or PLACED orders
         if (!"PENDING".equals(order.getOrderStatus()) && !"PLACED".equals(order.getOrderStatus())) {
             throw new OrderException("Cannot confirm order with status: " + order.getOrderStatus());
         }
@@ -122,7 +122,6 @@ public class OrderService implements IOrderService {
     public Order shippedOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
 
-        // Validate: can only ship CONFIRMED orders
         if (!"CONFIRMED".equals(order.getOrderStatus())) {
             throw new OrderException("Cannot ship order with status: " + order.getOrderStatus());
         }
@@ -137,7 +136,6 @@ public class OrderService implements IOrderService {
     public Order deliveredOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
 
-        // Validate: can only deliver SHIPPED orders
         if (!"SHIPPED".equals(order.getOrderStatus())) {
             throw new OrderException("Cannot deliver order with status: " + order.getOrderStatus());
         }
@@ -153,7 +151,6 @@ public class OrderService implements IOrderService {
     public Order cancelledOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
 
-        // Validate: cannot cancel DELIVERED orders
         if ("DELIVERED".equals(order.getOrderStatus())) {
             throw new OrderException("Cannot cancel order with status: DELIVERED");
         }
@@ -171,7 +168,6 @@ public class OrderService implements IOrderService {
         if (sortBy != null && !sortBy.isEmpty()) {
             pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
         } else {
-            // Default sort by id descending (newest first)
             pageable = PageRequest.of(pageNumber, pageSize, Sort.by("id").descending());
         }
 
@@ -183,9 +179,18 @@ public class OrderService implements IOrderService {
         orderRepository.deleteById(orderId);
     }
 
-    /**
-     * Convert Order entity to OrderDTO
-     */
+    public void updatePaymentStatus(Long orderId, PaymentStatus status, String transactionId) throws OrderException {
+        Order order = findOrderById(orderId);
+        order.setPaymentStatus(status);
+        if (transactionId != null) {
+            order.setTransactionId(transactionId);
+        }
+        if (status == PaymentStatus.PAID) {
+            order.setOrderStatus("CONFIRMED");
+        }
+        orderRepository.save(order);
+    }
+
     public phamiz.ecommerce.backend.dto.Order.OrderDTO convertToDTO(Order order) {
         if (order == null) {
             return null;
@@ -203,7 +208,6 @@ public class OrderService implements IOrderService {
         dto.setTotalItem(order.getTotalItem());
         dto.setCreateAt(order.getCreateAt());
 
-        // Convert shipping address
         if (order.getShippingAddress() != null) {
             phamiz.ecommerce.backend.dto.Order.AddressDTO addressDTO = new phamiz.ecommerce.backend.dto.Order.AddressDTO();
             addressDTO.setId(order.getShippingAddress().getId());
@@ -213,7 +217,6 @@ public class OrderService implements IOrderService {
             dto.setShippingAddress(addressDTO);
         }
 
-        // Convert order items
         if (order.getOrderItems() != null) {
             List<phamiz.ecommerce.backend.dto.Order.OrderItemDTO> itemDTOs = new ArrayList<>();
             for (OrderItem item : order.getOrderItems()) {
@@ -223,7 +226,7 @@ public class OrderService implements IOrderService {
                 itemDTO.setProductName(item.getProduct() != null ? item.getProduct().getProduct_name() : null);
                 itemDTO.setQuantity(item.getQuantity());
                 itemDTO.setPrice(item.getPrice());
-                itemDTO.setDiscountedPrice(0); // Not in current model
+                itemDTO.setDiscountedPrice(0);
                 itemDTOs.add(itemDTO);
             }
             dto.setOrderItems(itemDTOs);
@@ -231,5 +234,4 @@ public class OrderService implements IOrderService {
 
         return dto;
     }
-
 }
