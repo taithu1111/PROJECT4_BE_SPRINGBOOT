@@ -37,6 +37,7 @@ public class AppConfig {
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration corsConfiguration = new CorsConfiguration();
                         corsConfiguration.setAllowedOrigins(Arrays.asList(
+                                "http://localhost:3000",
                                 "http://localhost:4200", "http://localhost:8080"));
 
                         // allowed any method HTTP: GET POST PUT DELETE .

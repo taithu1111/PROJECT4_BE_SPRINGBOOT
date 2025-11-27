@@ -19,10 +19,7 @@ import phamiz.ecommerce.backend.service.IProductService;
 import phamiz.ecommerce.backend.service.IUserService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +35,7 @@ public class ProductServiceImpl implements IProductService {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId());
         productDTO.setProductName(product.getProduct_name());
+        productDTO.setDescription(product.getDescription());
         productDTO.setQuantity(product.getQuantity());
         productDTO.setPrice(product.getPrice());
         productDTO.setBrand(product.getBrand());
@@ -94,7 +92,7 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Category secondLevel = categoryRepository.findByNameAndParent(
-                request.getFirstLevelCategory(), firstLevel.getCategory_name());
+                request.getSecondLevelCategory(), firstLevel.getCategory_name());
         if (secondLevel == null) {
             Category secondLevelCategory = new Category();
             secondLevelCategory.setCategory_name(request.getSecondLevelCategory());
@@ -104,8 +102,14 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Product product = new Product();
-        product.setProductColors(request.getColors());
+        // Gán images và tự động set product_id cho từng image
+        if (request.getImages() != null) {
+            for (ProductImage image : request.getImages()) {
+                product.addImage(image); // addImage đã set image.setProduct(this)
+            }
+        }
         product.setImages(request.getImages());
+
         product.setBrand(request.getBrand());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
@@ -128,6 +132,21 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
         Product product = findProductById(productId);
+        product.setProduct_name(req.getTitle());
+        product.setProductColors(req.getColors());
+        product.setDescription(req.getDescription());
+//        product.setImages(req.getImages());
+        product.setBrand(req.getBrand());
+        product.setPrice(req.getPrice());
+        product.setQuantity(req.getQuantity());;
+        product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
+        product.setCreatedAt(LocalDateTime.now());
+        // Gán images và tự động set product_id cho từng image
+        if (req.getImages() != null) {
+            for (ProductImage image : req.getImages()) {
+                product.addImage(image); // addImage đã set image.setProduct(this)
+            }
+        }
 
         if (req.getQuantity() != 0) {
             product.setQuantity(req.getQuantity());
