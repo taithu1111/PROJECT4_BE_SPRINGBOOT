@@ -45,6 +45,10 @@ public class CartServiceImpl implements ICartService {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.findProductById(request.getProductId());
 
+        if (request.getQuantity() > product.getQuantity()) {
+            throw new ProductException("Insufficient stock for product: " + product.getProduct_name());
+        }
+
         CartItem isPresent = cartItemService.isCartItemExist(cart, product);
 
         if (isPresent == null) {
