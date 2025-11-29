@@ -74,4 +74,11 @@ public class RatingService implements IRatingService {
 
         ratingRepository.delete(rating);
     }
+
+    @Override
+    public void deleteRatingByAdmin(Long ratingId) throws Exception {
+        Rating rating = ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
+        ratingRepository.delete(rating);
+    }
 }

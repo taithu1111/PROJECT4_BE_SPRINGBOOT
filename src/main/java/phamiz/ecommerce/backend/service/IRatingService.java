@@ -19,4 +19,6 @@ public interface IRatingService {
     public Rating updateRating(Long ratingId, UpdateRatingRequest request, User user) throws Exception;
 
     public void deleteRating(Long ratingId, User user) throws Exception;
+
+    void deleteRatingByAdmin(Long ratingId) throws Exception;
 }

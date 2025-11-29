@@ -76,4 +76,11 @@ public class ReviewService implements IReviewService {
 
         reviewRepository.delete(review);
     }
+
+    @Override
+    public void deleteReviewByAdmin(Long reviewId) throws Exception {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
+        reviewRepository.delete(review);
+    }
 }

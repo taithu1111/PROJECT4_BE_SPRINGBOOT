@@ -20,4 +20,6 @@ public interface IReviewService {
     public Review updateReview(Long reviewId, UpdateReviewRequest request, User user) throws Exception;
 
     public void deleteReview(Long reviewId, User user) throws Exception;
+
+    void deleteReviewByAdmin(Long reviewId) throws Exception;
 }
