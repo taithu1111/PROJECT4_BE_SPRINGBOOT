@@ -1,6 +1,7 @@
 package phamiz.ecommerce.backend.service;
 
 import org.springframework.data.domain.Page;
+import phamiz.ecommerce.backend.dto.User.UpdateUserRequest;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
 
@@ -34,4 +35,6 @@ public interface IUserService {
     Page<User> findAllUsers(Integer pageNumber, Integer pageSize, String sortBy);
 
     User toggleUserStatus(Long userId) throws UserException;
+
+    User updateUserProfile(String jwt, UpdateUserRequest request) throws UserException;
 }

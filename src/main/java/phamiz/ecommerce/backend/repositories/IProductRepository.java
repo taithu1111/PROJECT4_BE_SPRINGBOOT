@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.repositories;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,6 +11,7 @@ import phamiz.ecommerce.backend.model.Product;
 import jakarta.persistence.LockModeType;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IProductRepository extends JpaRepository<Product, Long> {
@@ -36,6 +38,29 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
         @Lock(LockModeType.PESSIMISTIC_WRITE)
         @Query("SELECT p FROM Product p WHERE p.id = :productId")
         Product findByIdWithLock(@Param("productId") Long productId);
+
+        // ========== @EntityGraph Methods for Optimized Fetching ==========
+
+        /**
+         * Load product with ALL related entities in a SINGLE query
+         * Use this for Product Detail Page where you need complete data
+         */
+        @EntityGraph(attributePaths = { "productColors", "category", "ratings", "reviews", "images" })
+        @Query("SELECT p FROM Product p WHERE p.id = :id")
+        Optional<Product> findProductWithFullDetails(@Param("id") Long id);
+
+        /**
+         * Load product with ONLY images and category
+         * Use this for Product List View
+         */
+        @EntityGraph(attributePaths = { "category", "images" })
+        List<Product> findAllWithBasicInfo();
+
+        /**
+         * Load product with ratings and reviews for rating summary page
+         */
+        @EntityGraph(attributePaths = { "category", "ratings", "reviews" })
+        Optional<Product> findByIdWithRatingsAndReviews(Long id);
 
         // Delete product colors before deleting product to avoid foreign key constraint
         @Modifying

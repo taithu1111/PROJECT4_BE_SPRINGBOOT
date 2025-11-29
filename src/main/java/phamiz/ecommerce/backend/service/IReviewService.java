@@ -1,7 +1,9 @@
 package phamiz.ecommerce.backend.service;
 
 import phamiz.ecommerce.backend.dto.Review.ReviewRequest;
+import phamiz.ecommerce.backend.dto.Review.UpdateReviewRequest;
 import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Review;
 import phamiz.ecommerce.backend.model.User;
 
@@ -14,4 +16,8 @@ public interface IReviewService {
 
     public org.springframework.data.domain.Page<Review> getAllReviews(Long productId, Long userId, Integer page,
             Integer size);
+
+    public Review updateReview(Long reviewId, UpdateReviewRequest request, User user) throws Exception;
+
+    public void deleteReview(Long reviewId, User user) throws Exception;
 }

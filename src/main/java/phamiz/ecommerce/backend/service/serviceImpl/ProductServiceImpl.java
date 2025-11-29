@@ -151,10 +151,11 @@ public class ProductServiceImpl implements IProductService {
         product.setProduct_name(req.getTitle());
         product.setProductColors(req.getColors());
         product.setDescription(req.getDescription());
-//        product.setImages(req.getImages());
+        // product.setImages(req.getImages());
         product.setBrand(req.getBrand());
         product.setPrice(req.getPrice());
-        product.setQuantity(req.getQuantity());;
+        product.setQuantity(req.getQuantity());
+
         product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
         product.setCreatedAt(LocalDateTime.now());
         // Gán images và tự động set product_id cho từng image
@@ -172,15 +173,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public Product findProductById(Long id) throws ProductException {
-        Optional<Product> optionalProduct = productRepository.findById(id);
+        // Use @EntityGraph to load ALL related data in ONE query!
+        Product product = productRepository.findProductWithFullDetails(id)
+                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
 
-        if (optionalProduct.isPresent()) {
-            logger.info("Product was found with id : ", id);
-            return optionalProduct.get();
-        }
-        logger.error("Product not found with " + id);
-        throw new ProductException("Product not found with " + id);
+        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
+        return product;
     }
 
     @Override
@@ -258,4 +258,3 @@ public class ProductServiceImpl implements IProductService {
             createProduct(req);
         }
     }
-}

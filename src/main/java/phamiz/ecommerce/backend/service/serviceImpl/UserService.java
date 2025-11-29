@@ -101,6 +101,40 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updateUserProfile(String jwt, phamiz.ecommerce.backend.dto.User.UpdateUserRequest request)
+            throws UserException {
+        User user = findUserProfileByJwt(jwt);
+
+        // Update only non-null fields
+        if (request.getFirstName() != null && !request.getFirstName().trim().isEmpty()) {
+            user.setFirstName(request.getFirstName());
+        }
+
+        if (request.getLastName() != null && !request.getLastName().trim().isEmpty()) {
+            user.setLastName(request.getLastName());
+        }
+
+        if (request.getMobile() != null && !request.getMobile().trim().isEmpty()) {
+            user.setMobile(request.getMobile());
+        }
+
+        // Check if email is being changed and if it's already taken
+        if (request.getEmail() != null && !request.getEmail().trim().isEmpty()) {
+            if (!request.getEmail().equals(user.getEmail())) {
+                User existingUser = userRepository.findByEmail(request.getEmail());
+                if (existingUser != null) {
+                    logger.error("Email already exists: {}", request.getEmail());
+                    throw new UserException("Email is already in use");
+                }
+                user.setEmail(request.getEmail());
+            }
+        }
+
+        logger.info("User profile updated for user ID: {}", user.getId());
+        return userRepository.save(user);
+    }
+
     /**
      * Convert User entity to UserDTO (excludes password and relationships)
      */
