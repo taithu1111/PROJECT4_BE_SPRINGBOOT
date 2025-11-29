@@ -2,6 +2,7 @@ package phamiz.ecommerce.backend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -35,4 +36,9 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
         @Lock(LockModeType.PESSIMISTIC_WRITE)
         @Query("SELECT p FROM Product p WHERE p.id = :productId")
         Product findByIdWithLock(@Param("productId") Long productId);
+
+        // Delete product colors before deleting product to avoid foreign key constraint
+        @Modifying
+        @Query(value = "DELETE FROM product_color WHERE product_id = :productId", nativeQuery = true)
+        void deleteProductColorsByProductId(@Param("productId") Long productId);
 }

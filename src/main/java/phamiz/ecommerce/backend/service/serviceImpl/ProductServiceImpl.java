@@ -14,10 +14,12 @@ import phamiz.ecommerce.backend.dto.Product.ReviewDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.ICategoryRepository;
+import phamiz.ecommerce.backend.repositories.IProductImageRepository;
 import phamiz.ecommerce.backend.repositories.IProductRepository;
 import phamiz.ecommerce.backend.service.IProductService;
 import phamiz.ecommerce.backend.service.IUserService;
 
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +30,7 @@ public class ProductServiceImpl implements IProductService {
     private final IProductRepository productRepository;
     private final IUserService userService;
     private final ICategoryRepository categoryRepository;
+    private final IProductImageRepository productImageRepository;
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
@@ -122,10 +125,23 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
+
+        // Step 1: Delete all ProductImage records first
+        logger.info("Deleting product images for product ID: {}", productId);
+        productImageRepository.deleteByProductId(productId);
+
+        // Step 2: Delete all ProductColor records
+        logger.info("Deleting product colors for product ID: {}", productId);
+        productRepository.deleteProductColorsByProductId(productId);
+
+        // Step 3: Finally delete the product itself
+        logger.info("Deleting product with ID: {}", productId);
         productRepository.deleteById(product.getId());
-        logger.info("Product deleted success!");
+
+        logger.info("Product deleted successfully!");
         return "Product deleted success!";
     }
 
