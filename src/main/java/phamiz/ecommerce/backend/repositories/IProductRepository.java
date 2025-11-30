@@ -54,12 +54,14 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
          * Use this for Product List View
          */
         @EntityGraph(attributePaths = { "category", "images" })
+        @Query("SELECT p FROM Product p")
         List<Product> findAllWithBasicInfo();
 
         /**
          * Load product with ratings and reviews for rating summary page
          */
         @EntityGraph(attributePaths = { "category", "ratings", "reviews" })
+        @Query("SELECT p FROM Product p WHERE p.id = :id")
         Optional<Product> findByIdWithRatingsAndReviews(Long id);
 
         // Delete product colors before deleting product to avoid foreign key constraint
