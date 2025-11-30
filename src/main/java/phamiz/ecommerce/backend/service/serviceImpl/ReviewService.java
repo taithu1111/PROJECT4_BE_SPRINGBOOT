@@ -3,7 +3,6 @@ package phamiz.ecommerce.backend.service.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.dto.Review.ReviewRequest;
-import phamiz.ecommerce.backend.dto.Review.UpdateReviewRequest;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.model.Review;
@@ -46,41 +45,5 @@ public class ReviewService implements IReviewService {
             Integer size) {
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
         return reviewRepository.findByFilter(productId, userId, pageable);
-    }
-
-    @Override
-    public Review updateReview(Long reviewId, UpdateReviewRequest request, User user) throws Exception {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
-
-        // Authorization check: user can only update their own review
-        if (!review.getUser().getId().equals(user.getId())) {
-            throw new Exception("You are not authorized to update this review");
-        }
-
-        review.setReview(request.getReview());
-        review.setCreatedAt(LocalDateTime.now()); // Update timestamp
-
-        return reviewRepository.save(review);
-    }
-
-    @Override
-    public void deleteReview(Long reviewId, User user) throws Exception {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
-
-        // Authorization check: user can only delete their own review
-        if (!review.getUser().getId().equals(user.getId())) {
-            throw new Exception("You are not authorized to delete this review");
-        }
-
-        reviewRepository.delete(review);
-    }
-
-    @Override
-    public void deleteReviewByAdmin(Long reviewId) throws Exception {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
-        reviewRepository.delete(review);
     }
 }

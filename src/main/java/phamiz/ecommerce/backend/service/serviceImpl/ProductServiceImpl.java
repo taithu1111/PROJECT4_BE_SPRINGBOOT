@@ -14,14 +14,15 @@ import phamiz.ecommerce.backend.dto.Product.ReviewDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.ICategoryRepository;
-import phamiz.ecommerce.backend.repositories.IProductImageRepository;
 import phamiz.ecommerce.backend.repositories.IProductRepository;
 import phamiz.ecommerce.backend.service.IProductService;
 import phamiz.ecommerce.backend.service.IUserService;
 
-import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +31,6 @@ public class ProductServiceImpl implements IProductService {
     private final IProductRepository productRepository;
     private final IUserService userService;
     private final ICategoryRepository categoryRepository;
-    private final IProductImageRepository productImageRepository;
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
@@ -38,7 +38,6 @@ public class ProductServiceImpl implements IProductService {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId());
         productDTO.setProductName(product.getProduct_name());
-        productDTO.setDescription(product.getDescription());
         productDTO.setQuantity(product.getQuantity());
         productDTO.setPrice(product.getPrice());
         productDTO.setBrand(product.getBrand());
@@ -95,7 +94,7 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Category secondLevel = categoryRepository.findByNameAndParent(
-                request.getSecondLevelCategory(), firstLevel.getCategory_name());
+                request.getFirstLevelCategory(), firstLevel.getCategory_name());
         if (secondLevel == null) {
             Category secondLevelCategory = new Category();
             secondLevelCategory.setCategory_name(request.getSecondLevelCategory());
@@ -105,14 +104,8 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Product product = new Product();
-        // Gán images và tự động set product_id cho từng image
-        if (request.getImages() != null) {
-            for (ProductImage image : request.getImages()) {
-                product.addImage(image); // addImage đã set image.setProduct(this)
-            }
-        }
+        product.setProductColors(request.getColors());
         product.setImages(request.getImages());
-
         product.setBrand(request.getBrand());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
@@ -125,45 +118,16 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    @Transactional
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
-
-        // Step 1: Delete all ProductImage records first
-        logger.info("Deleting product images for product ID: {}", productId);
-        productImageRepository.deleteByProductId(productId);
-
-        // Step 2: Delete all ProductColor records
-        logger.info("Deleting product colors for product ID: {}", productId);
-        productRepository.deleteProductColorsByProductId(productId);
-
-        // Step 3: Finally delete the product itself
-        logger.info("Deleting product with ID: {}", productId);
         productRepository.deleteById(product.getId());
-
-        logger.info("Product deleted successfully!");
+        logger.info("Product deleted success!");
         return "Product deleted success!";
     }
 
     @Override
     public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
         Product product = findProductById(productId);
-        product.setProduct_name(req.getTitle());
-        product.setProductColors(req.getColors());
-        product.setDescription(req.getDescription());
-        // product.setImages(req.getImages());
-        product.setBrand(req.getBrand());
-        product.setPrice(req.getPrice());
-        product.setQuantity(req.getQuantity());
-
-        product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
-        product.setCreatedAt(LocalDateTime.now());
-        // Gán images và tự động set product_id cho từng image
-        if (req.getImages() != null) {
-            for (ProductImage image : req.getImages()) {
-                product.addImage(image); // addImage đã set image.setProduct(this)
-            }
-        }
 
         if (req.getQuantity() != 0) {
             product.setQuantity(req.getQuantity());
@@ -173,14 +137,15 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    @Transactional
     public Product findProductById(Long id) throws ProductException {
-        // Use @EntityGraph to load ALL related data in ONE query!
-        Product product = productRepository.findProductWithFullDetails(id)
-                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+        Optional<Product> optionalProduct = productRepository.findById(id);
 
-        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
-        return product;
+        if (optionalProduct.isPresent()) {
+            logger.info("Product was found with id : ", id);
+            return optionalProduct.get();
+        }
+        logger.error("Product not found with " + id);
+        throw new ProductException("Product not found with " + id);
     }
 
     @Override
@@ -258,3 +223,4 @@ public class ProductServiceImpl implements IProductService {
             createProduct(req);
         }
     }
+}

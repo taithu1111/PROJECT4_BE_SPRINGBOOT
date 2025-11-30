@@ -27,6 +27,7 @@ public class AppConfig {
         // says no session http, commonly used in RESTfull API app, ez to expand
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/api/**")
                         .authenticated()
                         .anyRequest().permitAll())
@@ -37,8 +38,7 @@ public class AppConfig {
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration corsConfiguration = new CorsConfiguration();
                         corsConfiguration.setAllowedOrigins(Arrays.asList(
-                                "http://localhost:3000",
-                                "http://localhost:4200", "http://localhost:8080"));
+                                "http://localhost:4200", "http://localhost:8080", "http://localhost:3000"));
 
                         // allowed any method HTTP: GET POST PUT DELETE .
                         corsConfiguration.setAllowedMethods(Collections.singletonList("*"));

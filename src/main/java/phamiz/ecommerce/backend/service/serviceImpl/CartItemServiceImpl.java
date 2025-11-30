@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.service.serviceImpl;
 
+
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,8 @@ public class CartItemServiceImpl implements ICartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
-        // Do NOT force quantity = 1, use what was set
-        cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+        // cartItem.setQuantity(1);
+        cartItem.setPrice(cartItem.getProduct().getPrice());
         CartItem createdCartItem = cartItemRepository.save(cartItem);
         logger.info("Create Cart Item success!");
         return createdCartItem;
@@ -80,12 +81,13 @@ public class CartItemServiceImpl implements ICartItemService {
     public Set<CartItem> findCartItemByCartId(Long cartId) throws CartItemException {
         Set<CartItem> cartItems = cartItemRepository.findByCartId(cartId);
         if (!cartItems.isEmpty()) {
-            logger.info("Cart Items was found", cartItems);
+            logger.info("Cart Items was found",cartItems);
             return cartItems;
         }
         logger.error("Cart item not found with id" + cartId);
         return null;
     }
+   
 
     @Override
     public CartItemDTO toDTO(CartItem cartItem) {

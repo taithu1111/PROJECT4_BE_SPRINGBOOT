@@ -25,11 +25,16 @@ public class JwtValidator extends OncePerRequestFilter {
     // Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        return path.startsWith("/auth/"); // skip JWT validation for auth endpoints
+    }
+
+    @Override
     // HttpServletRequest: object contains info about current http request
     // HttpServletResponse: object contains info about the return http response
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
-
         // value of Authorization commnly is Bearer <token>
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 

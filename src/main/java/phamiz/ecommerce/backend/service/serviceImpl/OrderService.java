@@ -15,7 +15,6 @@ import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.IAddressRepository;
 import phamiz.ecommerce.backend.repositories.IOrderItemRepository;
 import phamiz.ecommerce.backend.repositories.IOrderRepository;
-import phamiz.ecommerce.backend.repositories.IProductRepository;
 import phamiz.ecommerce.backend.repositories.UserRepository;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.IOrderItemService;
@@ -38,7 +37,6 @@ public class OrderService implements IOrderService {
     private final IOrderItemService orderItemService;
     private final IOrderItemRepository orderItemRepository;
     private final IAddressRepository addressRepository;
-    private final IProductRepository productRepository;
 
     @Override
     public Order createOrder(User user, Address shippingAddress) throws CartItemException {
@@ -68,17 +66,6 @@ public class OrderService implements IOrderService {
             orderItem.setProduct(item.getProduct());
             orderItem.setQuantity(item.getQuantity());
             orderItem.setOrder(createdOrder);
-
-            // Use pessimistic locking to prevent race conditions
-            Product product = productRepository.findByIdWithLock(item.getProduct().getId());
-            if (product == null) {
-                throw new CartItemException("Product not found: " + item.getProduct().getId());
-            }
-            if (item.getQuantity() > product.getQuantity()) {
-                throw new CartItemException("Insufficient stock for product: " + product.getProduct_name());
-            }
-            product.setQuantity(product.getQuantity() - item.getQuantity());
-            productRepository.save(product);
 
             orderItems.add(orderItem);
         }
@@ -169,13 +156,6 @@ public class OrderService implements IOrderService {
         }
 
         order.setOrderStatus("CANCELLED");
-
-        for (OrderItem item : order.getOrderItems()) {
-            Product product = item.getProduct();
-            product.setQuantity(product.getQuantity() + item.getQuantity());
-            productRepository.save(product);
-        }
-
         Order savedOrder = orderRepository.save(order);
         logger.info("Order {} status changed to CANCELLED", orderId);
         return savedOrder;

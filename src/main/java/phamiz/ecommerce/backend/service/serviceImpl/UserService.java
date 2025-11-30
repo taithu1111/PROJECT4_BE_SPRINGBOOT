@@ -7,9 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.config.JwtProvider;
-import phamiz.ecommerce.backend.dto.User.UserDTO;
+import phamiz.ecommerce.backend.dto.User.*;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.repositories.UserRepository;
@@ -26,6 +27,7 @@ public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
+    private final PasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     /**
@@ -101,40 +103,6 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public User updateUserProfile(String jwt, phamiz.ecommerce.backend.dto.User.UpdateUserRequest request)
-            throws UserException {
-        User user = findUserProfileByJwt(jwt);
-
-        // Update only non-null fields
-        if (request.getFirstName() != null && !request.getFirstName().trim().isEmpty()) {
-            user.setFirstName(request.getFirstName());
-        }
-
-        if (request.getLastName() != null && !request.getLastName().trim().isEmpty()) {
-            user.setLastName(request.getLastName());
-        }
-
-        if (request.getMobile() != null && !request.getMobile().trim().isEmpty()) {
-            user.setMobile(request.getMobile());
-        }
-
-        // Check if email is being changed and if it's already taken
-        if (request.getEmail() != null && !request.getEmail().trim().isEmpty()) {
-            if (!request.getEmail().equals(user.getEmail())) {
-                User existingUser = userRepository.findByEmail(request.getEmail());
-                if (existingUser != null) {
-                    logger.error("Email already exists: {}", request.getEmail());
-                    throw new UserException("Email is already in use");
-                }
-                user.setEmail(request.getEmail());
-            }
-        }
-
-        logger.info("User profile updated for user ID: {}", user.getId());
-        return userRepository.save(user);
-    }
-
     /**
      * Convert User entity to UserDTO (excludes password and relationships)
      */
@@ -158,4 +126,36 @@ public class UserService implements IUserService {
 
         return dto;
     }
+
+    @Override
+    public User updateUserProfile(String jwt, User updatedUser) throws UserException {
+        // Get current user
+        User user = findUserProfileByJwt(jwt);
+
+        // Update fields
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        user.setEmail(updatedUser.getEmail());
+        user.setMobile(updatedUser.getMobile());
+
+        logger.info("Updating profile for user: {}", user.getEmail());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void changeUserPassword(String jwt, String oldPassword, String newPassword) throws UserException {
+        User user = findUserProfileByJwt(jwt);
+
+        // Verify old password
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new UserException("Old password is incorrect");
+        }
+
+        // Encode new password
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        logger.info("Password changed successfully for user: {}", user.getEmail());
+    }
+
 }

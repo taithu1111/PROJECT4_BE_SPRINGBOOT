@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import phamiz.ecommerce.backend.dto.ApiResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import phamiz.ecommerce.backend.dto.Rating.RatingAdminDTO;
 import phamiz.ecommerce.backend.model.Rating;
 import phamiz.ecommerce.backend.service.IRatingService;
@@ -44,17 +46,5 @@ public class AdminRatingController {
         dto.setRating(rating.getRating());
         dto.setCreatedAt(rating.getCreatedAt());
         return dto;
-    }
-
-    @DeleteMapping("/{ratingId}")
-    public ResponseEntity<ApiResponse> deleteRating(@PathVariable Long ratingId) {
-        try {
-            ratingService.deleteRatingByAdmin(ratingId);
-            ApiResponse res = new ApiResponse("Rating deleted successfully", true);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (Exception e) {
-            ApiResponse res = new ApiResponse(e.getMessage(), false);
-            return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 }

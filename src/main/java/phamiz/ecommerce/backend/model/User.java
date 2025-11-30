@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Entity class representing a user/customer.
  */
@@ -37,11 +39,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @lombok.ToString.Exclude
     @lombok.EqualsAndHashCode.Exclude
+    @JsonIgnore
     private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @lombok.ToString.Exclude
     @lombok.EqualsAndHashCode.Exclude
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     private LocalDateTime createdAt;

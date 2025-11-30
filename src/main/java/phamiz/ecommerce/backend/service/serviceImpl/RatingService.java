@@ -3,7 +3,6 @@ package phamiz.ecommerce.backend.service.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import phamiz.ecommerce.backend.dto.Rating.RatingRequest;
-import phamiz.ecommerce.backend.dto.Rating.UpdateRatingRequest;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.model.Rating;
@@ -44,41 +43,5 @@ public class RatingService implements IRatingService {
             Integer size) {
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
         return ratingRepository.findByFilter(productId, userId, pageable);
-    }
-
-    @Override
-    public Rating updateRating(Long ratingId, UpdateRatingRequest request, User user) throws Exception {
-        Rating rating = ratingRepository.findById(ratingId)
-                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
-
-        // Authorization check: user can only update their own rating
-        if (!rating.getUser().getId().equals(user.getId())) {
-            throw new Exception("You are not authorized to update this rating");
-        }
-
-        rating.setRating(request.getRating());
-        rating.setCreatedAt(LocalDateTime.now()); // Update timestamp
-
-        return ratingRepository.save(rating);
-    }
-
-    @Override
-    public void deleteRating(Long ratingId, User user) throws Exception {
-        Rating rating = ratingRepository.findById(ratingId)
-                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
-
-        // Authorization check: user can only delete their own rating
-        if (!rating.getUser().getId().equals(user.getId())) {
-            throw new Exception("You are not authorized to delete this rating");
-        }
-
-        ratingRepository.delete(rating);
-    }
-
-    @Override
-    public void deleteRatingByAdmin(Long ratingId) throws Exception {
-        Rating rating = ratingRepository.findById(ratingId)
-                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
-        ratingRepository.delete(rating);
     }
 }
