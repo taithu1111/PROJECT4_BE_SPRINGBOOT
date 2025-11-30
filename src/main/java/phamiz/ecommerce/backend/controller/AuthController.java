@@ -21,7 +21,9 @@ import phamiz.ecommerce.backend.dto.Auth.AuthResponse;
 import phamiz.ecommerce.backend.dto.Auth.LoginRequest;
 import phamiz.ecommerce.backend.dto.Auth.SignupRequest;
 import phamiz.ecommerce.backend.exception.UserException;
+import phamiz.ecommerce.backend.model.Address;
 import phamiz.ecommerce.backend.model.User;
+import phamiz.ecommerce.backend.repositories.IAddressRepository;
 import phamiz.ecommerce.backend.repositories.UserRepository;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.serviceImpl.CustomUserServiceImpl;
@@ -44,6 +46,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserServiceImpl customUserService;
     private final ICartService cartService;
+    private final IAddressRepository addressRepository;
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     /**
@@ -85,11 +88,22 @@ public class AuthController {
         User savedUser = userRepository.save(createdUser);
         logger.info("User saved with ID: {}", savedUser.getId());
 
-        // 4. Create cart for the new user
+        // 4. Create address if address object is provided
+        if (req.getAddress() != null) {
+            Address address = new Address();
+            address.setStreetAddress(req.getAddress().getStreetAddress());
+            address.setCity(req.getAddress().getCity());
+            address.setZipCode(req.getAddress().getZipCode());
+            address.setUser(savedUser);
+            addressRepository.save(address);
+            logger.info("Address created for user ID: {}", savedUser.getId());
+        }
+
+        // 5. Create cart for the new user
         cartService.createCart(savedUser);
         logger.info("Cart created successfully for user ID: {}", savedUser.getId());
 
-        // 5. Generate JWT with proper authorities
+        // 6. Generate JWT with proper authorities
         UserDetails userDetails = customUserService.loadUserByUsername(savedUser.getEmail());
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities());
@@ -97,7 +111,7 @@ public class AuthController {
         String token = jwtProvider.generateToken(authentication);
         logger.info("Token generated successfully for user ID: {}", savedUser.getId());
 
-        // 6. Build response
+        // 7. Build response
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(token);
         authResponse.setMessage("Signup Success!");
@@ -161,4 +175,5 @@ public class AuthController {
         }
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
+
 }

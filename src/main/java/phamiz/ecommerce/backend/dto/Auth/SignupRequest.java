@@ -28,6 +28,18 @@ public class SignupRequest {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).*$", message = "Password must contain at least one uppercase letter, one lowercase letter, and one special character")
     private String password;
 
+    @NotBlank(message = "Mobile is required")
     @Pattern(regexp = "\\d{10}", message = "Mobile number must be 10 digits")
     private String mobile;
+
+    private AddressDTO address;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AddressDTO {
+        private String streetAddress;
+        private String city;
+        private String zipCode;
+    }
 }
