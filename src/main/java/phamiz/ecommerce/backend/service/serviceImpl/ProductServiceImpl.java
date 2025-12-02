@@ -13,9 +13,7 @@ import phamiz.ecommerce.backend.dto.Product.ProductDTO;
 import phamiz.ecommerce.backend.dto.Product.ReviewDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.*;
-import phamiz.ecommerce.backend.repositories.ICategoryRepository;
-import phamiz.ecommerce.backend.repositories.IProductImageRepository;
-import phamiz.ecommerce.backend.repositories.IProductRepository;
+import phamiz.ecommerce.backend.repositories.*;
 import phamiz.ecommerce.backend.service.IProductService;
 import phamiz.ecommerce.backend.service.IUserService;
 
@@ -31,6 +29,9 @@ public class ProductServiceImpl implements IProductService {
     private final IUserService userService;
     private final ICategoryRepository categoryRepository;
     private final IProductImageRepository productImageRepository;
+    private final IReviewRepository reviewRepository;
+    private final IRatingRepository ratingRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
@@ -70,6 +71,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public List<ProductDTO> findAllProduct() {
         List<Product> products = productRepository.findAll();
         if (products.isEmpty()) {
@@ -130,13 +132,15 @@ public class ProductServiceImpl implements IProductService {
         Product product = findProductById(productId);
 
         // Step 1: Delete all ProductImage records first
-        logger.info("Deleting product images for product ID: {}", productId);
-        productImageRepository.deleteByProductId(productId);
+//        logger.info("Deleting product images for product ID: {}", productId);
+//        productImageRepository.deleteByProductId(productId);
+        // Clear tất cả collection
 
-        // Step 2: Delete all ProductColor records
-        logger.info("Deleting product colors for product ID: {}", productId);
-        productRepository.deleteProductColorsByProductId(productId);
+//        // Step 2: Delete all ProductColor records
+        // Xóa colors thông qua Product
 
+//        reviewRepository.deleteAllProductsReview(productId);
+//        ratingRepository.deleteAllProductsRating(productId);
         // Step 3: Finally delete the product itself
         logger.info("Deleting product with ID: {}", productId);
         productRepository.deleteById(product.getId());
@@ -145,41 +149,56 @@ public class ProductServiceImpl implements IProductService {
         return "Product deleted success!";
     }
 
-    @Override
-    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
-        Product product = findProductById(productId);
-        product.setProduct_name(req.getTitle());
-        product.setProductColors(req.getColors());
-        product.setDescription(req.getDescription());
-        // product.setImages(req.getImages());
-        product.setBrand(req.getBrand());
-        product.setPrice(req.getPrice());
-        product.setQuantity(req.getQuantity());
-
-        product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
-        product.setCreatedAt(LocalDateTime.now());
-        // Gán images và tự động set product_id cho từng image
-        if (req.getImages() != null) {
-            for (ProductImage image : req.getImages()) {
-                product.addImage(image); // addImage đã set image.setProduct(this)
-            }
-        }
-
-        if (req.getQuantity() != 0) {
-            product.setQuantity(req.getQuantity());
-            logger.info("Product update success!");
-        }
-        return productRepository.save(product);
-    }
+//    @Override
+//    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
+//        Product product = findProductById(productId);
+//        product.setProduct_name(req.getTitle());
+//        product.setProductColors(req.getColors());
+//        product.setDescription(req.getDescription());
+//        // product.setImages(req.getImages());
+//        product.setBrand(req.getBrand());
+//        product.setPrice(req.getPrice());
+//        product.setQuantity(req.getQuantity());
+//
+//        product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
+//        product.setCreatedAt(LocalDateTime.now());
+//        // Gán images và tự động set product_id cho từng image
+//        if (req.getImages() != null) {
+//            for (ProductImage image : req.getImages()) {
+//                product.addImage(image); // addImage đã set image.setProduct(this)
+//            }
+//        }
+//
+//        if (req.getQuantity() != 0) {
+//            product.setQuantity(req.getQuantity());
+//            logger.info("Product update success!");
+//        }
+//        return productRepository.save(product);
+//    }
 
     @Override
     @Transactional
     public Product findProductById(Long id) throws ProductException {
         // Use @EntityGraph to load ALL related data in ONE query!
-        Product product = productRepository.findProductWithFullDetails(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+//
+//        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
+//        return product;
+        // Step 2: Fetch images riêng
+        productRepository.findWithImages(id).ifPresent(p -> product.setImages(p.getImages()));
 
-        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
+        // Step 3: Fetch ratings riêng
+        productRepository.findWithRatings(id).ifPresent(p -> product.setRatings(p.getRatings()));
+
+        // Step 4: Fetch reviews nếu cần
+        // Nếu muốn, có thể tạo repository findWithReviews
+        product.setReviews(reviewRepository.getAllProductsReview(id));
+        // Step 5: Fetch productColors
+        // Giả sử productColors được lazy load, ta có thể gọi getter để init
+        product.getProductColors().size(); // force initialize
+
+        logger.info("Product found safely with ID {} (images, ratings, reviews, colors loaded separately)", id);
         return product;
     }
 
@@ -258,4 +277,54 @@ public class ProductServiceImpl implements IProductService {
             createProduct(req);
         }
     }
+    @Override
+    @Transactional
+    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
+        Product product = findProductById(productId);
+
+        // Update cơ bản
+        product.setProduct_name(req.getTitle());
+        product.setDescription(req.getDescription());
+        product.setBrand(req.getBrand());
+        product.setPrice(req.getPrice());
+        product.setQuantity(req.getQuantity());
+        product.setCreatedAt(LocalDateTime.now());
+
+        // Update colors
+        if (req.getColors() != null) {
+            product.setProductColors(req.getColors());
+        }
+
+        // Update images: Xóa ảnh cũ, thêm ảnh mới
+        if (req.getImages() != null) {
+            product.getImages().clear();
+            for (ProductImage image : req.getImages()) {
+                product.addImage(image); // addImage đã set product = this
+            }
+        }
+
+        // Update category: xử lý parent category đúng
+        Category firstLevel = categoryRepository.findByCategoryName(req.getFirstLevelCategory());
+        if (firstLevel == null) {
+            firstLevel = new Category();
+            firstLevel.setCategory_name(req.getFirstLevelCategory());
+            firstLevel.setLevel(1);
+            firstLevel = categoryRepository.save(firstLevel);
+        }
+
+        Category secondLevel = categoryRepository.findByNameAndParent(req.getSecondLevelCategory(), firstLevel.getCategory_name());
+        if (secondLevel == null) {
+            secondLevel = new Category();
+            secondLevel.setCategory_name(req.getSecondLevelCategory());
+            secondLevel.setParent_category(firstLevel);
+            secondLevel.setLevel(2);
+            secondLevel = categoryRepository.save(secondLevel);
+        }
+        product.setCategory(secondLevel);
+
+        Product updatedProduct = productRepository.save(product);
+        logger.info("Product updated successfully: {}", updatedProduct.getId());
+        return updatedProduct;
     }
+
+}

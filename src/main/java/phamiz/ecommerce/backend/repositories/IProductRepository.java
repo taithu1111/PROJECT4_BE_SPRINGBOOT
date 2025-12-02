@@ -57,6 +57,7 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
         @Query("SELECT p FROM Product p")
         List<Product> findAllWithBasicInfo();
 
+
         /**
          * Load product with ratings and reviews for rating summary page
          */
@@ -68,4 +69,25 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
         @Modifying
         @Query(value = "DELETE FROM product_color WHERE product_id = :productId", nativeQuery = true)
         void deleteProductColorsByProductId(@Param("productId") Long productId);
+
+
+
+    // Load product với images
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.images WHERE p.id = :id")
+    Optional<Product> findWithImages(@Param("id") Long id);
+
+    // Load product với ratings
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.ratings WHERE p.id = :id")
+    Optional<Product> findWithRatings(@Param("id") Long id);
+
+    // Load product với reviews
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.reviews WHERE p.id = :id")
+    Optional<Product> findWithReviews(@Param("id") Long id);
+
+    // Load product với colors (nếu cần)
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.productColors WHERE p.id = :id")
+    Optional<Product> findWithColors(@Param("id") Long id);
+
+
+
 }
