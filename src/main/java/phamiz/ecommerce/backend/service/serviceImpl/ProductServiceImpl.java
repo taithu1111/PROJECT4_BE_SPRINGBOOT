@@ -130,18 +130,6 @@ public class ProductServiceImpl implements IProductService {
     @Transactional
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
-
-        // Step 1: Delete all ProductImage records first
-//        logger.info("Deleting product images for product ID: {}", productId);
-//        productImageRepository.deleteByProductId(productId);
-        // Clear tất cả collection
-
-//        // Step 2: Delete all ProductColor records
-        // Xóa colors thông qua Product
-
-//        reviewRepository.deleteAllProductsReview(productId);
-//        ratingRepository.deleteAllProductsRating(productId);
-        // Step 3: Finally delete the product itself
         logger.info("Deleting product with ID: {}", productId);
         productRepository.deleteById(product.getId());
 
@@ -176,31 +164,47 @@ public class ProductServiceImpl implements IProductService {
 //        return productRepository.save(product);
 //    }
 
-    @Override
-    @Transactional
-    public Product findProductById(Long id) throws ProductException {
-        // Use @EntityGraph to load ALL related data in ONE query!
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+//    @Override
+//    @Transactional
+//    public Product findProductById(Long id) throws ProductException {
+//        // Use @EntityGraph to load ALL related data in ONE query!
+//        Product product = productRepository.findById(id)
+//                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+////
+////        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
+////        return product;
+//        // Step 2: Fetch images riêng
+//        productRepository.findWithImages(id).ifPresent(p -> product.setImages(p.getImages()));
 //
-//        logger.info("Product found with full details (images, ratings, reviews, colors): {}", id);
+//        // Step 3: Fetch ratings riêng
+//        productRepository.findWithRatings(id).ifPresent(p -> product.setRatings(p.getRatings()));
+//
+//        // Step 4: Fetch reviews nếu cần
+//        // Nếu muốn, có thể tạo repository findWithReviews
+//        product.setReviews(reviewRepository.getAllProductsReview(id));
+//        // Step 5: Fetch productColors
+//        // Giả sử productColors được lazy load, ta có thể gọi getter để init
+//        product.getProductColors().size(); // force initialize
+//
+//        logger.info("Product found safely with ID {} (images, ratings, reviews, colors loaded separately)", id);
 //        return product;
-        // Step 2: Fetch images riêng
-        productRepository.findWithImages(id).ifPresent(p -> product.setImages(p.getImages()));
+//    }
+@Override
+@Transactional
+public Product findProductById(Long id) throws ProductException {
+    Product product = productRepository.findById(id)
+            .orElseThrow(() -> new ProductException("Product not found with id: " + id));
 
-        // Step 3: Fetch ratings riêng
-        productRepository.findWithRatings(id).ifPresent(p -> product.setRatings(p.getRatings()));
+    // --- Force load liên quan để Hibernate giữ reference ---
+    product.getProductColors().size(); // init colors
+    product.getImages().size();        // init images
+    product.getRatings().size();       // init ratings
+    product.getReviews().size();       // init reviews, giữ reference
 
-        // Step 4: Fetch reviews nếu cần
-        // Nếu muốn, có thể tạo repository findWithReviews
-        product.setReviews(reviewRepository.getAllProductsReview(id));
-        // Step 5: Fetch productColors
-        // Giả sử productColors được lazy load, ta có thể gọi getter để init
-        product.getProductColors().size(); // force initialize
+    logger.info("Product loaded safely with ID {} (images, ratings, reviews, colors)", id);
+    return product;
+}
 
-        logger.info("Product found safely with ID {} (images, ratings, reviews, colors loaded separately)", id);
-        return product;
-    }
 
     @Override
     public Page<ProductDTO> getAllProduct(String category, List<String> colors,
@@ -282,7 +286,7 @@ public class ProductServiceImpl implements IProductService {
     public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
         Product product = findProductById(productId);
 
-        // Update cơ bản
+        // --- Cập nhật thông tin cơ bản ---
         product.setProduct_name(req.getTitle());
         product.setDescription(req.getDescription());
         product.setBrand(req.getBrand());
@@ -290,20 +294,21 @@ public class ProductServiceImpl implements IProductService {
         product.setQuantity(req.getQuantity());
         product.setCreatedAt(LocalDateTime.now());
 
-        // Update colors
+        // --- Cập nhật colors: clear + addAll, giữ reference ---
         if (req.getColors() != null) {
-            product.setProductColors(req.getColors());
+            product.getProductColors().clear();
+            product.getProductColors().addAll(req.getColors());
         }
 
-        // Update images: Xóa ảnh cũ, thêm ảnh mới
+        // --- Cập nhật images: clear + add mới, giữ reference ---
         if (req.getImages() != null) {
             product.getImages().clear();
             for (ProductImage image : req.getImages()) {
-                product.addImage(image); // addImage đã set product = this
+                product.addImage(image); // addImage đã set image.setProduct(this)
             }
         }
 
-        // Update category: xử lý parent category đúng
+        // --- Cập nhật category ---
         Category firstLevel = categoryRepository.findByCategoryName(req.getFirstLevelCategory());
         if (firstLevel == null) {
             firstLevel = new Category();
@@ -322,9 +327,13 @@ public class ProductServiceImpl implements IProductService {
         }
         product.setCategory(secondLevel);
 
+        // --- Không set reviews hay ratings trực tiếp, giữ reference Hibernate quản lý ---
+        product.getReviews().size(); // force load, giữ referenc
+
         Product updatedProduct = productRepository.save(product);
         logger.info("Product updated successfully: {}", updatedProduct.getId());
         return updatedProduct;
     }
+
 
 }
