@@ -113,13 +113,20 @@ public class ProductServiceImpl implements IProductService {
                 product.addImage(image); // addImage đã set image.setProduct(this)
             }
         }
-        product.setImages(request.getImages());
+//        if (request.getColors() != null && !request.getColors().isEmpty()) {
+//            product.setProductColors(request.getColors());
+//        }
 
+
+        product.setImages(request.getImages());
+        product.setProductColors(request.getColors());
         product.setBrand(request.getBrand());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
         product.setCategory(secondLevel);
         product.setCreatedAt(LocalDateTime.now());
+        product.setProduct_name(request.getTitle());
+        product.setDescription(request.getDescription());
 
         Product savedProduct = productRepository.save(product);
         logger.info("Create success product : ", savedProduct);
