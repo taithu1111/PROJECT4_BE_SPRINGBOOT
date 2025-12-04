@@ -13,10 +13,10 @@ import phamiz.ecommerce.backend.dto.Product.ProductDTO;
 import phamiz.ecommerce.backend.dto.Product.ReviewDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.*;
-import phamiz.ecommerce.backend.repositories.ICategoryRepository;
-import phamiz.ecommerce.backend.repositories.IProductRepository;
+import phamiz.ecommerce.backend.repositories.*;
 import phamiz.ecommerce.backend.service.IProductService;
 import phamiz.ecommerce.backend.service.IUserService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,6 +31,10 @@ public class ProductServiceImpl implements IProductService {
     private final IProductRepository productRepository;
     private final IUserService userService;
     private final ICategoryRepository categoryRepository;
+    private final IProductImageRepository productImageRepository;
+    private final IReviewRepository reviewRepository;
+    private final IRatingRepository ratingRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
@@ -69,6 +73,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public List<ProductDTO> findAllProduct() {
         List<Product> products = productRepository.findAll();
         if (products.isEmpty()) {
@@ -104,13 +109,25 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Product product = new Product();
-        product.setProductColors(request.getColors());
+        // Gán images và tự động set product_id cho từng image
+        if (request.getImages() != null) {
+            for (ProductImage image : request.getImages()) {
+                product.addImage(image); // addImage đã set image.setProduct(this)
+            }
+        }
+        // if (request.getColors() != null && !request.getColors().isEmpty()) {
+        // product.setProductColors(request.getColors());
+        // }
+
         product.setImages(request.getImages());
+        product.setProductColors(request.getColors());
         product.setBrand(request.getBrand());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
         product.setCategory(secondLevel);
         product.setCreatedAt(LocalDateTime.now());
+        product.setProduct_name(request.getTitle());
+        product.setDescription(request.getDescription());
 
         Product savedProduct = productRepository.save(product);
         logger.info("Create success product : ", savedProduct);
@@ -120,32 +137,83 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
+        logger.info("Deleting product with ID: {}", productId);
         productRepository.deleteById(product.getId());
         logger.info("Product deleted success!");
         return "Product deleted success!";
     }
 
-    @Override
-    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
-        Product product = findProductById(productId);
+    // @Override
+    // public Product updateProduct(Long productId, CreateProductRequest req) throws
+    // ProductException {
+    // Product product = findProductById(productId);
+    // product.setProduct_name(req.getTitle());
+    // product.setProductColors(req.getColors());
+    // product.setDescription(req.getDescription());
+    // // product.setImages(req.getImages());
+    // product.setBrand(req.getBrand());
+    // product.setPrice(req.getPrice());
+    // product.setQuantity(req.getQuantity());
+    //
+    // product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
+    // product.setCreatedAt(LocalDateTime.now());
+    // // Gán images và tự động set product_id cho từng image
+    // if (req.getImages() != null) {
+    // for (ProductImage image : req.getImages()) {
+    // product.addImage(image); // addImage đã set image.setProduct(this)
+    // }
+    // }
+    //
+    // if (req.getQuantity() != 0) {
+    // product.setQuantity(req.getQuantity());
+    // logger.info("Product update success!");
+    // }
+    // return productRepository.save(product);
+    // }
 
-        if (req.getQuantity() != 0) {
-            product.setQuantity(req.getQuantity());
-            logger.info("Product update success!");
-        }
-        return productRepository.save(product);
-    }
-
+    // @Override
+    // @Transactional
+    // public Product findProductById(Long id) throws ProductException {
+    // // Use @EntityGraph to load ALL related data in ONE query!
+    // Product product = productRepository.findById(id)
+    // .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+    ////
+    //// logger.info("Product found with full details (images, ratings, reviews,
+    // colors): {}", id);
+    //// return product;
+    // // Step 2: Fetch images riêng
+    // productRepository.findWithImages(id).ifPresent(p ->
+    // product.setImages(p.getImages()));
+    //
+    // // Step 3: Fetch ratings riêng
+    // productRepository.findWithRatings(id).ifPresent(p ->
+    // product.setRatings(p.getRatings()));
+    //
+    // // Step 4: Fetch reviews nếu cần
+    // // Nếu muốn, có thể tạo repository findWithReviews
+    // product.setReviews(reviewRepository.getAllProductsReview(id));
+    // // Step 5: Fetch productColors
+    // // Giả sử productColors được lazy load, ta có thể gọi getter để init
+    // product.getProductColors().size(); // force initialize
+    //
+    // logger.info("Product found safely with ID {} (images, ratings, reviews,
+    // colors loaded separately)", id);
+    // return product;
+    // }
     @Override
+    @Transactional
     public Product findProductById(Long id) throws ProductException {
-        Optional<Product> optionalProduct = productRepository.findById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
 
-        if (optionalProduct.isPresent()) {
-            logger.info("Product was found with id : ", id);
-            return optionalProduct.get();
-        }
-        logger.error("Product not found with " + id);
-        throw new ProductException("Product not found with " + id);
+        // --- Force load liên quan để Hibernate giữ reference ---
+        product.getProductColors().size(); // init colors
+        product.getImages().size(); // init images
+        product.getRatings().size(); // init ratings
+        product.getReviews().size(); // init reviews, giữ reference
+
+        logger.info("Product loaded safely with ID {} (images, ratings, reviews, colors)", id);
+        return product;
     }
 
     @Override
@@ -223,4 +291,61 @@ public class ProductServiceImpl implements IProductService {
             createProduct(req);
         }
     }
+
+    @Override
+    @Transactional
+    public Product updateProduct(Long productId, CreateProductRequest req) throws ProductException {
+        Product product = findProductById(productId);
+
+        // --- Cập nhật thông tin cơ bản ---
+        product.setProduct_name(req.getTitle());
+        product.setDescription(req.getDescription());
+        product.setBrand(req.getBrand());
+        product.setPrice(req.getPrice());
+        product.setQuantity(req.getQuantity());
+        product.setCreatedAt(LocalDateTime.now());
+
+        // --- Cập nhật colors: clear + addAll, giữ reference ---
+        if (req.getColors() != null) {
+            product.getProductColors().clear();
+            product.getProductColors().addAll(req.getColors());
+        }
+
+        // --- Cập nhật images: clear + add mới, giữ reference ---
+        if (req.getImages() != null) {
+            product.getImages().clear();
+            for (ProductImage image : req.getImages()) {
+                product.addImage(image); // addImage đã set image.setProduct(this)
+            }
+        }
+
+        // --- Cập nhật category ---
+        Category firstLevel = categoryRepository.findByCategoryName(req.getFirstLevelCategory());
+        if (firstLevel == null) {
+            firstLevel = new Category();
+            firstLevel.setCategory_name(req.getFirstLevelCategory());
+            firstLevel.setLevel(1);
+            firstLevel = categoryRepository.save(firstLevel);
+        }
+
+        Category secondLevel = categoryRepository.findByNameAndParent(req.getSecondLevelCategory(),
+                firstLevel.getCategory_name());
+        if (secondLevel == null) {
+            secondLevel = new Category();
+            secondLevel.setCategory_name(req.getSecondLevelCategory());
+            secondLevel.setParent_category(firstLevel);
+            secondLevel.setLevel(2);
+            secondLevel = categoryRepository.save(secondLevel);
+        }
+        product.setCategory(secondLevel);
+
+        // --- Không set reviews hay ratings trực tiếp, giữ reference Hibernate quản lý
+        // ---
+        product.getReviews().size(); // force load, giữ referenc
+
+        Product updatedProduct = productRepository.save(product);
+        logger.info("Product updated successfully: {}", updatedProduct.getId());
+        return updatedProduct;
+    }
+
 }
