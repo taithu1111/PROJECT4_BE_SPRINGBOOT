@@ -10,6 +10,7 @@ import phamiz.ecommerce.backend.dto.Cart.CartDTO;
 import phamiz.ecommerce.backend.dto.Cart.CartItemDTO;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Cart;
 import phamiz.ecommerce.backend.model.CartItem;
 import phamiz.ecommerce.backend.model.Product;
@@ -41,13 +42,14 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest request) throws ProductException {
+    public String addCartItem(Long userId, AddItemRequest request)
+            throws ProductException, CartItemException, UserException {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.findProductById(request.getProductId());
 
-        CartItem isPresent = cartItemService.isCartItemExist(cart, product);
+        CartItem existingItem = cartItemService.isCartItemExist(cart, product);
 
-        if (isPresent == null) {
+        if (existingItem == null) {
             CartItem cartItem = new CartItem();
             cartItem.setProduct(product);
             cartItem.setCart(cart);
@@ -61,8 +63,11 @@ public class CartServiceImpl implements ICartService {
             logger.info("Item add to Cart");
             return "Item add to Cart";
         }
-        logger.info("CartItem was exit");
-        return "Item already in cart";
+
+        int newQuality = existingItem.getQuantity() + request.getQuantity();
+        cartItemService.updateCartItem(userId, existingItem.getId(), newQuality);
+        logger.info("Updated quantity of existing cart item");
+        return "Item quantity updated";
     }
 
     @Override

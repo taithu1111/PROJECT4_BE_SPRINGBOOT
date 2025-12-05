@@ -12,12 +12,16 @@ import java.util.Set;
 
 public interface ICartItemService {
     public CartItem createCartItem(CartItem cartItem);
+
     public CartItem updateCartItem(Long userId, Long id, int quantity) throws CartItemException, UserException;
+
     public CartItem isCartItemExist(Cart cart, Product product);
+
     public void removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException;
+
     public CartItem findCartItemById(Long cartItemId) throws CartItemException;
+
     Set<CartItem> findCartItemByCartId(Long cartId) throws CartItemException;
 
     CartItemDTO toDTO(CartItem cartItem);
 }
-
