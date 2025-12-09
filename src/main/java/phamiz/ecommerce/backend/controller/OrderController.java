@@ -12,6 +12,7 @@ import phamiz.ecommerce.backend.model.Order;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.service.IOrderService;
 import phamiz.ecommerce.backend.service.IUserService;
+import phamiz.ecommerce.backend.dto.Order.OrderDTO;
 
 import java.util.List;
 
@@ -33,10 +34,10 @@ public class OrderController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<Order>> usersOrderHistory (
+    public ResponseEntity<List<OrderDTO>> usersOrderHistory(
             @RequestHeader("Authorization") String jwt) throws UserException {
         User user = userService.findUserProfileByJwt(jwt);
-        List<Order> orders = orderService.usersOrderHistory(user.getId());
+        List<OrderDTO> orders = orderService.usersOrderHistory(user.getId());
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
@@ -47,6 +48,39 @@ public class OrderController {
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.findOrderById(orderId);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{orderId}/confirmed")
+    public ResponseEntity<Order> confirmedOrder(
+            @PathVariable Long orderId,
+            @RequestHeader("Authorization") String jwt) throws UserException, OrderException {
+        User user = userService.findUserProfileByJwt(jwt);
+        Order order = orderService.confirmedOrder(orderId);
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{orderId}")
+    public ResponseEntity<Void> deleteOrder(
+            @PathVariable Long orderId,
+            @RequestHeader("Authorization") String jwt) throws UserException, OrderException {
+
+        User user = userService.findUserProfileByJwt(jwt);
+
+        Order order = orderService.findOrderById(orderId);
+
+        // ✅ only allow delete for owner
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new OrderException("You are not allowed to delete this order");
+        }
+
+        // ✅ safety rule (optional but recommended)
+        if (!order.getOrderStatus().equalsIgnoreCase("PENDING")
+                && !order.getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+            throw new OrderException("Only PENDING or CANCELLED orders can be deleted");
+        }
+
+        orderService.deleteOrder(orderId);
+        return ResponseEntity.noContent().build();
     }
 
 }

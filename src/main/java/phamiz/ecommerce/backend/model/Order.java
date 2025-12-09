@@ -1,5 +1,6 @@
 package phamiz.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({ "addresses", "password" })
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

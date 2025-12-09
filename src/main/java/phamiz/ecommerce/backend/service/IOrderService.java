@@ -6,7 +6,7 @@ import phamiz.ecommerce.backend.exception.OrderException;
 import phamiz.ecommerce.backend.model.Address;
 import phamiz.ecommerce.backend.model.Order;
 import phamiz.ecommerce.backend.model.User;
-
+import phamiz.ecommerce.backend.dto.Order.OrderDTO;
 import java.util.List;
 
 public interface IOrderService {
@@ -14,7 +14,7 @@ public interface IOrderService {
 
     public Order findOrderById(Long orderId) throws OrderException;
 
-    public List<Order> usersOrderHistory(Long userId);
+    public List<OrderDTO> usersOrderHistory(Long userId);
 
     public Order placedOrder(Long orderId) throws OrderException;
 

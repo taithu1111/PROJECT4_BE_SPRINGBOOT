@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import phamiz.ecommerce.backend.dto.Order.OrderDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -77,7 +79,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public Order findOrderById(Long orderId) throws OrderException {
-        Optional<Order> order = orderRepository.findById(orderId);
+        Optional<Order> order = orderRepository.findOrderByIdWithItems(orderId);
         if (order.isPresent()) {
             return order.get();
         }
@@ -85,9 +87,9 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> usersOrderHistory(Long userId) {
+    public List<OrderDTO> usersOrderHistory(Long userId) {
         List<Order> orders = orderRepository.getUsersOrders(userId);
-        return orders;
+        return orders.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -195,7 +197,6 @@ public class OrderService implements IOrderService {
         if (order == null) {
             return null;
         }
-
         phamiz.ecommerce.backend.dto.Order.OrderDTO dto = new phamiz.ecommerce.backend.dto.Order.OrderDTO();
         dto.setId(order.getId());
         dto.setOrderId(order.getOrderId());
@@ -207,7 +208,6 @@ public class OrderService implements IOrderService {
         dto.setOrderStatus(order.getOrderStatus());
         dto.setTotalItem(order.getTotalItem());
         dto.setCreateAt(order.getCreateAt());
-
         if (order.getShippingAddress() != null) {
             phamiz.ecommerce.backend.dto.Order.AddressDTO addressDTO = new phamiz.ecommerce.backend.dto.Order.AddressDTO();
             addressDTO.setId(order.getShippingAddress().getId());
@@ -216,14 +216,17 @@ public class OrderService implements IOrderService {
             addressDTO.setZipCode(order.getShippingAddress().getZipCode());
             dto.setShippingAddress(addressDTO);
         }
-
         if (order.getOrderItems() != null) {
             List<phamiz.ecommerce.backend.dto.Order.OrderItemDTO> itemDTOs = new ArrayList<>();
             for (OrderItem item : order.getOrderItems()) {
                 phamiz.ecommerce.backend.dto.Order.OrderItemDTO itemDTO = new phamiz.ecommerce.backend.dto.Order.OrderItemDTO();
                 itemDTO.setId(item.getId());
                 itemDTO.setProductId(item.getProduct() != null ? item.getProduct().getId() : null);
-                itemDTO.setProductName(item.getProduct() != null ? item.getProduct().getProduct_name() : null);
+                // IMPORTANT: Map extended product details
+                if (item.getProduct() != null) {
+                    itemDTO.setProductName(item.getProduct().getProduct_name());
+                }
+
                 itemDTO.setQuantity(item.getQuantity());
                 itemDTO.setPrice(item.getPrice());
                 itemDTO.setDiscountedPrice(0);
@@ -231,7 +234,6 @@ public class OrderService implements IOrderService {
             }
             dto.setOrderItems(itemDTOs);
         }
-
         return dto;
     }
 }
