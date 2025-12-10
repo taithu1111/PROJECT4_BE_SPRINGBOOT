@@ -47,10 +47,17 @@ public class CartServiceImpl implements ICartService {
     public String addCartItem(Long userId, AddItemRequest request)
             throws ProductException, CartItemException, UserException {
 
-        Cart cart = cartRepository.findByUserId(userId);
+        Cart cart = cartRepository.findByUserIdWithItems(userId);
         Product product = productService.findProductById(request.getProductId());
 
         CartItem existingItem = cartItemService.isCartItemExist(cart, product);
+
+        // Calculate price to add (Unit Price * Quantity being added)
+        double priceToAdd = product.getPrice() * request.getQuantity();
+
+        // Update Cart totals incrementally
+        cart.setTotalItem(cart.getTotalItem() + request.getQuantity());
+        cart.setTotalPrice(cart.getTotalPrice() + priceToAdd);
 
         if (existingItem == null) {
             CartItem cartItem = new CartItem();
@@ -62,19 +69,23 @@ public class CartServiceImpl implements ICartService {
             cart.getCartItems().add(created);
         } else {
             int newQuantity = existingItem.getQuantity() + request.getQuantity();
-            cartItemService.updateCartItem(userId, existingItem.getId(), newQuantity);
+            CartItem updated = cartItemService.updateCartItem(userId, existingItem.getId(), newQuantity);
+
+            // Update the item in the local set to ensure recalculation uses the new values
+            cart.getCartItems().remove(existingItem);
+            cart.getCartItems().add(updated);
         }
 
-        // ✅ critical fix
-        recalculateCart(cart);
-        cartRepository.save(cart);
+        // recalculateCart(cart); // Optimization: Disabled full recalculation for Add
+        // per user request
+        cartRepository.saveAndFlush(cart);
 
         return "Item added to cart";
     }
 
     @Override
     public Cart findUserCart(Long userId) {
-        return cartRepository.findByUserId(userId);
+        return cartRepository.findByUserIdWithItems(userId);
     }
 
     @Override
@@ -101,10 +112,61 @@ public class CartServiceImpl implements ICartService {
 
         for (CartItem item : cart.getCartItems()) {
             totalItem += item.getQuantity();
-            totalPrice += item.getPrice();
+            totalPrice += (item.getPrice() != null ? item.getPrice() : 0);
         }
 
         cart.setTotalItem(totalItem);
         cart.setTotalPrice(totalPrice);
+    }
+
+    @Override
+    public void updateItem(Long userId, Long cartItemId, int quantity) throws CartItemException, UserException {
+        Cart cart = findUserCart(userId);
+        CartItem item = cartItemService.findCartItemById(cartItemId);
+        // Verify item belongs to cart? Not strictly needed if ID is unique but good
+        // practice.
+
+        CartItem updated = cartItemService.updateCartItem(userId, cartItemId, quantity);
+
+        // Update local set
+        cart.getCartItems().remove(item); // remove old instance relying on equals/hashCode?
+        // Note: CartItem equals/hashCode is usually ID based. If ID is same, hashset
+        // replace might be tricky.
+        // Safer to remove by ID search or ensure equals works.
+        // Given Lombok @Data usually includes ID, and we are updating the same
+        // entity...
+        // Actually, if we just reload the cart or rely on fetch, it's safer.
+        // But to be consistent with my previous fix:
+        cart.getCartItems().removeIf(i -> i.getId().equals(cartItemId));
+        cart.getCartItems().add(updated);
+
+        recalculateCart(cart);
+        cartRepository.saveAndFlush(cart);
+    }
+
+    @Override
+    public void removeItem(Long userId, Long cartItemId) throws CartItemException, UserException {
+        Cart cart = findUserCart(userId);
+
+        cartItemService.removeCartItem(userId, cartItemId);
+
+        cart.getCartItems().removeIf(item -> item.getId().equals(cartItemId));
+
+        recalculateCart(cart);
+        cartRepository.saveAndFlush(cart);
+    }
+
+    @Override
+    public void clearCart(Long userId) {
+        Cart cart = findUserCart(userId);
+
+        // Orphan removal is enabled, so clearing the collection and saving the parent
+        // should remove children from DB.
+        cart.getCartItems().clear();
+
+        cart.setTotalItem(0);
+        cart.setTotalPrice(0);
+
+        cartRepository.saveAndFlush(cart);
     }
 }

@@ -31,8 +31,8 @@ public class CartItemServiceImpl implements ICartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
-        // ✅ price must come from product
-        cartItem.setPrice(cartItem.getQuantity() * cartItem.getProduct().getPrice());
+        // ✅ Store Unit Price (per User Request)
+        cartItem.setPrice(cartItem.getProduct().getPrice());
         CartItem createdCartItem = cartItemRepository.save(cartItem);
         logger.info("Create Cart Item success!");
         return createdCartItem;
@@ -44,7 +44,9 @@ public class CartItemServiceImpl implements ICartItemService {
 
         CartItem cartItem = findCartItemById(id);
         cartItem.setQuantity(quantity);
-        cartItem.setPrice(quantity * cartItem.getProduct().getPrice());
+        // ✅ Ensure Unit Price is up to date (though unrelated to quantity, good
+        // practice)
+        cartItem.setPrice(cartItem.getProduct().getPrice());
 
         return cartItemRepository.save(cartItem);
     }
@@ -86,7 +88,11 @@ public class CartItemServiceImpl implements ICartItemService {
         dto.setCartId(cartItem.getCart().getId());
         dto.setProductId(cartItem.getProduct().getId());
         dto.setQuantity(cartItem.getQuantity());
+
+        // ✅ Send Line Total to Frontend (Unit Price * Quantity)
+        // Frontend expects "Price" to be the total for that row.
         dto.setPrice(cartItem.getPrice());
+
         dto.setProductName(cartItem.getProduct().getProduct_name());
         dto.setProductImageUrl(
                 cartItem.getProduct().getImages()

@@ -62,19 +62,38 @@ public class OrderService implements IOrderService {
         createdOrder.setPaymentStatus(PaymentStatus.PENDING);
         createdOrder.setPaymentMethod(PaymentMethod.PAYOS);
 
+        double orderTotalPrice = 0;
+        int orderTotalItem = 0;
+
         for (CartItem item : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
-            orderItem.setPrice(item.getPrice());
+
+            // Use Product price as the source of truth for Unit Price
+            // This ensures we don't rely on potentially inconsistent CartItem.price
+            double unitPrice = item.getProduct().getPrice();
+
+            orderItem.setPrice(unitPrice); // Store Unit Price in OrderItem
             orderItem.setProduct(item.getProduct());
             orderItem.setQuantity(item.getQuantity());
             orderItem.setOrder(createdOrder);
 
             orderItems.add(orderItem);
+
+            // Calculate line total: Unit Price * Quantity
+            orderTotalPrice += (unitPrice * item.getQuantity());
+            orderTotalItem += item.getQuantity();
         }
 
         createdOrder.setOrderItems(orderItems);
+        createdOrder.setTotalPrice(orderTotalPrice);
+        createdOrder.setTotalItem(orderTotalItem);
 
-        return orderRepository.save(createdOrder);
+        Order savedOrder = orderRepository.save(createdOrder);
+
+        // Clear the cart after successful order creation
+        cartService.clearCart(user.getId());
+
+        return savedOrder;
     }
 
     @Override

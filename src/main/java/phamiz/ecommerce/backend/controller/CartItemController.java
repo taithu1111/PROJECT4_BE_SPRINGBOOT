@@ -9,15 +9,15 @@ import phamiz.ecommerce.backend.dto.ApiResponse;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
-import phamiz.ecommerce.backend.service.ICartItemService;
+
 import phamiz.ecommerce.backend.service.IUserService;
 
 @RestController
 @RequestMapping("/api/cartItem")
 @RequiredArgsConstructor
 public class CartItemController {
-    private final ICartItemService cartItemService;
     private final IUserService userService;
+    private final phamiz.ecommerce.backend.service.ICartService cartService;
 
     @DeleteMapping("/{cartItemId}")
     public ResponseEntity<ApiResponse> deleteCartItemById(
@@ -25,7 +25,8 @@ public class CartItemController {
             @RequestHeader("Authorization") String jwt)
             throws CartItemException, UserException {
         User user = userService.findUserProfileByJwt(jwt);
-        cartItemService.removeCartItem(user.getId(), cartItemId);
+        // Delegate to CartService to ensure recalculation
+        cartService.removeItem(user.getId(), cartItemId);
         ApiResponse res = new ApiResponse();
         res.setMessage("Item deleted!");
         res.setStatus(true);
@@ -36,11 +37,11 @@ public class CartItemController {
     public ResponseEntity<ApiResponse> updateCartItem(
             @PathVariable Long cartItemId,
             @RequestBody UpdateCartItem req,
-            @RequestHeader("Authorization") String jwt
-    ) throws CartItemException, UserException {
+            @RequestHeader("Authorization") String jwt) throws CartItemException, UserException {
         User user = userService.findUserProfileByJwt(jwt);
 
-        cartItemService.updateCartItem(user.getId(), cartItemId, req.getQuantity());
+        // Delegate to CartService to ensure recalculation
+        cartService.updateItem(user.getId(), cartItemId, req.getQuantity());
 
         ApiResponse res = new ApiResponse();
         res.setMessage("Item updated!");

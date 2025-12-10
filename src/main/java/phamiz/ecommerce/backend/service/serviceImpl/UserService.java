@@ -15,6 +15,7 @@ import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.repositories.UserRepository;
 import phamiz.ecommerce.backend.service.IUserService;
+import phamiz.ecommerce.backend.model.Address;
 
 import java.util.Optional;
 
@@ -137,6 +138,27 @@ public class UserService implements IUserService {
         user.setLastName(updatedUser.getLastName());
         user.setEmail(updatedUser.getEmail());
         user.setMobile(updatedUser.getMobile());
+
+        if (updatedUser.getAddresses() != null && !updatedUser.getAddresses().isEmpty()) {
+            Address updatedAddress = updatedUser.getAddresses().get(0);
+
+            if (user.getAddresses().isEmpty()) {
+                // No address yet → create new
+                Address newAddress = new Address();
+                newAddress.setStreetAddress(updatedAddress.getStreetAddress());
+                newAddress.setCity(updatedAddress.getCity());
+                newAddress.setZipCode(updatedAddress.getZipCode());
+                newAddress.setUser(user);
+
+                user.getAddresses().add(newAddress);
+            } else {
+                // Update existing first address
+                Address existingAddress = user.getAddresses().get(0);
+                existingAddress.setStreetAddress(updatedAddress.getStreetAddress());
+                existingAddress.setCity(updatedAddress.getCity());
+                existingAddress.setZipCode(updatedAddress.getZipCode());
+            }
+        }
 
         logger.info("Updating profile for user: {}", user.getEmail());
         return userRepository.save(user);

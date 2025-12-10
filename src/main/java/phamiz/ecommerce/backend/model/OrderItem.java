@@ -27,5 +27,13 @@ public class OrderItem {
 
     private int quantity;
 
-    private int price;
+    private double price;
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

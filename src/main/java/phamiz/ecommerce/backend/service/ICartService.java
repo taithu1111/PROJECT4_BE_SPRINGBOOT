@@ -17,4 +17,10 @@ public interface ICartService {
     public Cart findUserCart(Long userid) throws CartItemException;
 
     CartDTO toDTO(Cart cart);
+
+    void updateItem(Long userId, Long cartItemId, int quantity) throws CartItemException, UserException;
+
+    void removeItem(Long userId, Long cartItemId) throws CartItemException, UserException;
+
+    void clearCart(Long userId);
 }
