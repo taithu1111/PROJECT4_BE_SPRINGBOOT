@@ -90,7 +90,7 @@ public class ProductServiceTest {
             productService.findProductById(999L);
         });
 
-        assertEquals("Product not found with 999", exception.getMessage());
+        assertEquals("Product not found with id: 999", exception.getMessage());
     }
 
     // ==================== FILTER TESTS ====================

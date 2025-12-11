@@ -135,9 +135,20 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
         logger.info("Deleting product with ID: {}", productId);
+
+        // Manually delete related entities to avoid FK constraint violations
+        productImageRepository.deleteByProductId(productId);
+        reviewRepository.deleteAllProductsReview(productId);
+        ratingRepository.deleteAllProductsRating(productId);
+
+        // Colors are ElementCollection, should be deleted automatically, but we can
+        // clear them if needed
+        // product.getProductColors().clear();
+
         productRepository.deleteById(product.getId());
         logger.info("Product deleted success!");
         return "Product deleted success!";
@@ -217,6 +228,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<ProductDTO> getAllProduct(String category, List<String> colors,
             Integer minPrice, Integer maxPrice,
             String sort, Integer pageNumber, Integer pageSize) throws ProductException {
@@ -244,7 +256,8 @@ public class ProductServiceImpl implements IProductService {
         }
         List<ProductDTO> listProductRespone = new ArrayList<>();
         for (Product product : listFilterProduct) {
-            System.out.println(product.getProduct_name());
+            // System.out.println(product.getProduct_name());
+            logger.debug("Filter match: {}", product.getProduct_name());
             listProductRespone.add(toDTO(product));
         }
         int startIndex = pageable.getPageNumber() * pageable.getPageSize();
@@ -256,6 +269,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDTO> getNewProduct() {
         List<Product> products = productRepository.findTop6ByOrderByCreatedAtDesc();
         if (products.isEmpty()) {
@@ -271,6 +285,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDTO> getRandomProduct() {
         List<Product> products = productRepository.findRandom6Products();
         if (products.isEmpty()) {

@@ -65,6 +65,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<ErrorDetails> accessDeniedExceptionHandler(
+            org.springframework.security.access.AccessDeniedException ue, WebRequest req) {
+        logger.error("AccessDeniedException: ", ue);
+        ErrorDetails err = new ErrorDetails(ue.getMessage(), req.getDescription(false), LocalDateTime.now());
+        return new ResponseEntity<>(err, HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorDetails> resourceNotFoundExceptionHandler(ResourceNotFoundException ue, WebRequest req) {
         logger.error("ResourceNotFoundException: ", ue);

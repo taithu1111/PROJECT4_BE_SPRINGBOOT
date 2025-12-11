@@ -10,7 +10,6 @@ import java.time.ZoneOffset;
 import java.util.Collections;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * 1️⃣ Successful signup (201 Created, token, Location header, UTC timestamp)
  * 2️⃣ Duplicate‑email case (409 Conflict via {@link UserException})
  */
-@WebMvcTest(AuthController.class)
+@org.springframework.boot.test.context.SpringBootTest
+@org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+@org.springframework.test.context.ActiveProfiles("test")
 class AuthControllerTest {
 
     @Autowired
@@ -64,6 +65,9 @@ class AuthControllerTest {
     @MockBean
     private ICartService cartService;
 
+    @MockBean
+    private phamiz.ecommerce.backend.repositories.IAddressRepository addressRepository;
+
     // -------------------------------------------------------------------------
 
     /** Helper to build a valid {@link SignupRequest}. */
@@ -77,82 +81,76 @@ class AuthControllerTest {
         return req;
     }
 
-    @Nested
+    @Test
     @DisplayName("✅ Successful signup")
-    class SuccessfulSignup {
+    void shouldReturn201CreatedWithTokenAndLocationHeader() throws Exception {
+        // ---- Arrange -------------------------------------------------------
+        SignupRequest req = validRequest();
 
-        @Test
-        void shouldReturn201CreatedWithTokenAndLocationHeader() throws Exception {
-            // ---- Arrange -------------------------------------------------------
-            SignupRequest req = validRequest();
+        // Mock password encoding
+        when(passwordEncoder.encode(req.getPassword())).thenReturn("encodedPassword");
 
-            // Mock password encoding
-            when(passwordEncoder.encode(req.getPassword())).thenReturn("encodedPassword");
+        // Mock saving user
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
+            User u = invocation.getArgument(0);
+            u.setId(1L); // simulate generated ID
+            return u;
+        });
 
-            // Capture the User entity saved to repository
-            ArgumentCaptor<User> savedUserCaptor = ArgumentCaptor.forClass(User.class);
-            when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
-                User u = savedUserCaptor.getValue();
-                u.setId(1L); // simulate generated ID
-                return u;
-            });
+        // Mock loading UserDetails (authorities contain ROLE_USER)
+        UserDetails userDetails = org.springframework.security.core.userdetails.User
+                .withUsername(req.getEmail())
+                .password("encodedPassword")
+                .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")))
+                .build();
+        when(customUserService.loadUserByUsername(req.getEmail())).thenReturn(userDetails);
 
-            // Mock loading UserDetails (authorities contain ROLE_USER)
-            UserDetails userDetails = org.springframework.security.core.userdetails.User
-                    .withUsername(req.getEmail())
-                    .password("encodedPassword")
-                    .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")))
-                    .build();
-            when(customUserService.loadUserByUsername(req.getEmail())).thenReturn(userDetails);
+        // Mock JWT generation
+        when(jwtProvider.generateToken(any())).thenReturn("dummy-jwt-token");
 
-            // Mock JWT generation
-            when(jwtProvider.generateToken(any())).thenReturn("dummy-jwt-token");
+        // ---- Act -----------------------------------------------------------
+        mockMvc.perform(post("/auth/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+                .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print())
+                // ---- Assert ----------------------------------------------------
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"))
+                .andExpect(header().string("Location", "/users/1"))
+                .andExpect(jsonPath("$.token").value("dummy-jwt-token"))
+                .andExpect(jsonPath("$.message").value("Signup Success!"));
 
-            // ---- Act -----------------------------------------------------------
-            mockMvc.perform(post("/auth/signup")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(req)))
-                    // ---- Assert ----------------------------------------------------
-                    .andExpect(status().isCreated())
-                    .andExpect(header().exists("Location"))
-                    .andExpect(header().string("Location", "/users/1"))
-                    .andExpect(jsonPath("$.token").value("dummy-jwt-token"))
-                    .andExpect(jsonPath("$.message").value("Signup Success!"));
-
-            // ---- Additional verification ----------------------------------------
-            User saved = savedUserCaptor.getValue();
-            // Verify UTC timestamp
-            LocalDateTime createdAt = saved.getCreatedAt();
-            LocalDateTime nowUtc = LocalDateTime.now(ZoneOffset.UTC);
-            long diffSec = java.time.Duration.between(createdAt, nowUtc).getSeconds();
-            assert Math.abs(diffSec) < 5 : "Timestamp not stored in UTC";
-            // Verify password was encoded
-            assert saved.getPassword().equals("encodedPassword");
-        }
+        // ---- Additional verification ----------------------------------------
+        ArgumentCaptor<User> savedUserCaptor = ArgumentCaptor.forClass(User.class);
+        org.mockito.Mockito.verify(userRepository).save(savedUserCaptor.capture());
+        User saved = savedUserCaptor.getValue();
+        // Verify UTC timestamp
+        LocalDateTime createdAt = saved.getCreatedAt();
+        LocalDateTime nowUtc = LocalDateTime.now(ZoneOffset.UTC);
+        long diffSec = java.time.Duration.between(createdAt, nowUtc).getSeconds();
+        assert Math.abs(diffSec) < 5 : "Timestamp not stored in UTC";
+        // Verify password was encoded
+        assert saved.getPassword().equals("encodedPassword");
     }
 
-    @Nested
+    @Test
     @DisplayName("❌ Duplicate‑email handling")
-    class DuplicateEmail {
+    void shouldReturn409ConflictWhenEmailAlreadyExists() throws Exception {
+        // ---- Arrange -------------------------------------------------------
+        SignupRequest req = validRequest();
 
-        @Test
-        void shouldReturn409ConflictWhenEmailAlreadyExists() throws Exception {
-            // ---- Arrange -------------------------------------------------------
-            SignupRequest req = validRequest();
+        // Simulate existing user
+        User existing = new User();
+        existing.setId(99L);
+        existing.setEmail(req.getEmail());
+        when(userRepository.findByEmail(req.getEmail())).thenReturn(existing);
 
-            // Simulate existing user
-            User existing = new User();
-            existing.setId(99L);
-            existing.setEmail(req.getEmail());
-            when(userRepository.findByEmail(req.getEmail())).thenReturn(existing);
-
-            // ---- Act -----------------------------------------------------------
-            mockMvc.perform(post("/auth/signup")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(req)))
-                    // ---- Assert ----------------------------------------------------
-                    .andExpect(status().isConflict())
-                    .andExpect(jsonPath("$.message").value("Email is already exists with another account"));
-        }
+        // ---- Act -----------------------------------------------------------
+        mockMvc.perform(post("/auth/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+                // ---- Assert ----------------------------------------------------
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.error").value("Email is already exists with another account"));
     }
 }

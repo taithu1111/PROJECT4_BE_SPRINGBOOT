@@ -11,6 +11,8 @@ import phamiz.ecommerce.backend.dto.Product.ProductDTO;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.model.Product;
 import phamiz.ecommerce.backend.service.IProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.validation.Valid;
 
@@ -21,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminProductController {
-
+    private static final Logger logger = LoggerFactory.getLogger(AdminProductController.class);
     private final IProductService productService;
 
     @GetMapping("")
@@ -32,8 +34,8 @@ public class AdminProductController {
 
     @PostMapping("/")
     public ResponseEntity<Product> createProduct(@RequestBody @Valid CreateProductRequest req) {
-        System.out.println("AdminProductController - createProduct called");
-        System.out.println("AdminProductController - Request: " + req);
+        logger.info("AdminProductController - createProduct called");
+        logger.debug("AdminProductController - Request: {}", req);
         Product product = productService.createProduct(req);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }

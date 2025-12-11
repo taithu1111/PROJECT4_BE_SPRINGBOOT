@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ICartItemService {
-    public CartItem createCartItem(CartItem cartItem);
+    public CartItem createCartItem(CartItem cartItem) throws CartItemException;
 
     public CartItem updateCartItem(Long userId, Long id, int quantity) throws CartItemException, UserException;
 

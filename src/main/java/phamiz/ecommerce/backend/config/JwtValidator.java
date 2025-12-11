@@ -18,8 +18,12 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 // ensures the filter will be excuted only once per request
 public class JwtValidator extends OncePerRequestFilter {
+    private static final Logger customLogger = LoggerFactory.getLogger(JwtValidator.class);
     private final static String TOKEN_PREFIX = "Bearer ";
     // private static final Key SECRET_KEY =
     // Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -67,8 +71,8 @@ public class JwtValidator extends OncePerRequestFilter {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
 
                 // LOGGING: Print authorities to console
-                System.out.println("JwtValidator - Email: " + email);
-                System.out.println("JwtValidator - Authorities: " + auths);
+                customLogger.debug("JwtValidator - Email: {}", email);
+                customLogger.debug("JwtValidator - Authorities: {}", auths);
 
                 // set authentication created into security context.
                 SecurityContextHolder.getContext().setAuthentication(authentication);

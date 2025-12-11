@@ -52,7 +52,8 @@ public class ProductController {
         Page<ProductDTO> response = productService.getAllProduct(
                 category, color, minPrice, maxPrice,
                 sort, pageNumber, pageSize);
-        System.out.println(response);
+        // System.out.println(response);
+        logger.debug("Filtered products page: {}", response);
         logger.info("Filter products success !");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }

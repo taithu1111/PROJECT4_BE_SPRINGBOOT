@@ -15,11 +15,14 @@ import phamiz.ecommerce.backend.model.Cart;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.service.ICartService;
 import phamiz.ecommerce.backend.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
 public class CartController {
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     private final ICartService cartService;
     private final IUserService userService;
 
@@ -37,11 +40,11 @@ public class CartController {
     }
 
     @PutMapping("/add")
-    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest req,
+    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody @jakarta.validation.Valid AddItemRequest req,
             @RequestHeader("Authorization") String jwt) throws CartItemException, UserException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
         cartService.addCartItem(user.getId(), req);
-        System.out.println(req.getProductId());
+        logger.debug("Adding item to cart: productId={}", req.getProductId());
         ApiResponse res = new ApiResponse();
         res.setMessage("Item added to cart");
         res.setStatus(true);

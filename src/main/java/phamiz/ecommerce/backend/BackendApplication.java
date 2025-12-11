@@ -9,8 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SpringBootApplication
 public class BackendApplication {
+
+    private static final Logger logger = LoggerFactory.getLogger(BackendApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
@@ -20,7 +25,7 @@ public class BackendApplication {
     CommandLineRunner testDataSource(DataSource dataSource) {
         return args -> {
             try (Connection conn = dataSource.getConnection()) {
-                System.out.println("DB connection OK: " + conn.getMetaData().getURL());
+                logger.info("DB connection OK: {}", conn.getMetaData().getURL());
 
                 // FIX: Alter table user to ensure ID is AUTO_INCREMENT
                 // Commented out to prevent blocking application startup
@@ -34,7 +39,7 @@ public class BackendApplication {
                 // }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Database connection failed during startup test", e);
             }
         };
     }

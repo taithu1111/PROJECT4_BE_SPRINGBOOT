@@ -6,17 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import phamiz.ecommerce.backend.config.JwtProvider;
 import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -49,10 +54,14 @@ public class UserCRUDIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private JwtProvider jwtProvider;
+
     private User testUser;
     private Product testProduct;
     private Review testReview;
     private Rating testRating;
+    private String validJwtToken;
 
     @BeforeEach
     public void setup() {
@@ -67,6 +76,13 @@ public class UserCRUDIntegrationTest {
         testUser.setActive(true);
         testUser.setCreatedAt(LocalDateTime.now());
         testUser = userRepository.save(testUser);
+
+        // Generate real JWT token for integration tests
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                testUser.getEmail(),
+                null,
+                List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        validJwtToken = jwtProvider.generateToken(authentication);
 
         // Create test product
         Category category = new Category();
@@ -112,7 +128,7 @@ public class UserCRUDIntegrationTest {
                 """;
 
         mockMvc.perform(put("/api/users/profile")
-                .header("Authorization", "Bearer mock-jwt-token")
+                .header("Authorization", "Bearer " + validJwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
                 .andExpect(status().isOk())
@@ -130,7 +146,7 @@ public class UserCRUDIntegrationTest {
                 """;
 
         mockMvc.perform(put("/api/reviews/" + testReview.getId())
-                .header("Authorization", "Bearer mock-jwt-token")
+                .header("Authorization", "Bearer " + validJwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
                 .andExpect(status().isOk())
@@ -141,7 +157,7 @@ public class UserCRUDIntegrationTest {
     @WithMockUser(username = "testuser@test.com", roles = { "USER" })
     public void testDeleteReview_Success() throws Exception {
         mockMvc.perform(delete("/api/reviews/" + testReview.getId())
-                .header("Authorization", "Bearer mock-jwt-token"))
+                .header("Authorization", "Bearer " + validJwtToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(true))
                 .andExpect(jsonPath("$.message").value("Review deleted successfully"));
@@ -160,7 +176,7 @@ public class UserCRUDIntegrationTest {
                 """;
 
         mockMvc.perform(put("/api/ratings/" + testRating.getId())
-                .header("Authorization", "Bearer mock-jwt-token")
+                .header("Authorization", "Bearer " + validJwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
                 .andExpect(status().isOk())
@@ -171,7 +187,7 @@ public class UserCRUDIntegrationTest {
     @WithMockUser(username = "testuser@test.com", roles = { "USER" })
     public void testDeleteRating_Success() throws Exception {
         mockMvc.perform(delete("/api/ratings/" + testRating.getId())
-                .header("Authorization", "Bearer mock-jwt-token"))
+                .header("Authorization", "Bearer " + validJwtToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(true))
                 .andExpect(jsonPath("$.message").value("Rating deleted successfully"));

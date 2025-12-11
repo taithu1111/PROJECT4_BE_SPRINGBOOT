@@ -30,7 +30,12 @@ public class CartItemServiceImpl implements ICartItemService {
     private static final Logger logger = LoggerFactory.getLogger(CartItemServiceImpl.class);
 
     @Override
-    public CartItem createCartItem(CartItem cartItem) {
+    public CartItem createCartItem(CartItem cartItem) throws CartItemException {
+        // Check stock
+        if (cartItem.getProduct().getQuantity() < cartItem.getQuantity()) {
+            throw new CartItemException("Insufficient stock for product: " + cartItem.getProduct().getProduct_name());
+        }
+
         // ✅ Store Unit Price (per User Request)
         cartItem.setPrice(cartItem.getProduct().getPrice());
         CartItem createdCartItem = cartItemRepository.save(cartItem);
@@ -43,6 +48,12 @@ public class CartItemServiceImpl implements ICartItemService {
             throws CartItemException, UserException {
 
         CartItem cartItem = findCartItemById(id);
+
+        // Check stock
+        if (cartItem.getProduct().getQuantity() < quantity) {
+            throw new CartItemException("Insufficient stock for product: " + cartItem.getProduct().getProduct_name());
+        }
+
         cartItem.setQuantity(quantity);
         // ✅ Ensure Unit Price is up to date (though unrelated to quantity, good
         // practice)

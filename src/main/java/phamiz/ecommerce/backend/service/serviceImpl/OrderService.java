@@ -13,11 +13,9 @@ import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
 import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.IAddressRepository;
-import phamiz.ecommerce.backend.repositories.IOrderItemRepository;
 import phamiz.ecommerce.backend.repositories.IOrderRepository;
 import phamiz.ecommerce.backend.repositories.UserRepository;
 import phamiz.ecommerce.backend.service.ICartService;
-import phamiz.ecommerce.backend.service.IOrderItemService;
 import phamiz.ecommerce.backend.service.IOrderService;
 
 import java.time.LocalDateTime;
@@ -36,9 +34,8 @@ public class OrderService implements IOrderService {
     private final ICartService cartService;
     private final IOrderRepository orderRepository;
     private final UserRepository userRepository;
-    private final IOrderItemService orderItemService;
-    private final IOrderItemRepository orderItemRepository;
     private final IAddressRepository addressRepository;
+    private final phamiz.ecommerce.backend.repositories.IProductRepository productRepository;
 
     @Override
     public Order createOrder(User user, Address shippingAddress) throws CartItemException {
@@ -60,7 +57,7 @@ public class OrderService implements IOrderService {
         createdOrder.setTotalPrice(cart.getTotalPrice());
         createdOrder.setTotalItem(cart.getTotalItem());
         createdOrder.setPaymentStatus(PaymentStatus.PENDING);
-        createdOrder.setPaymentMethod(PaymentMethod.PAYOS);
+        createdOrder.setPaymentMethod(PaymentMethod.COD);
 
         double orderTotalPrice = 0;
         int orderTotalItem = 0;
@@ -82,6 +79,20 @@ public class OrderService implements IOrderService {
             // Calculate line total: Unit Price * Quantity
             orderTotalPrice += (unitPrice * item.getQuantity());
             orderTotalItem += item.getQuantity();
+
+            // Deduct stock
+            // Deduct stock with Pessimistic Lock
+            Product product = productRepository.findByIdWithLock(item.getProduct().getId());
+            if (product == null) {
+                // Fallback if product not found (should be rare as it is in cart)
+                throw new CartItemException("Product not found: " + item.getProduct().getProduct_name());
+            }
+
+            if (product.getQuantity() < item.getQuantity()) {
+                throw new CartItemException("Insufficient stock for product: " + product.getProduct_name());
+            }
+            product.setQuantity(product.getQuantity() - item.getQuantity());
+            productRepository.save(product);
         }
 
         createdOrder.setOrderItems(orderItems);
@@ -177,6 +188,12 @@ public class OrderService implements IOrderService {
         }
 
         order.setOrderStatus("CANCELLED");
+
+        // Restore stock
+        for (OrderItem item : order.getOrderItems()) {
+            Product product = item.getProduct();
+            product.setQuantity(product.getQuantity() + item.getQuantity());
+        }
         Order savedOrder = orderRepository.save(order);
         logger.info("Order {} status changed to CANCELLED", orderId);
         return savedOrder;
@@ -227,6 +244,9 @@ public class OrderService implements IOrderService {
         dto.setOrderStatus(order.getOrderStatus());
         dto.setTotalItem(order.getTotalItem());
         dto.setCreateAt(order.getCreateAt());
+        dto.setPaymentStatus(order.getPaymentStatus());
+        dto.setPaymentMethod(order.getPaymentMethod());
+        dto.setTransactionId(order.getTransactionId());
         if (order.getShippingAddress() != null) {
             phamiz.ecommerce.backend.dto.Order.AddressDTO addressDTO = new phamiz.ecommerce.backend.dto.Order.AddressDTO();
             addressDTO.setId(order.getShippingAddress().getId());

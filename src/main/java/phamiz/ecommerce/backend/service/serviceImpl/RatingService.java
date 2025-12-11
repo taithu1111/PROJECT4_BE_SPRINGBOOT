@@ -44,4 +44,40 @@ public class RatingService implements IRatingService {
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
         return ratingRepository.findByFilter(productId, userId, pageable);
     }
+
+    @Override
+    public Rating updateRating(Long ratingId, Double ratingValue, User user) throws Exception {
+        Rating rating = ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
+
+        // Check if user owns this rating
+        if (!rating.getUser().getId().equals(user.getId())) {
+            throw new Exception("You are not authorized to update this rating");
+        }
+
+        rating.setRating(ratingValue);
+        return ratingRepository.save(rating);
+    }
+
+    @Override
+    public void deleteRating(Long ratingId, User user) throws Exception {
+        Rating rating = ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
+
+        // Check if user owns this rating
+        if (!rating.getUser().getId().equals(user.getId())) {
+            throw new Exception("You are not authorized to delete this rating");
+        }
+
+        ratingRepository.delete(rating);
+    }
+
+    @Override
+    public void deleteRatingByAdmin(Long ratingId) throws Exception {
+        Rating rating = ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new Exception("Rating not found with id: " + ratingId));
+
+        // Admin can delete any rating without ownership check
+        ratingRepository.delete(rating);
+    }
 }

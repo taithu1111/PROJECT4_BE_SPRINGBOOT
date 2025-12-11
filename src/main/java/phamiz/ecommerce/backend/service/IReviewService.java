@@ -14,4 +14,10 @@ public interface IReviewService {
 
     public org.springframework.data.domain.Page<Review> getAllReviews(Long productId, Long userId, Integer page,
             Integer size);
+
+    public Review updateReview(Long reviewId, String reviewText, User user) throws Exception;
+
+    public void deleteReview(Long reviewId, User user) throws Exception;
+
+    public void deleteReviewByAdmin(Long reviewId) throws Exception;
 }

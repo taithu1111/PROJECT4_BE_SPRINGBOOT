@@ -14,4 +14,10 @@ public interface IRatingService {
 
     public org.springframework.data.domain.Page<Rating> getAllRatings(Long productId, Long userId, Integer page,
             Integer size);
+
+    public Rating updateRating(Long ratingId, Double ratingValue, User user) throws Exception;
+
+    public void deleteRating(Long ratingId, User user) throws Exception;
+
+    public void deleteRatingByAdmin(Long ratingId) throws Exception;
 }

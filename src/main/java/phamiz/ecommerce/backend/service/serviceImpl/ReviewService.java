@@ -46,4 +46,40 @@ public class ReviewService implements IReviewService {
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
         return reviewRepository.findByFilter(productId, userId, pageable);
     }
+
+    @Override
+    public Review updateReview(Long reviewId, String reviewText, User user) throws Exception {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
+
+        // Check if user owns this review
+        if (!review.getUser().getId().equals(user.getId())) {
+            throw new Exception("You are not authorized to update this review");
+        }
+
+        review.setReview(reviewText);
+        return reviewRepository.save(review);
+    }
+
+    @Override
+    public void deleteReview(Long reviewId, User user) throws Exception {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
+
+        // Check if user owns this review
+        if (!review.getUser().getId().equals(user.getId())) {
+            throw new Exception("You are not authorized to delete this review");
+        }
+
+        reviewRepository.delete(review);
+    }
+
+    @Override
+    public void deleteReviewByAdmin(Long reviewId) throws Exception {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new Exception("Review not found with id: " + reviewId));
+
+        // Admin can delete any review without ownership check
+        reviewRepository.delete(review);
+    }
 }

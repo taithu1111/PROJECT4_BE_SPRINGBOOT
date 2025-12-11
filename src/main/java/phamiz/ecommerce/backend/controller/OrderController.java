@@ -26,7 +26,7 @@ public class OrderController {
 
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(
-            @RequestBody Address shippingAddress,
+            @RequestBody @jakarta.validation.Valid Address shippingAddress,
             @RequestHeader("Authorization") String jwt) throws UserException, CartItemException {
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.createOrder(user, shippingAddress);

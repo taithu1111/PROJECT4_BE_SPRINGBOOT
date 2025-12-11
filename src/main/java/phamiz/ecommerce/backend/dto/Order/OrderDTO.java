@@ -23,4 +23,7 @@ public class OrderDTO {
     private String orderStatus;
     private Integer totalItem;
     private LocalDateTime createAt;
+    private phamiz.ecommerce.backend.model.PaymentStatus paymentStatus;
+    private phamiz.ecommerce.backend.model.PaymentMethod paymentMethod;
+    private String transactionId;
 }

@@ -1,10 +1,10 @@
 package phamiz.ecommerce.backend.controller;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import phamiz.ecommerce.backend.dto.ApiResponse;
 import phamiz.ecommerce.backend.dto.Rating.RatingRequest;
 import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.exception.UserException;
@@ -35,10 +35,32 @@ public class RatingController {
     @GetMapping("/product/{productId}")
     public ResponseEntity<List<Rating>> getProductsRating(
             @PathVariable Long productId,
-            @RequestHeader("Authorization") String jwt
-    ) throws UserException, ProductException {
+            @RequestHeader("Authorization") String jwt) throws UserException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
         List<Rating> ratings = ratingService.getProductsRating(productId);
         return new ResponseEntity<>(ratings, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{ratingId}")
+    public ResponseEntity<Rating> updateRating(
+            @PathVariable Long ratingId,
+            @RequestBody RatingRequest req,
+            @RequestHeader("Authorization") String jwt) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        Rating rating = ratingService.updateRating(ratingId, req.getRating(), user);
+        return new ResponseEntity<>(rating, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{ratingId}")
+    public ResponseEntity<ApiResponse> deleteRating(
+            @PathVariable Long ratingId,
+            @RequestHeader("Authorization") String jwt) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        ratingService.deleteRating(ratingId, user);
+
+        ApiResponse response = new ApiResponse();
+        response.setMessage("Rating deleted successfully");
+        response.setStatus(true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
