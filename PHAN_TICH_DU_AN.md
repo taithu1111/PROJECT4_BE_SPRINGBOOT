@@ -1,4 +1,5 @@
 # PHÂN TÍCH DỰ ÁN E-COMMERCE BACKEND
+(Cập nhật mới nhất)
 
 ## 1. TỔNG QUAN DỰ ÁN
 
@@ -27,392 +28,87 @@
   - User có thể đánh giá (Rating) và review nhiều sản phẩm
 
 ### 2.2. **Admin (Quản trị viên)**
-- **Vai trò:** Quản lý hệ thống
+- **Vai trò:** Quản lý hệ thống toàn diện
 - **Quyền hạn:**
-  - Quản lý sản phẩm (CRUD)
-  - Quản lý danh mục (Category)
-  - Quản lý đơn hàng (xem, cập nhật trạng thái)
-  - Quản lý người dùng
-  - Xem báo cáo và thống kê
+  - Quản lý sản phẩm (CRUD): Thêm mới, cập nhật, xóa (soft/hard delete)
+  - Quản lý danh mục (Category): Tạo cấu trúc danh mục cha-con
+  - Quản lý đơn hàng:
+    - Xem danh sách đơn hàng (Filter theo trạng thái)
+    - Cập nhật trạng thái đơn hàng (`SHIPPED`, `DELIVERED`, `CANCELLED`, `CONFIRMED`)
+    - Xác nhận thanh toán (`PAID`)
+  - Quản lý người dùng: Xem danh sách, khóa/mở khóa tài khoản
+  - Xem báo cáo và thống kê (Revenue, Orders count)
+  - Quản lý nội dung (Rating/Review): Xóa các đánh giá vi phạm
 
 - **Đặc điểm:**
-  - Phân biệt với User thông qua field `role` trong bảng User
-  - Cần xác thực JWT để truy cập các endpoint quản trị
+  - Phân biệt với User thông qua field `role` (`ROLE_ADMIN`)
+  - Cần xác thực JWT để truy cập các endpoint `/api/admin/**`
 
 ### 2.3. **Hệ thống (System)**
-- **Vai trò:** Xử lý tự động các tác vụ
+- **Vai trò:** Xử lý tự động các tác vụ nền
 - **Chức năng:**
-  - Xác thực JWT token
-  - Bảo mật API endpoints
-  - Quản lý session (stateless)
-  - Logging và error handling
+  - Xác thực JWT token mỗi request
+  - Tự động tính toán tổng tiền giỏ hàng/đơn hàng
+  - Kiểm tra tồn kho khóa (Pessimistic Locking) khi đặt hàng 
+  - Logging hoạt động hệ thống
 
 ---
 
 ## 3. CÁC LUỒNG DATA FLOW CHÍNH
 
-### 3.1. LUỒNG XÁC THỰC (Authentication Flow)
+### 3.1. LUỒNG QUẢN LÝ ĐƠN HÀNG CỦA ADMIN (Admin Order Flow - MỚI)
+Quy trình xử lý đơn hàng từ lúc khách đặt đến khi hoàn tất:
 
-```
-┌─────────┐         ┌─────────────┐         ┌──────────────┐
-│ Client  │────────▶│AuthController│────────▶│UserRepository│
-└─────────┘         └─────────────┘         └──────────────┘
-                           │                         │
-                           │                         ▼
-                           │                  ┌──────────────┐
-                           │                  │   Database    │
-                           │                  └──────────────┘
-                           │                         │
-                           ▼                         │
-                    ┌─────────────┐                 │
-                    │ JwtProvider │◀────────────────┘
-                    └─────────────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │ JWT Token   │
-                    └─────────────┘
-```
+1. **Khách đặt hàng:** Order có status `PENDING`.
+2. **Admin xác nhận:** 
+   - Gọi API `/confirmed`: Chuyển status sang `CONFIRMED`.
+3. **Giao hàng:**
+   - Gọi API `/ship`: Chuyển status sang `SHIPPED`.
+   - Gọi API `/deliver`: Chuyển status sang `DELIVERED`.
+4. **Hoàn tất thanh toán:**
+   - Gọi API `/confirmed-payment`: Chuyển status sang `PAID` và `PaymentStatus` sang `PAID` (đối với đơn COD sau khi giao thành công).
 
-**Chi tiết luồng:**
+### 3.2. LUỒNG XÁC THỰC (Authentication Flow)
+*(Giữ nguyên logic cũ nhưng bổ sung chi tiết)*
+- **Stateless:** Server không lưu session, client phải gửi token mỗi request.
+- **Filter Chain:** `JwtValidator` đứng trước tất cả Controller để chặn request không hợp lệ.
 
-1. **Đăng ký (Signup):**
-   - Client gửi POST `/auth/signup` với thông tin User
-   - `AuthController` kiểm tra email đã tồn tại chưa
-   - Tạo User mới với password đã mã hóa (BCrypt)
-   - Tự động tạo Cart cho User mới
-   - Tạo JWT token và trả về cho Client
-
-2. **Đăng nhập (Signin):**
-   - Client gửi POST `/auth/signin` với email/password
-   - `AuthController` xác thực thông tin qua `CustomUserServiceImpl`
-   - Nếu thành công, tạo JWT token
-   - Client lưu token để sử dụng cho các request sau
-
-3. **Xác thực JWT (Mỗi request đến `/api/**`):**
-   - `JwtValidator` filter kiểm tra token trong header `Authorization`
-   - Giải mã token và lấy thông tin user (email, authorities)
-   - Đặt Authentication vào SecurityContext
-   - Cho phép request tiếp tục nếu token hợp lệ
+### 3.3. LUỒNG QUẢN LÝ SẢN PHẨM & KHO (Product & Inventory)
+- **Kiểm tra tồn kho:** Khi user đặt hàng (`createOrder`), hệ thống sẽ trừ tồn kho (`quantity`).
+- **Khóa bi quan (Pessimistic Lock):** Sử dụng khi trừ tồn kho để tránh Race Condition (nhiều người mua cùng lúc 1 sản phẩm cuối cùng).
+- **Hoàn trả kho:** Khi đơn hàng bị hủy (`CANCELLED`), số lượng sản phẩm được cộng lại vào kho.
 
 ---
 
-### 3.2. LUỒNG QUẢN LÝ SẢN PHẨM (Product Flow)
+## 4. CẤU TRÚC DỮ LIỆU & STATUS
 
-```
-┌─────────┐         ┌──────────────┐         ┌──────────────┐
-│ Client  │────────▶│ProductController│──────▶│ProductService│
-└─────────┘         └──────────────┘         └──────────────┘
-                           │                         │
-                           │                         ▼
-                           │                  ┌──────────────┐
-                           │                  │ProductRepo   │
-                           │                  └──────────────┘
-                           │                         │
-                           ▼                         ▼
-                    ┌─────────────┐         ┌──────────────┐
-                    │  ProductDTO │         │  Database    │
-                    └─────────────┘         └──────────────┘
-```
+### 4.1. Order Status (Trạng thái đơn hàng)
+Hệ thống sử dụng String/Enum để quản lý trạng thái:
+- `PENDING`: Mới đặt, chờ xử lý
+- `PLACED`: Đã đặt (tương đương Pending trong một số ngữ cảnh)
+- `CONFIRMED`: Admin đã xác nhận
+- `SHIPPED`: Đang giao hàng
+- `DELIVERED`: Đã giao hàng thành công
+- `PAID`: Đã thanh toán (Trạng thái cuối cùng của luồng thành công)
+- `CANCELLED`: Đã hủy
 
-**Các endpoint:**
-
-- `GET /api/product` - Lấy tất cả sản phẩm
-- `GET /api/product/{id}` - Lấy chi tiết sản phẩm
-- `GET /api/product/filter` - Lọc sản phẩm theo:
-  - Category
-  - Color
-  - Price range (minPrice, maxPrice)
-  - Sort (sắp xếp)
-  - Pagination (pageNumber, pageSize)
-
-- `GET /home/get-new` - Lấy sản phẩm mới (không cần auth)
-- `GET /home/get-random` - Lấy sản phẩm ngẫu nhiên (không cần auth)
-
-**Cấu trúc Product:**
-- Product có nhiều ProductImage
-- Product có nhiều ProductColor
-- Product thuộc một Category
-- Product có nhiều Rating và Review
+### 4.2. Payment Status
+- `PENDING`: Chưa thanh toán / Chờ thanh toán COD
+- `PAID`: Đã thanh toán
+- `FAILED`: Thanh toán thất bại
 
 ---
 
-### 3.3. LUỒNG QUẢN LÝ GIỎ HÀNG (Cart Flow)
+## 5. CÁC ĐIỂM LƯU Ý KỸ THUẬT QUAN TRỌNG
 
-```
-┌─────────┐         ┌──────────────┐         ┌──────────────┐
-│ Client  │────────▶│CartController│────────▶│ CartService  │
-└─────────┘         └──────────────┘         └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │ CartItem     │
-      │                     │                  │ Service      │
-      │                     │                  └──────────────┘
-      │                     │                         │
-      │                     ▼                         ▼
-      │              ┌──────────────┐         ┌──────────────┐
-      │              │   CartRepo   │         │CartItemRepo   │
-      │              └──────────────┘         └──────────────┘
-      │                     │                         │
-      ▼                     ▼                         ▼
-┌─────────────┐         ┌──────────────┐         ┌──────────────┐
-│ JWT Token   │         │   Database   │         │   Product    │
-└─────────────┘         └──────────────┘         └──────────────┘
-```
-
-**Chi tiết luồng:**
-
-1. **Thêm sản phẩm vào giỏ (Add to Cart):**
-   - Client gửi PUT `/api/cart/add` với JWT token và `AddItemRequest` (productId, quantity, price)
-   - `CartController` xác thực user từ JWT
-   - `CartService` tìm Cart của user (hoặc tạo mới nếu chưa có)
-   - Kiểm tra sản phẩm đã có trong Cart chưa
-   - Nếu chưa có: tạo CartItem mới
-   - Cập nhật `totalPrice` và `totalItem` của Cart
-
-2. **Xem giỏ hàng:**
-   - Client gửi GET `/api/cart` với JWT token
-   - `CartService` trả về CartDTO chứa danh sách CartItem
-
-3. **Cập nhật số lượng:**
-   - Client gửi PUT `/api/cartItem/{cartItemId}` với quantity mới
-   - `CartItemController` cập nhật quantity và tính lại totalPrice
-
-4. **Xóa sản phẩm khỏi giỏ:**
-   - Client gửi DELETE `/api/cartItem/{cartItemId}`
-   - `CartItemService` xóa CartItem và cập nhật Cart
+1. **Transactional:** Các service quan trọng (`OrderService`, `ProductService`) đều có `@Transactional` để đảm bảo tính toàn vẹn dữ liệu.
+2. **Exception Handling:** Sử dụng `GlobalExceptionHandler` (nếu có) hoặc try-catch tại Controller để trả về `ApiResponse` chuẩn.
+3. **Phân trang (Pagination):** Hầu hết các API danh sách (`getAllOrders`, `getAllProducts`) đều hỗ trợ phân trang (`page`, `size`) để tối ưu hiệu năng.
+4. **Security:** Role-based access control (RBAC) được áp dụng chặt chẽ trên Controller (`@PreAuthorize("hasRole('ADMIN')")`).
 
 ---
 
-### 3.4. LUỒNG ĐẶT HÀNG (Order Flow)
-
-```
-┌─────────┐         ┌──────────────┐         ┌──────────────┐
-│ Client  │────────▶│OrderController│───────▶│ OrderService │
-└─────────┘         └──────────────┘         └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │  CartService │
-      │                     │                  └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │CartItemService│
-      │                     │                  └──────────────┘
-      │                     │                         │
-      │                     ▼                         ▼
-      │              ┌──────────────┐         ┌──────────────┐
-      │              │ AddressRepo  │         │OrderItemService│
-      │              └──────────────┘         └──────────────┘
-      │                     │                         │
-      ▼                     ▼                         ▼
-┌─────────────┐         ┌──────────────┐         ┌──────────────┐
-│ JWT Token   │         │   Database   │         │   OrderRepo │
-└─────────────┘         └──────────────┘         └──────────────┘
-```
-
-**Chi tiết luồng:**
-
-1. **Tạo đơn hàng:**
-   - Client gửi POST `/api/orders/` với:
-     - JWT token
-     - Address (shippingAddress): streetAddress, city, zipCode
-   
-   - `OrderService.createOrder()` thực hiện:
-     - Lưu Address và liên kết với User
-     - Lấy Cart của User
-     - Chuyển đổi tất cả CartItem thành OrderItem
-     - Tạo Order mới với:
-       - orderDate = hiện tại
-       - orderStatus = "PENDING"
-       - totalPrice = cart.totalPrice
-       - totalItem = cart.totalItem
-     - Lưu Order và OrderItem vào database
-     - **Lưu ý:** Giỏ hàng vẫn còn sau khi đặt hàng (có thể thêm xóa Cart sau khi đặt)
-
-2. **Xem lịch sử đơn hàng:**
-   - Client gửi GET `/api/orders/user` với JWT token
-   - Trả về danh sách Order của user
-
-3. **Xem chi tiết đơn hàng:**
-   - Client gửi GET `/api/orders/{id}` với JWT token
-   - Trả về Order với đầy đủ OrderItem
-
----
-
-### 3.5. LUỒNG ĐÁNH GIÁ VÀ REVIEW (Rating & Review Flow)
-
-```
-┌─────────┐         ┌──────────────┐         ┌──────────────┐
-│ Client  │────────▶│RatingController│──────▶│RatingService│
-└─────────┘         └──────────────┘         └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │ RatingRepo   │
-      │                     │                  └──────────────┘
-      │                     │                         │
-      │                     ▼                         ▼
-      │              ┌──────────────┐         ┌──────────────┐
-      │              │  ReviewController │     │  ReviewRepo  │
-      │              └──────────────┘         └──────────────┘
-      │                     │                         │
-      ▼                     ▼                         ▼
-┌─────────────┐         ┌──────────────┐         ┌──────────────┐
-│ JWT Token   │         │   Database   │         │   Product    │
-└─────────────┘         └──────────────┘         └──────────────┘
-```
-
-**Chi tiết luồng:**
-
-1. **Tạo Rating:**
-   - Client gửi POST `/api/ratings/create` với:
-     - JWT token
-     - RatingRequest (productId, rating value)
-   - `RatingService` tạo Rating và liên kết với User và Product
-
-2. **Xem Rating của sản phẩm:**
-   - Client gửi GET `/api/ratings/product/{productId}`
-   - Trả về danh sách Rating của sản phẩm
-
-3. **Tạo Review:**
-   - Client gửi POST `/api/reviews/create` với:
-     - JWT token
-     - ReviewRequest (productId, review text)
-   - `ReviewService` tạo Review và liên kết với User và Product
-
-4. **Xem Review của sản phẩm:**
-   - Client gửi GET `/api/reviews/product/{productId}` (không cần auth)
-   - Trả về danh sách Review của sản phẩm
-
----
-
-### 3.6. LUỒNG QUẢN LÝ NGƯỜI DÙNG (User Management Flow)
-
-```
-┌─────────┐         ┌──────────────┐         ┌──────────────┐
-│ Client  │────────▶│UserController│────────▶│ UserService  │
-└─────────┘         └──────────────┘         └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │ JwtProvider  │
-      │                     │                  └──────────────┘
-      │                     │                         │
-      │                     │                         ▼
-      │                     │                  ┌──────────────┐
-      │                     │                  │ UserRepository│
-      │                     │                  └──────────────┘
-      │                     │                         │
-      ▼                     ▼                         ▼
-┌─────────────┐         ┌──────────────┐         ┌──────────────┐
-│ JWT Token   │         │  User Entity │         │   Database   │
-└─────────────┘         └──────────────┘         └──────────────┘
-```
-
-**Chi tiết:**
-
-1. **Xem thông tin cá nhân:**
-   - Client gửi GET `/api/users/profile` với JWT token
-   - `UserService.findUserProfileByJwt()` giải mã token, lấy email
-   - Tìm User trong database và trả về thông tin
-
----
-
-## 4. KIẾN TRÚC DỮ LIỆU (Data Model)
-
-### 4.1. Quan hệ giữa các Entity:
-
-```
-User (1) ────── (1) Cart ────── (N) CartItem ────── (1) Product
-  │                                                      │
-  │                                                      │
-  ├──── (N) Address                                       │
-  │                                                      │
-  ├──── (N) Order ────── (N) OrderItem ─────────────────┤
-  │                                                      │
-  ├──── (N) Rating ─────────────────────────────────────┤
-  │                                                      │
-  └──── (N) Review ─────────────────────────────────────┤
-                                                         │
-                                              ┌──────────┴──────────┐
-                                              │                     │
-                                         (1) Category         (N) ProductImage
-                                                              (N) ProductColor
-```
-
-### 4.2. Các Entity chính:
-
-- **User:** id, firstName, lastName, email, password, role, mobile, addresses, ratings, reviews
-- **Product:** id, product_name, quantity, price, brand, category, colors, images, ratings, reviews
-- **Cart:** id, user, cartItems, totalPrice, totalItem
-- **CartItem:** id, cart, product, quantity, price
-- **Order:** id, orderId, user, orderItems, orderDate, deliveryDate, shippingAddress, totalPrice, orderStatus, totalItem
-- **OrderItem:** id, order, product, quantity, price
-- **Address:** id, streetAddress, city, zipCode, user
-- **Category:** id, category_name, parent_category, level
-- **Rating:** id, user, product, rating, createdAt
-- **Review:** id, user, product, review, createdAt
-
----
-
-## 5. BẢO MẬT VÀ XÁC THỰC
-
-### 5.1. Security Configuration:
-- **Stateless Authentication:** Sử dụng JWT, không lưu session
-- **CORS:** Cho phép từ `http://localhost:4200` và `http://localhost:8080`
-- **Protected Endpoints:** Tất cả `/api/**` cần JWT token
-- **Public Endpoints:** `/auth/**`, `/home/**`
-
-### 5.2. JWT Flow:
-1. User đăng nhập → Nhận JWT token
-2. Mỗi request đến `/api/**` → Gửi token trong header `Authorization: Bearer <token>`
-3. `JwtValidator` filter kiểm tra và giải mã token
-4. Đặt Authentication vào SecurityContext
-5. Controller có thể lấy User từ SecurityContext
-
----
-
-## 6. CÔNG NGHỆ VÀ THÀNH PHẦN
-
-- **Framework:** Spring Boot 3.2.4
-- **Database:** MySQL
-- **ORM:** JPA/Hibernate
-- **Security:** Spring Security + JWT
-- **Logging:** SLF4J + Logback
-- **Mapping:** ModelMapper
-- **API Documentation:** SpringDoc OpenAPI
-- **Build Tool:** Maven
-
----
-
-## 7. TÓM TẮT CÁC LUỒNG CHÍNH
-
-1. **Authentication Flow:** Signup → Login → JWT Token → Protected API calls
-2. **Product Browsing Flow:** View Products → Filter/Search → View Details
-3. **Shopping Flow:** Add to Cart → Update Cart → View Cart → Create Order → Order History
-4. **Review Flow:** Create Rating → Create Review → View Reviews
-5. **User Profile Flow:** View Profile → Manage Addresses
-
----
-
-## 8. ĐIỂM LƯU Ý
-
-1. **Giỏ hàng không tự động xóa sau khi đặt hàng:** Sau khi tạo Order, Cart vẫn còn các CartItem
-2. **Authentication:** Tất cả endpoints `/api/**` đều cần JWT token, trừ `/auth/**` và `/home/**`
-3. **One-to-One Cart-User:** Mỗi user chỉ có một Cart duy nhất
-4. **Cascade Operations:** Xóa CartItem sẽ không ảnh hưởng đến Product
-5. **Order Status:** Hiện tại chỉ có status "PENDING" khi tạo, chưa có cập nhật trạng thái
-
-
-
-
-
-
-
-
-
-
-
+## 6. TÓM TẮT THAY ĐỔI GẦN ĐÂY
+- **Bổ sung API Admin:** Đã hoàn thiện bộ API cho Admin quản lý full vòng đời đơn hàng.
+- **Fix lỗi Logic:** Cập nhật giỏ hàng sau khi đặt hàng (Clear cart).
+- **Tối ưu cấu trúc:** Tách biệt rõ ràng các Controller Admin vào package riêng hoặc file riêng dể dễ bảo trì.
