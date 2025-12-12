@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
+import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.*;
 import phamiz.ecommerce.backend.repositories.IAddressRepository;
 import phamiz.ecommerce.backend.repositories.IOrderRepository;
@@ -38,70 +40,74 @@ public class OrderService implements IOrderService {
     private final phamiz.ecommerce.backend.repositories.IProductRepository productRepository;
 
     @Override
-    public Order createOrder(User user, Address shippingAddress) throws CartItemException {
+    @Transactional
+    public Order createOrder(User user, Address shippingAddress)
+            throws CartItemException, ProductException, UserException {
+
+        // Save shipping address
         shippingAddress.setUser(user);
-        Address address = addressRepository.save(shippingAddress);
-        user.getAddresses().add(address);
+        Address savedAddress = addressRepository.save(shippingAddress);
+        user.getAddresses().add(savedAddress);
         userRepository.save(user);
 
+        // Fetch cart
         Cart cart = cartService.findUserCart(user.getId());
-        List<OrderItem> orderItems = new ArrayList<>();
+        if (cart.getCartItems().isEmpty()) {
+            throw new CartItemException("Cart is empty.");
+        }
 
-        Order createdOrder = new Order();
-        createdOrder.setUser(user);
-        createdOrder.setOrderId(java.util.UUID.randomUUID().toString());
-        createdOrder.setShippingAddress(address);
-        createdOrder.setOrderDate(LocalDateTime.now());
-        createdOrder.setOrderStatus("PENDING");
-        createdOrder.setCreateAt(LocalDateTime.now());
-        createdOrder.setTotalPrice(cart.getTotalPrice());
-        createdOrder.setTotalItem(cart.getTotalItem());
-        createdOrder.setPaymentStatus(PaymentStatus.PENDING);
-        createdOrder.setPaymentMethod(PaymentMethod.COD);
+        // Create new order
+        Order order = new Order();
+        order.setUser(user);
+        order.setOrderId(java.util.UUID.randomUUID().toString());
+        order.setShippingAddress(savedAddress);
+        order.setOrderDate(LocalDateTime.now());
+        order.setCreateAt(LocalDateTime.now());
+        order.setOrderStatus("PENDING");
+        order.setPaymentStatus(PaymentStatus.PENDING);
+        order.setPaymentMethod(PaymentMethod.COD);
 
-        double orderTotalPrice = 0;
-        int orderTotalItem = 0;
+        double totalPrice = 0;
+        int totalItem = 0;
 
+        // Create order items from cart items
         for (CartItem item : cart.getCartItems()) {
-            OrderItem orderItem = new OrderItem();
 
-            // Use Product price as the source of truth for Unit Price
-            // This ensures we don't rely on potentially inconsistent CartItem.price
-            double unitPrice = item.getProduct().getPrice();
-
-            orderItem.setPrice(unitPrice); // Store Unit Price in OrderItem
-            orderItem.setProduct(item.getProduct());
-            orderItem.setQuantity(item.getQuantity());
-            orderItem.setOrder(createdOrder);
-
-            orderItems.add(orderItem);
-
-            // Calculate line total: Unit Price * Quantity
-            orderTotalPrice += (unitPrice * item.getQuantity());
-            orderTotalItem += item.getQuantity();
-
-            // Deduct stock
-            // Deduct stock with Pessimistic Lock
+            // Always use the latest product price from DB
             Product product = productRepository.findByIdWithLock(item.getProduct().getId());
             if (product == null) {
-                // Fallback if product not found (should be rare as it is in cart)
                 throw new CartItemException("Product not found: " + item.getProduct().getProduct_name());
             }
 
             if (product.getQuantity() < item.getQuantity()) {
                 throw new CartItemException("Insufficient stock for product: " + product.getProduct_name());
             }
+
+            double unitPrice = product.getPrice();
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order); // required for bidirectional sync
+            orderItem.setProduct(product);
+            orderItem.setQuantity(item.getQuantity());
+            orderItem.setPrice(unitPrice); // unit price
+
+            order.getOrderItems().add(orderItem); // required for cascade save
+
+            totalPrice += (unitPrice * item.getQuantity());
+            totalItem += item.getQuantity();
+
+            // Deduct stock
             product.setQuantity(product.getQuantity() - item.getQuantity());
             productRepository.save(product);
         }
 
-        createdOrder.setOrderItems(orderItems);
-        createdOrder.setTotalPrice(orderTotalPrice);
-        createdOrder.setTotalItem(orderTotalItem);
+        order.setTotalPrice(totalPrice);
+        order.setTotalItem(totalItem);
 
-        Order savedOrder = orderRepository.save(createdOrder);
+        // Save order (orderItems will cascade automatically)
+        Order savedOrder = orderRepository.save(order);
 
-        // Clear the cart after successful order creation
+        // Clear cart after successful order creation
         cartService.clearCart(user.getId());
 
         return savedOrder;

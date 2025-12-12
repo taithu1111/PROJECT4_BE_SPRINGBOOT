@@ -154,63 +154,6 @@ public class ProductServiceImpl implements IProductService {
         return "Product deleted success!";
     }
 
-    // @Override
-    // public Product updateProduct(Long productId, CreateProductRequest req) throws
-    // ProductException {
-    // Product product = findProductById(productId);
-    // product.setProduct_name(req.getTitle());
-    // product.setProductColors(req.getColors());
-    // product.setDescription(req.getDescription());
-    // // product.setImages(req.getImages());
-    // product.setBrand(req.getBrand());
-    // product.setPrice(req.getPrice());
-    // product.setQuantity(req.getQuantity());
-    //
-    // product.setCategory(categoryRepository.findByCategoryName(req.getSecondLevelCategory()));
-    // product.setCreatedAt(LocalDateTime.now());
-    // // Gán images và tự động set product_id cho từng image
-    // if (req.getImages() != null) {
-    // for (ProductImage image : req.getImages()) {
-    // product.addImage(image); // addImage đã set image.setProduct(this)
-    // }
-    // }
-    //
-    // if (req.getQuantity() != 0) {
-    // product.setQuantity(req.getQuantity());
-    // logger.info("Product update success!");
-    // }
-    // return productRepository.save(product);
-    // }
-
-    // @Override
-    // @Transactional
-    // public Product findProductById(Long id) throws ProductException {
-    // // Use @EntityGraph to load ALL related data in ONE query!
-    // Product product = productRepository.findById(id)
-    // .orElseThrow(() -> new ProductException("Product not found with id: " + id));
-    ////
-    //// logger.info("Product found with full details (images, ratings, reviews,
-    // colors): {}", id);
-    //// return product;
-    // // Step 2: Fetch images riêng
-    // productRepository.findWithImages(id).ifPresent(p ->
-    // product.setImages(p.getImages()));
-    //
-    // // Step 3: Fetch ratings riêng
-    // productRepository.findWithRatings(id).ifPresent(p ->
-    // product.setRatings(p.getRatings()));
-    //
-    // // Step 4: Fetch reviews nếu cần
-    // // Nếu muốn, có thể tạo repository findWithReviews
-    // product.setReviews(reviewRepository.getAllProductsReview(id));
-    // // Step 5: Fetch productColors
-    // // Giả sử productColors được lazy load, ta có thể gọi getter để init
-    // product.getProductColors().size(); // force initialize
-    //
-    // logger.info("Product found safely with ID {} (images, ratings, reviews,
-    // colors loaded separately)", id);
-    // return product;
-    // }
     @Override
     @Transactional
     public Product findProductById(Long id) throws ProductException {
@@ -363,4 +306,13 @@ public class ProductServiceImpl implements IProductService {
         return updatedProduct;
     }
 
+    @Override
+    @Transactional
+    public Product findProductWithImages(Long id) throws ProductException {
+        Product product = productRepository.findWithImages(id)
+                .orElseThrow(() -> new ProductException("Product not found with id: " + id));
+
+        product.getImages().size(); // ensure initialized
+        return product;
+    }
 }

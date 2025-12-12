@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
+import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Address;
 import phamiz.ecommerce.backend.model.Order;
@@ -27,7 +28,7 @@ public class OrderController {
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(
             @RequestBody @jakarta.validation.Valid Address shippingAddress,
-            @RequestHeader("Authorization") String jwt) throws UserException, CartItemException {
+            @RequestHeader("Authorization") String jwt) throws UserException, CartItemException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.createOrder(user, shippingAddress);
         return new ResponseEntity<>(order, HttpStatus.CREATED);

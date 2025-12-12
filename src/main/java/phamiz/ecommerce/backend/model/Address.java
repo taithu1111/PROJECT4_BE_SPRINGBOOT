@@ -1,6 +1,8 @@
 package phamiz.ecommerce.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,14 +18,17 @@ public class Address {
     private Long id;
 
     @Column(name = "street_address")
+    @JsonProperty("street_address")
     @jakarta.validation.constraints.NotBlank(message = "Street address is required")
     private String streetAddress;
 
     @Column(name = "city")
+    @JsonProperty("city")
     @jakarta.validation.constraints.NotBlank(message = "City is required")
     private String city;
 
     @Column(name = "zip_code")
+    @JsonProperty("zip_code")
     @jakarta.validation.constraints.NotBlank(message = "Zip code is required")
     private String zipCode;
 

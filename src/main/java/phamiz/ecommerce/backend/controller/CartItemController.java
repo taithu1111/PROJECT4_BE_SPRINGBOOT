@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import phamiz.ecommerce.backend.dto.Cart.UpdateCartItem;
 import phamiz.ecommerce.backend.dto.ApiResponse;
 import phamiz.ecommerce.backend.exception.CartItemException;
+import phamiz.ecommerce.backend.exception.ProductException;
 import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.User;
 
@@ -23,7 +24,7 @@ public class CartItemController {
     public ResponseEntity<ApiResponse> deleteCartItemById(
             @PathVariable Long cartItemId,
             @RequestHeader("Authorization") String jwt)
-            throws CartItemException, UserException {
+            throws CartItemException, UserException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
         // Delegate to CartService to ensure recalculation
         cartService.removeItem(user.getId(), cartItemId);
@@ -37,7 +38,7 @@ public class CartItemController {
     public ResponseEntity<ApiResponse> updateCartItem(
             @PathVariable Long cartItemId,
             @RequestBody UpdateCartItem req,
-            @RequestHeader("Authorization") String jwt) throws CartItemException, UserException {
+            @RequestHeader("Authorization") String jwt) throws CartItemException, UserException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
 
         // Delegate to CartService to ensure recalculation
