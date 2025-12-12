@@ -303,4 +303,16 @@ public class OrderService implements IOrderService {
         }
         return dto;
     }
+    @Override
+    public Page<Order> getAllPaidOrders(Integer pageNumber, Integer pageSize, String sortBy) {
+        Pageable pageable;
+
+        if (sortBy != null && !sortBy.isEmpty()) {
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+        } else {
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.by("deliveryDate").descending());
+        }
+
+        return orderRepository.findByOrderStatus("PAID", pageable);
+    }
 }

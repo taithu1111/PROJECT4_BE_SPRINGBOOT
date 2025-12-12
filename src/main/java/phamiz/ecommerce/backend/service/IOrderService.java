@@ -10,6 +10,8 @@ import phamiz.ecommerce.backend.model.Order;
 import phamiz.ecommerce.backend.model.User;
 import phamiz.ecommerce.backend.dto.Order.OrderDTO;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
+
 
 public interface IOrderService {
     public Order createOrder(User user, Address shippingAddress)
@@ -36,4 +38,6 @@ public interface IOrderService {
     public List<Order> getAllDeliveredOrders();
 
     public Order confirmOrderPayment(Long orderId) throws OrderException;
+
+    Page<Order> getAllPaidOrders(Integer pageNumber, Integer pageSize, String sortBy);
 }

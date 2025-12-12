@@ -88,4 +88,13 @@ public class AdminOrderController {
 
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    @GetMapping("/paid")
+    public ResponseEntity<Page<OrderDTO>> getPaidOrdersHandler(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "5") Integer size,
+            @RequestParam(required = false) String sortBy) {
+        Page<Order> orders = orderService.getAllPaidOrders(page, size, sortBy);
+        Page<OrderDTO> orderDTOs = orders.map(orderService::convertToDTO);
+        return new ResponseEntity<>(orderDTOs, HttpStatus.OK);
+    }
 }
