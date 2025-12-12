@@ -48,11 +48,11 @@ public class AdminProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<Product> updateProduct(@RequestBody @Valid CreateProductRequest req,
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody @Valid CreateProductRequest req,
             @PathVariable Long productId)
             throws ProductException {
         Product product = productService.updateProduct(productId, req);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        return new ResponseEntity<>(productService.toDTO(product), HttpStatus.OK);
     }
 
     @PostMapping("/creates")
