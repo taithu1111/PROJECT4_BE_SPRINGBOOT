@@ -62,6 +62,22 @@ public class AdminOrderController {
         return new ResponseEntity<>(orderDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/delivered")
+    public ResponseEntity<List<OrderDTO>> getDeliveredOrdersHandler() {
+        List<Order> orders = orderService.getAllDeliveredOrders();
+        List<OrderDTO> orderDTOs = orders.stream()
+                .map(orderService::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(orderDTOs, HttpStatus.OK);
+    }
+
+    @PutMapping("/{orderId}/confirmed-payment")
+    public ResponseEntity<OrderDTO> confirmOrderPaymentHandler(@PathVariable Long orderId) throws OrderException {
+        Order order = orderService.confirmOrderPayment(orderId);
+        OrderDTO orderDTO = orderService.convertToDTO(order);
+        return new ResponseEntity<>(orderDTO, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{orderId}")
     public ResponseEntity<ApiResponse> deleteOrderHandler(@PathVariable Long orderId) throws OrderException {
         orderService.deleteOrder(orderId);

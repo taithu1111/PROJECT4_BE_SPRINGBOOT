@@ -29,4 +29,8 @@ public interface IOrderService {
     public Page<Order> getAllOrders(Integer pageNumber, Integer pageSize, String sortBy);
 
     public void deleteOrder(Long orderId) throws OrderException;
+
+    public List<Order> getAllDeliveredOrders();
+
+    public Order confirmOrderPayment(Long orderId) throws OrderException;
 }

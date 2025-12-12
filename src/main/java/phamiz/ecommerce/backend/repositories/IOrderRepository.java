@@ -23,4 +23,6 @@ public interface IOrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o LEFT JOIN FETCH o.orderItems WHERE o.id = :orderId")
     java.util.Optional<Order> findOrderByIdWithItems(@Param("orderId") Long orderId);
+
+    List<Order> findByOrderStatus(String orderStatus);
 }

@@ -198,4 +198,55 @@ public class AdminOrderControllerTest {
                 .andExpect(jsonPath("$.status").value(true))
                 .andExpect(jsonPath("$.message").value("Order deleted successfully"));
     }
+
+    @Test
+    @DisplayName("GET /api/admin/orders/delivered - Should return all delivered orders")
+    void shouldGetDeliveredOrders() throws Exception {
+        // Setup mock data
+        Order order = new Order();
+        order.setId(1L);
+        order.setOrderStatus("DELIVERED");
+
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setId(1L);
+        orderDTO.setOrderStatus("DELIVERED");
+
+        List<Order> orders = Collections.singletonList(order);
+
+        // Mock service calls
+        when(orderService.getAllDeliveredOrders()).thenReturn(orders);
+        when(orderService.convertToDTO(any(Order.class))).thenReturn(orderDTO);
+
+        // Perform request
+        mockMvc.perform(get("/api/admin/orders/delivered")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].orderStatus").value("DELIVERED"));
+    }
+
+    @Test
+    @DisplayName("PUT /api/admin/orders/{orderId}/confirmed-payment - Should confirm order payment")
+    void shouldConfirmOrderPayment() throws Exception {
+        // Setup mock data
+        Order order = new Order();
+        order.setId(1L);
+        order.setOrderStatus("PAID");
+        // PaymentStatus.PAID might need to be set if DTO includes it, but here checking
+        // string Status mainly
+
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setId(1L);
+        orderDTO.setOrderStatus("PAID");
+
+        // Mock service calls
+        when(orderService.confirmOrderPayment(1L)).thenReturn(order);
+        when(orderService.convertToDTO(order)).thenReturn(orderDTO);
+
+        // Perform request
+        mockMvc.perform(put("/api/admin/orders/1/confirmed-payment")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.orderStatus").value("PAID"));
+    }
 }

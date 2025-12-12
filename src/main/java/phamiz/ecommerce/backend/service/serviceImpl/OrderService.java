@@ -229,6 +229,28 @@ public class OrderService implements IOrderService {
         orderRepository.save(order);
     }
 
+    @Override
+    public List<Order> getAllDeliveredOrders() {
+        return orderRepository.findByOrderStatus("DELIVERED");
+    }
+
+    @Override
+    public Order confirmOrderPayment(Long orderId) throws OrderException {
+        Order order = findOrderById(orderId);
+
+        if (!"DELIVERED".equals(order.getOrderStatus())) {
+            throw new OrderException("Cannot confirm payment for order with status: " + order.getOrderStatus()
+                    + ". Order must be DELIVERED first.");
+        }
+
+        order.setPaymentStatus(PaymentStatus.PAID);
+        order.setOrderStatus("PAID"); // Set status to "PAID" as requested ("Đã thanh toán")
+
+        Order savedOrder = orderRepository.save(order);
+        logger.info("Order {} payment confirmed. Status changed to PAID", orderId);
+        return savedOrder;
+    }
+
     public phamiz.ecommerce.backend.dto.Order.OrderDTO convertToDTO(Order order) {
         if (order == null) {
             return null;
