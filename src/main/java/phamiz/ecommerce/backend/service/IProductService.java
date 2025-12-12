@@ -30,4 +30,6 @@ public interface IProductService {
     List<ProductDTO> getNewProduct();
 
     List<ProductDTO> getRandomProduct();
+
+    Product findProductWithImages(Long id) throws ProductException;
 }

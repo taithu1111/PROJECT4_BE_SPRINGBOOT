@@ -142,9 +142,12 @@ public class AuthController {
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
+        // Lấy user từ DB
+        User user = userRepository.findByEmail(username);
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(token);
-        authResponse.setMessage("Signin Success!");
+
+        authResponse.setMessage(user.getRole().equals("ROLE_ADMIN") ? "Admin" : "Signin Success!");
         logger.info(String.format("User signed in with email: %s", username));
         return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }

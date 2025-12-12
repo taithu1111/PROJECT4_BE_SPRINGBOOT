@@ -3,6 +3,8 @@ package phamiz.ecommerce.backend.service;
 import org.springframework.data.domain.Page;
 import phamiz.ecommerce.backend.exception.CartItemException;
 import phamiz.ecommerce.backend.exception.OrderException;
+import phamiz.ecommerce.backend.exception.ProductException;
+import phamiz.ecommerce.backend.exception.UserException;
 import phamiz.ecommerce.backend.model.Address;
 import phamiz.ecommerce.backend.model.Order;
 import phamiz.ecommerce.backend.model.User;
@@ -10,7 +12,8 @@ import phamiz.ecommerce.backend.dto.Order.OrderDTO;
 import java.util.List;
 
 public interface IOrderService {
-    public Order createOrder(User user, Address shippingAddress) throws CartItemException;
+    public Order createOrder(User user, Address shippingAddress)
+            throws CartItemException, ProductException, UserException;
 
     public Order findOrderById(Long orderId) throws OrderException;
 

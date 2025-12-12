@@ -84,8 +84,21 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Cart findUserCart(Long userId) {
-        return cartRepository.findByUserIdWithItems(userId);
+    @Transactional
+    public Cart findUserCart(Long userId) throws CartItemException, ProductException {
+        Cart cart = cartRepository.findByUserIdWithItems(userId);
+
+        cart.getCartItems().forEach(item -> {
+            try {
+                Long pid = item.getProduct().getId();
+                Product loaded = productService.findProductWithImages(pid);
+                item.setProduct(loaded);
+            } catch (ProductException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        return cart;
     }
 
     @Override
@@ -120,7 +133,8 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public void updateItem(Long userId, Long cartItemId, int quantity) throws CartItemException, UserException {
+    public void updateItem(Long userId, Long cartItemId, int quantity)
+            throws ProductException, CartItemException, UserException {
         Cart cart = findUserCart(userId);
         CartItem item = cartItemService.findCartItemById(cartItemId);
         // Verify item belongs to cart? Not strictly needed if ID is unique but good
@@ -145,7 +159,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public void removeItem(Long userId, Long cartItemId) throws CartItemException, UserException {
+    public void removeItem(Long userId, Long cartItemId) throws ProductException, CartItemException, UserException {
         Cart cart = findUserCart(userId);
 
         cartItemService.removeCartItem(userId, cartItemId);
@@ -157,7 +171,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public void clearCart(Long userId) {
+    public void clearCart(Long userId) throws ProductException, CartItemException, UserException {
         Cart cart = findUserCart(userId);
 
         // Orphan removal is enabled, so clearing the collection and saving the parent

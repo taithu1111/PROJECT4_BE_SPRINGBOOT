@@ -14,13 +14,14 @@ public interface ICartService {
     public String addCartItem(Long userId, AddItemRequest request)
             throws ProductException, CartItemException, UserException;
 
-    public Cart findUserCart(Long userid) throws CartItemException;
+    public Cart findUserCart(Long userid) throws CartItemException, ProductException;
 
     CartDTO toDTO(Cart cart);
 
-    void updateItem(Long userId, Long cartItemId, int quantity) throws CartItemException, UserException;
+    void updateItem(Long userId, Long cartItemId, int quantity)
+            throws ProductException, CartItemException, UserException;
 
-    void removeItem(Long userId, Long cartItemId) throws CartItemException, UserException;
+    void removeItem(Long userId, Long cartItemId) throws ProductException, CartItemException, UserException;
 
-    void clearCart(Long userId);
+    void clearCart(Long userId) throws ProductException, CartItemException, UserException;
 }

@@ -27,7 +27,7 @@ public class Order {
     @JsonIgnoreProperties({ "addresses", "password" })
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL ,  orphanRemoval = true, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
