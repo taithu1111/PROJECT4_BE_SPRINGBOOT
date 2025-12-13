@@ -100,7 +100,7 @@ public class ProductServiceImpl implements IProductService {
         }
 
         Category secondLevel = categoryRepository.findByNameAndParent(
-                request.getFirstLevelCategory(), firstLevel.getCategory_name());
+                request.getSecondLevelCategory(), firstLevel.getCategory_name());
         if (secondLevel == null) {
             Category secondLevelCategory = new Category();
             secondLevelCategory.setCategory_name(request.getSecondLevelCategory());
@@ -142,9 +142,9 @@ public class ProductServiceImpl implements IProductService {
         logger.info("Deleting product with ID: {}", productId);
 
         // Manually delete related entities to avoid FK constraint violations
-        productImageRepository.deleteByProductId(productId);
-        reviewRepository.deleteAllProductsReview(productId);
-        ratingRepository.deleteAllProductsRating(productId);
+//        productImageRepository.deleteByProductId(productId);
+//        reviewRepository.deleteAllProductsReview(productId);
+//        ratingRepository.deleteAllProductsRating(productId);
 
         // Colors are ElementCollection, should be deleted automatically, but we can
         // clear them if needed
